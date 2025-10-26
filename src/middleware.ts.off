@@ -1,0 +1,102 @@
+// src/middleware.ts
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import { getToken } from '@/lib/auth-utils'
+import { canAccessAdmin, canAccessVendor } from '@/lib/roles'
+
+const ADMIN_ROLES = new Set([
+  'ADMIN',
+  'MANAGER',
+  'CONTENT_CREATOR',
+  'EVENTS_PRODUCT_MANAGER',
+  'EVENTS_CONTENT_CREATOR',
+  'VENUES_PRODUCT_MANAGER',
+  'VENUES_CONTENT_CREATOR',
+  'BLOG_CONTENT_CREATOR',
+  // Старые роли для совместимости
+  'SUPER_ADMIN',
+  'CITY_PM',
+  'SECTION_PM',
+  'EDITOR',
+  'MARKETER',
+])
+
+const VENDOR_ROLES = new Set([
+  'VENDOR',
+  'ADMIN',
+  'MANAGER',
+  // Старые роли для совместимости
+  'VENDOR_OWNER', 
+  'VENDOR_STAFF'
+])
+
+export async function middleware(req: NextRequest) {
+  const { pathname, search } = req.nextUrl
+  
+  const isAdmin = pathname.startsWith('/admin')
+  const isVendor = pathname.startsWith('/vendor')
+
+  if (!isAdmin && !isVendor) {
+    return NextResponse.next()
+  }
+
+  // Проверяем ключ доступа
+  const key = req.nextUrl.searchParams.get("key")?.trim() || ""
+  const isDev = process.env.NODE_ENV !== "production"
+  const adminKey = (process.env.ADMIN_KEY || "").trim()
+  const vendorKey = (process.env.VENDOR_KEY || "").trim()
+
+  // BYPASS ПО КЛЮЧУ
+  if (isAdmin) {
+    if ((adminKey && key === adminKey) || (!adminKey && isDev && key === "kidsreview2025")) {
+      return NextResponse.next()
+    }
+  }
+  if (isVendor) {
+    if ((vendorKey && key === vendorKey) || (!vendorKey && isDev && key === "kidsreview2025")) {
+      return NextResponse.next()
+    }
+  }
+
+  const token = await getToken(req)
+
+  // Требуем вход для всего /admin и /vendor
+  if (!token) {
+    const url = new URL('/', req.url)
+    return NextResponse.redirect(url)
+  }
+
+  const baseRole = token.role as string | undefined
+  const assignments = (token.assignments || []) as Array<{ role: string }>
+
+
+  if (isAdmin) {
+    // Проверяем базовую роль
+    const hasBaseRole = canAccessAdmin(baseRole || '')
+    
+    // Проверяем назначенные роли
+    const hasAssignedRole = assignments.some(a => canAccessAdmin(a.role))
+    
+    // Проверяем старые роли для совместимости
+    const hasLegacyRole = assignments.some(a => ADMIN_ROLES.has(a.role))
+    
+    if (!hasBaseRole && !hasAssignedRole && !hasLegacyRole) {
+      return NextResponse.rewrite(new URL('/auth/forbidden', req.url))
+    }
+  }
+
+  if (isVendor) {
+    // Разрешаем всем залогиненным пользователям доступ к vendor путям
+    console.log('Vendor middleware: Allowing access to', pathname)
+    return NextResponse.next()
+  }
+
+  return NextResponse.next()
+}
+
+export const config = {
+  matcher: [
+    '/admin/:path*',
+    '/vendor/:path*'
+  ]
+}

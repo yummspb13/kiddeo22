@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="560" viewBox="0 0 1600 560">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#7C3AED"></stop>
+      <stop offset="1" stop-color="#06B6D4"></stop>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="560" fill="url(#g)"></rect>
+  <g fill="white" opacity="0.15">
+    <circle cx="220" cy="120" r="80"></circle>
+    <circle cx="460" cy="200" r="50"></circle>
+    <circle cx="820" cy="140" r="70"></circle>
+    <circle cx="1240" cy="220" r="90"></circle>
+  </g>
+  <g fill="white" font-family="ui-sans-serif,system-ui,Segoe UI,Roboto" text-anchor="middle">
+    <text x="800" y="270" font-size="64" font-weight="700">Лучшие события вашего города</text>
+    <text x="800" y="330" font-size="24" opacity="0.9">Детские праздники, спектакли, мастер-классы и многое другое</text>
+  </g>
+</svg>

@@ -1,0 +1,2591 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model City {
+  id                 Int                    @id @default(autoincrement())
+  slug               String                 @unique
+  name               String                 @unique
+  isPublic           Boolean                @default(false)
+  AdEvent            AdEvent[]
+  AdPlacement        AdPlacement[]
+  Content            Content[]
+  FilterConfig       FilterConfig[]
+  Lead               Lead[]
+  listings           Listing[]
+  popularCategories  PopularCategory[]
+  PopularEvent       PopularEvent[]
+  QuickFilter        QuickFilter[]
+  RoleAssignment     RoleAssignment[]
+  SectionVisibility  SectionVisibility[]
+  vendors            Vendor[]
+  venueCategories    VenueCategoryCity[]
+  venuePartners      VenuePartner[]
+  venueSubcategories VenueSubcategoryCity[]
+}
+
+model Category {
+  id                 Int                 @id @default(autoincrement())
+  slug               String              @unique
+  name               String              @unique
+  defaultBookingMode BookingMode         @default(REQUEST)
+  icon               String?
+  color              String?
+  isActive           Boolean             @default(true)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @default(now()) @updatedAt
+  FilterConfig       FilterConfig[]
+  listings           Listing[]
+  RoleAssignment     RoleAssignment[]
+  SectionVisibility  SectionVisibility[]
+  afishaEvents       AfishaEvent[]
+}
+
+model VenueCategory {
+  id             Int                 @id @default(autoincrement())
+  name           String              @unique
+  slug           String              @unique
+  icon           String?
+  color          String?
+  isActive       Boolean             @default(true)
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  cityCategories VenueCategoryCity[]
+  subcategories  VenueSubcategory[]
+}
+
+model VenueCategoryCity {
+  id         Int           @id @default(autoincrement())
+  categoryId Int
+  cityId     Int
+  createdAt  DateTime      @default(now())
+  city       City          @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  category   VenueCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, cityId])
+  @@index([categoryId])
+  @@index([cityId])
+}
+
+model VenueSubcategory {
+  id                Int                    @id @default(autoincrement())
+  name              String                 @unique
+  slug              String                 @unique
+  type              VenueType              @default(PLACE)
+  categoryId        Int
+  icon              String?
+  color             String?
+  backgroundImage   String?
+  isActive          Boolean                @default(true)
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
+  filters           VenueFilter[]
+  parameters        VenueParameter[]
+  partners          VenuePartner[]
+  category          VenueCategory          @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  citySubcategories VenueSubcategoryCity[]
+}
+
+model VenueSubcategoryCity {
+  id            Int              @id @default(autoincrement())
+  subcategoryId Int
+  cityId        Int
+  createdAt     DateTime         @default(now())
+  city          City             @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  subcategory   VenueSubcategory @relation(fields: [subcategoryId], references: [id], onDelete: Cascade)
+
+  @@unique([subcategoryId, cityId])
+  @@index([subcategoryId])
+  @@index([cityId])
+}
+
+model VenueParameter {
+  id            Int                     @id @default(autoincrement())
+  subcategoryId Int
+  name          String
+  type          VenueParameterType
+  config        Json?
+  isFree        Boolean                 @default(false)
+  isOptimal     Boolean                 @default(false)
+  isMaximum     Boolean                 @default(false)
+  order         Int                     @default(0)
+  isActive      Boolean                 @default(true)
+  createdAt     DateTime                @default(now())
+  updatedAt     DateTime                @updatedAt
+  subcategory   VenueSubcategory        @relation(fields: [subcategoryId], references: [id], onDelete: Cascade)
+  partnerValues VenuePartnerParameter[]
+
+  @@index([subcategoryId])
+  @@index([isActive])
+}
+
+model VenueFilter {
+  id            Int              @id @default(autoincrement())
+  subcategoryId Int
+  name          String
+  key           String
+  isVisible     Boolean          @default(true)
+  config        Json
+  order         Int              @default(0)
+  isActive      Boolean          @default(true)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  subcategory   VenueSubcategory @relation(fields: [subcategoryId], references: [id], onDelete: Cascade)
+
+  @@index([subcategoryId])
+  @@index([isVisible])
+  @@index([order])
+}
+
+model VenuePartner {
+  id               Int                     @id @default(autoincrement())
+  name             String
+  slug             String                  @unique
+  address          String?
+  description      String?
+  coverImage       String?
+  additionalImages String? // JSON array of image paths
+  subcategoryId    Int
+  vendorId         Int
+  cityId           Int
+  tariff           VenueTariff             @default(FREE)
+  status           VenuePartnerStatus      @default(ACTIVE)
+  moderationReason String?
+  // Дополнительные поля адреса
+  district         String?
+  metro            String?
+  lat              Float?
+  lng              Float?
+  // NEW: Цена и возраст для тарифов SUPER/MAXIMUM
+  priceFrom        Int?
+  priceTo          Int?
+  ageFrom          Int?
+  ageTo            Int?
+  timezone         String?
+  fiasId           String?
+  kladrId          String?
+  createdAt        DateTime                @default(now())
+  updatedAt        DateTime                @updatedAt
+  city             City                    @relation(fields: [cityId], references: [id])
+  vendor           Vendor                  @relation(fields: [vendorId], references: [id])
+  subcategory      VenueSubcategory        @relation(fields: [subcategoryId], references: [id])
+  parameters       VenuePartnerParameter[]
+  reviews          VenueReview[]
+
+  @@index([subcategoryId])
+  @@index([vendorId])
+  @@index([status])
+}
+
+model VenuePartnerParameter {
+  id          Int            @id @default(autoincrement())
+  partnerId   Int
+  parameterId Int
+  value       String
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  parameter   VenueParameter @relation(fields: [parameterId], references: [id], onDelete: Cascade)
+  partner     VenuePartner   @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+
+  @@unique([partnerId, parameterId])
+  @@index([partnerId])
+  @@index([parameterId])
+}
+
+model VenueVendor {
+  id                     Int                 @id @default(autoincrement())
+  vendorId               Int                 @unique
+  type                   VenueVendorType
+  status                 VenueVendorStatus   @default(PENDING)
+  documentsStatus        VenueDocumentStatus @default(NONE)
+  documentsChecked       Boolean             @default(false)
+  documentsCheckedAt     DateTime?
+  documentsCheckedBy     Int?
+  fullName               String?
+  inn                    String?
+  orgnip                 String?
+  bankAccount            String?
+  bik                    String?
+  address                String?
+  isVatPayer             Boolean             @default(false)
+  vatRate                Int?
+  egryulDocument         String?
+  representativeName     String?
+  representativePosition String?
+  isRepresentative       Boolean             @default(false)
+  companyName            String?
+  kpp                    String?
+  orgn                   String?
+  legalAddress           String?
+  actualAddress          String?
+  directorName           String?
+  directorPosition       String?
+  selfEmployedInn        String?
+  agreementAccepted      Boolean             @default(false)
+  agreementAcceptedAt    DateTime?
+  createdAt              DateTime            @default(now())
+  updatedAt              DateTime            @updatedAt
+  vendor                 Vendor              @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  documentsCheckedByUser User?               @relation("VenueVendorDocumentsCheckedBy", fields: [documentsCheckedBy], references: [id])
+  users                  VenueVendorUser[]
+
+  @@index([status])
+  @@index([type])
+  @@index([documentsStatus])
+}
+
+model VenueVendorUser {
+  id        Int         @id @default(autoincrement())
+  vendorId  Int
+  userId    Int
+  createdAt DateTime    @default(now())
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vendor    VenueVendor @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+
+  @@unique([vendorId, userId])
+  @@index([vendorId])
+  @@index([userId])
+}
+
+model User {
+  id                                        Int                       @id @default(autoincrement())
+  email                                     String                    @unique
+  name                                      String?
+  password                                  String?
+  role                                      AppRole                   @default(USER)
+  createdAt                                 DateTime                  @default(now())
+  updatedAt                                 DateTime                  @default(now()) @updatedAt
+  emailVerified                             DateTime?
+  image                                     String?
+  sessions                                  UserSession[]
+  Account                                   Account[]
+  AdminAudit                                AdminAudit[]
+  AdminDashboard                            AdminDashboard[]
+  AdminInsight                              AdminInsight[]
+  bookings                                  Booking[]
+  Chat                                      Chat[]
+  Content_Content_authorIdToUser            Content[]                 @relation("Content_authorIdToUser")
+  Content_Content_editorIdToUser            Content[]                 @relation("Content_editorIdToUser")
+  Content_Content_reviewerIdToUser          Content[]                 @relation("Content_reviewerIdToUser")
+  ContentComment                            ContentComment[]
+  ContentLike                               ContentLike[]
+  ContentTemplate                           ContentTemplate[]
+  ListingCommission                         ListingCommission[]
+  ListingModeration                         ListingModeration[]
+  LoyaltyPoint                              LoyaltyPoint[]
+  Message                                   Message[]
+  Notification                              Notification[]
+  Order                                     Order[]
+  Payment                                   Payment[]
+  PublicationPlan                           PublicationPlan[]
+  PublicationPlanItem                       PublicationPlanItem[]
+  Review_Review_userIdToUser                Review[]                  @relation("Review_userIdToUser")
+  Review_Review_moderatorIdToUser           Review[]                  @relation("Review_moderatorIdToUser")
+  RoleAssignment                            RoleAssignment[]
+  Session                                   Session[]
+  Ticket_Ticket_userIdToUser                Ticket[]                  @relation("Ticket_userIdToUser")
+  Ticket_Ticket_usedByToUser                Ticket[]                  @relation("Ticket_usedByToUser")
+  UserBehaviorEvent                         UserBehaviorEvent[]
+  UserChild                                 UserChild[]
+  UserComment_UserComment_userIdToUser      UserComment[]             @relation("UserComment_userIdToUser")
+  UserComment_UserComment_moderatorIdToUser UserComment[]             @relation("UserComment_moderatorIdToUser")
+  UserCommentVote                           UserCommentVote[]
+  UserFavorite                              UserFavorite[]
+  UserInterest                              UserInterest[]
+  UserLoyaltyPoint                          UserLoyaltyPoint[]
+  UserNotification                          UserNotification[]
+  UserNotificationSettings                  UserNotificationSettings?
+  UserReview_UserReview_userIdToUser        UserReview[]              @relation("UserReview_userIdToUser")
+  UserReview_UserReview_moderatorIdToUser   UserReview[]              @relation("UserReview_moderatorIdToUser")
+  UserReviewVote                            UserReviewVote[]
+  UserSubscription                          UserSubscription[]
+  UserWallet                                UserWallet?
+  vendor                                    Vendor?
+  venueVendorDocumentsCheckedBy             VenueVendor[]             @relation("VenueVendorDocumentsCheckedBy")
+  venueVendorUsers                          VenueVendorUser[]
+  reviews                                   EventReview[]
+  reactions                                 ReviewReaction[]
+  reviewReplies                             ReviewReply[]
+  venueReviews                              VenueReview[] @relation("VenueReview_userIdToUser")
+  venueReviewReactions                      VenueReviewReaction[] @relation("VenueReviewReaction_userIdToUser")
+  venueReviewReplies                        VenueReviewReply[] @relation("VenueReviewReply_userIdToUser")
+  userPoints                                UserPoints?
+  pointsTransactions                        PointsTransaction[]
+  userRewards                               UserReward[]
+  invitesSent                               UserInvite[] @relation("UserInvites")
+  invitesReceived                           UserInvite[] @relation("UserInvited")
+  moderatedListingClaims                    ListingClaim[]
+  moderatedVendorRoles                      VendorRole[] @relation("VendorRoleModerator")
+  moderatedDocuments                        Document[] @relation("DocumentModerator")
+  moderatedBankAccounts                     BankAccount[] @relation("BankAccountModerator")
+  moderatedTaxProfiles                      TaxProfile[] @relation("TaxProfileModerator")
+  auditLogs                                 AuditLog[]
+  vendorModerationHistory                   VendorModerationHistory[] @relation("VendorModerationHistoryModerator")
+}
+
+model Vendor {
+  id                      Int                       @id @default(autoincrement())
+  userId                  Int                       @unique
+  displayName             String
+  cityId                  Int
+  canPostEvents           Boolean                   @default(false)
+  canPostCatalog          Boolean                   @default(false)
+  description             String?
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @default(now()) @updatedAt
+  address                 String?
+  email                   String?
+  logo                    String?
+  phone                   String?
+  website                 String?
+  
+  // Новые поля для системы вендоров
+  type                    VendorType                @default(START)
+  kycStatus               KycStatus                 @default(DRAFT)
+  payoutEnabled           Boolean                   @default(false)
+  officialPartner         Boolean                   @default(false)
+  brandSlug               String?                   @unique
+  supportEmail            String?
+  supportPhone            String?
+  subscriptionStatus      SubscriptionStatus        @default(INACTIVE)
+  
+  // Данные для подтверждения представительства
+  proofType               ProofType?
+  proofData               String?
+  additionalProofData     String?
+  agreements              Json?
+  AIAssistant             AIAssistant[]
+  AIRecommendation        AIRecommendation[]
+  Chat                    Chat[]
+  ChatTemplate            ChatTemplate[]
+  Lead                    Lead[]
+  listings                Listing[]
+  Order                   Order[]
+  Payment                 Payment[]
+  Payout                  Payout[]
+  Review                  Review[]
+  RoleAssignment          RoleAssignment[]
+  SLARule                 SLARule[]
+  Ticket                  Ticket[]
+  user                    User                      @relation(fields: [userId], references: [id])
+  city                    City                      @relation(fields: [cityId], references: [id])
+  VendorOnboarding        VendorOnboarding?
+  VendorPerformanceMetric VendorPerformanceMetric[]
+  VendorSubscription      VendorSubscription[]
+  venuePartners           VenuePartner[]
+  moderationHistory       VendorModerationHistory[]
+  venueVendor             VenueVendor?
+  vendorRole              VendorRole?
+  documents               Document[]
+  bankAccounts            BankAccount[]
+  taxProfiles             TaxProfile[]
+  listingClaims           ListingClaim[] @relation("ListingClaims")
+
+  @@index([cityId])
+}
+
+model Listing {
+  id                Int                 @id @default(autoincrement())
+  vendorId          Int
+  cityId            Int
+  categoryId        Int
+  type              ListingType
+  bookingMode       BookingMode
+  enforceAdminMode  Boolean             @default(false)
+  title             String
+  slug              String              @unique
+  description       String?
+  address           String?
+  lat               Float?
+  lng               Float?
+  isActive          Boolean             @default(true)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  ageFrom           Int?
+  ageTo             Int?
+  isFree            Boolean             @default(false)
+  isIndoor          Boolean?
+  district          String?
+  priceFrom         Int?
+  priceTo           Int?
+  eventDate         DateTime?
+  eventEndDate      DateTime?
+  images            String?
+  claimable         Boolean             @default(false)
+  claimStatus       ClaimStatus?        @default(PENDING)
+  AIRecommendation  AIRecommendation[]
+  bookings          Booking[]
+  Chat              Chat[]
+  ContentListing    ContentListing[]
+  tickets           EventTicketType[]
+  Lead              Lead[]
+  vendor            Vendor              @relation(fields: [vendorId], references: [id])
+  city              City                @relation(fields: [cityId], references: [id])
+  category          Category            @relation(fields: [categoryId], references: [id])
+  ListingCommission ListingCommission[]
+  ListingModeration ListingModeration?
+  ListingTag        ListingTag[]
+  Order             Order[]
+  payments          Payment[]
+  Review            Review[]
+  slots             Slot[]
+  Ticket            Ticket[]
+  UserComment       UserComment[]
+  UserFavorite      UserFavorite[]
+  UserReview        UserReview[]
+  claims            ListingClaim[]
+
+  @@index([vendorId])
+  @@index([cityId])
+  @@index([categoryId])
+}
+
+// Модель для детальной информации о роли вендора
+model VendorRole {
+  id                    Int                 @id @default(autoincrement())
+  vendorId              Int                 @unique
+  role                  VendorRoleType
+  fullName              String?
+  inn                   String?
+  orgnip                String?
+  orgn                  String?
+  kpp                   String?
+  bankAccount           String?
+  bik                   String?
+  bankName              String?
+  corrAccount           String?
+  iban                  String?
+  swift                 String?
+  address               String?
+  legalAddress          String?
+  actualAddress         String?
+  isVatPayer            Boolean             @default(false)
+  vatRate               Int?
+  representativeName    String?
+  representativePosition String?
+  isRepresentative      Boolean             @default(false)
+  companyName           String?
+  directorName          String?
+  directorPosition      String?
+  selfEmployedInn       String?
+  taxRegime             TaxRegime?
+  npdToken              String?
+  npdRegion             String?
+  // Поля для модерации
+  moderatorNotes        String?
+  moderatedBy           Int?
+  moderatedAt           DateTime?
+  moderatorIp           String?
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+  vendor                Vendor              @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  moderator             User?               @relation("VendorRoleModerator", fields: [moderatedBy], references: [id])
+
+  @@index([role])
+  @@index([inn])
+  @@index([orgnip])
+  @@index([orgn])
+}
+
+// Модель для документов вендоров
+model Document {
+  id            Int           @id @default(autoincrement())
+  vendorId      Int
+  docType       DocumentType
+  fileUrl       String
+  fileName      String?
+  fileSize      Int?
+  mimeType      String?
+  status        DocumentStatus @default(PENDING)
+  issuedAt      DateTime?
+  expiresAt     DateTime?
+  moderatorNotes  String?
+  rejectionReason String?
+  moderatorId     Int?
+  moderatedAt     DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  vendor        Vendor        @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  moderator     User?         @relation("DocumentModerator", fields: [moderatorId], references: [id])
+
+  @@index([vendorId, docType])
+  @@index([status])
+}
+
+// Модель для банковских счетов
+model BankAccount {
+  id              Int      @id @default(autoincrement())
+  vendorId        Int
+  holderName      String   // Наименование держателя счета
+  inn             String   // ИНН
+  bankName        String   // Наименование банка
+  bik             String   // БИК
+  account         String   // Расчетный счет
+  corrAccount     String?  // Корреспондентский счет
+  iban            String?  // IBAN (для международных переводов)
+  swift           String?  // SWIFT код
+  verified        Boolean  @default(false)
+  verifiedAt      DateTime?
+  moderatorNotes  String?
+  moderatorId     Int?
+  moderatedAt     DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  vendor          Vendor   @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  moderator       User?    @relation("BankAccountModerator", fields: [moderatorId], references: [id])
+
+  @@unique([vendorId])
+  @@index([inn])
+  @@index([verified])
+}
+
+// Модель для налоговых профилей
+model TaxProfile {
+  id              Int           @id @default(autoincrement())
+  vendorId        Int
+  taxRegime       TaxRegime     // Налоговый режим
+  vatStatus       VatStatus     @default(NONE) // Статус НДС
+  vatRate         Int?          // Ставка НДС (0, 5, 7, 20)
+  isVatPayer      Boolean       @default(false)
+  npdToken        String?       // Токен для НПД
+  npdRegion       String?       // Регион для НПД
+  fiscalMode      FiscalMode    @default(PLATFORM) // Режим фискализации
+  agencyAgreement Boolean       @default(false) // Согласие на агентский договор
+  moderatorNotes  String?
+  moderatorId     Int?
+  moderatedAt     DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  vendor          Vendor        @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  moderator       User?         @relation("TaxProfileModerator", fields: [moderatorId], references: [id])
+
+  @@unique([vendorId])
+  @@index([taxRegime])
+}
+
+// Модель для системы клайма карточек
+model ListingClaim {
+  id                Int                 @id @default(autoincrement())
+  listingId         Int
+  requestorVendorId Int
+  status            ClaimStatus         @default(PENDING)
+  proofType         ProofType
+  proofData         String?             // JSON с данными подтверждения
+  moderatorId       Int?
+  moderatorNotes    String?
+  submittedAt       DateTime            @default(now())
+  reviewedAt        DateTime?
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  listing           Listing             @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  requestorVendor   Vendor              @relation("ListingClaims", fields: [requestorVendorId], references: [id])
+  moderator         User?               @relation(fields: [moderatorId], references: [id])
+
+  @@index([listingId])
+  @@index([requestorVendorId])
+  @@index([status])
+  @@index([submittedAt])
+}
+
+model Slot {
+  id        Int           @id @default(autoincrement())
+  listingId Int
+  start     DateTime
+  end       DateTime
+  capacity  Int           @default(1)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  items     BookingItem[]
+  listing   Listing       @relation(fields: [listingId], references: [id])
+
+  @@index([listingId])
+}
+
+model Booking {
+  id        Int           @id @default(autoincrement())
+  userId    Int
+  listingId Int
+  mode      BookingMode
+  status    BookingStatus
+  totalRub  Int           @default(0)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  user      User          @relation(fields: [userId], references: [id])
+  listing   Listing       @relation(fields: [listingId], references: [id])
+  items     BookingItem[]
+  payments  Payment[]
+
+  @@index([userId])
+  @@index([listingId])
+  @@index([status])
+}
+
+model BookingItem {
+  id           Int              @id @default(autoincrement())
+  bookingId    Int
+  ticketTypeId String?
+  slotId       Int?
+  qty          Int              @default(1)
+  priceRub     Int
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  booking      Booking          @relation(fields: [bookingId], references: [id])
+  ticketType   EventTicketType? @relation(fields: [ticketTypeId], references: [id])
+  slot         Slot?            @relation(fields: [slotId], references: [id])
+
+  @@index([bookingId])
+  @@index([ticketTypeId])
+  @@index([slotId])
+}
+
+/// ---------- Payments (YooKassa) ----------
+model Payment {
+  id                 Int                 @id @default(autoincrement())
+  listingId          Int?
+  bookingId          Int?
+  vendorId           Int?
+  subscriptionId     Int?
+  orderId            String?
+  userId             Int?
+  email              String?
+  amount             Int
+  currency           String              @default("RUB")
+  status             PaymentStatus       @default(NEW)
+  ykId               String?             @unique
+  ykUrl              String?
+  paymentMethod      String?
+  externalId         String?
+  description        String?
+  metadata           Json?
+  paidAt             DateTime?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  listing            Listing?            @relation(fields: [listingId], references: [id])
+  booking            Booking?            @relation(fields: [bookingId], references: [id])
+  Vendor             Vendor?             @relation(fields: [vendorId], references: [id])
+  VendorSubscription VendorSubscription? @relation(fields: [subscriptionId], references: [id])
+  Order              Order?              @relation(fields: [orderId], references: [id])
+  User               User?               @relation(fields: [userId], references: [id])
+  Payout             Payout[]
+  Refund             Refund[]
+
+  @@index([listingId])
+  @@index([bookingId])
+  @@index([status])
+  @@index([externalId])
+  @@index([userId])
+  @@index([orderId])
+  @@index([vendorId, status])
+}
+
+/// ---------- QuickFilter ----------
+model QuickFilter {
+  id        Int     @id @default(autoincrement())
+  cityId    Int?
+  page      String  @default("afisha")
+  label     String
+  queryJson Json
+  order     Int     @default(0)
+  isActive  Boolean @default(true)
+  City      City?   @relation(fields: [cityId], references: [id])
+}
+
+/// ---------- AfishaEvent ----------
+model Collection {
+  id             String        @id @default(cuid())
+  title          String
+  slug           String        @unique
+  description    String?
+  coverImage     String?
+  isActive       Boolean       @default(true)
+  hideFromAfisha Boolean       @default(false)
+  order          Int           @default(0)
+  city           String
+  citySlug       String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  eventCollections CollectionEvent[]
+}
+
+model CollectionEvent {
+  id           String     @id @default(cuid())
+  collectionId String
+  eventId      String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  event        AfishaEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  
+  @@unique([collectionId, eventId])
+}
+
+model AfishaEvent {
+  id                String                       @id @default(cuid())
+  title             String
+  slug              String?                      @unique @default("")
+  description       String?
+  venue             String
+  organizer         String?
+  startDate         DateTime?                    @default(now())
+  endDate           DateTime?                    @default(now())
+  coordinates       String?
+  order             Int?                         @default(0)
+  status            String?                      @default("active")
+  coverImage        String?
+  gallery           String?
+  tickets           String?
+  city              String
+  citySlug          String?                      // Добавляем citySlug для фильтров
+  category          String?
+  categoryId        Int?
+  categoryRelation  Category? @relation(fields: [categoryId], references: [id])
+  eventCollections  CollectionEvent[]
+  createdAt         DateTime?                    @default(now())
+  updatedAt         DateTime?                    @default(now()) @updatedAt
+  ageFrom           Int?                         // нижняя граница возрастной пригодности
+  ageTo             Int?                         // верхняя граница (null = 99+)
+  minPrice          Int?                         // минимальная цена билета в копейках/центах
+  ageGroups         String?
+  viewCount         Int                          @default(0)
+  isPopular         Boolean                      @default(false)
+  isPaid            Boolean                      @default(false)
+  isPromoted        Boolean                      @default(false)
+  priority          Int                          @default(5)
+  searchText        String                       @default("") // для кейс-инсенситив поиска по кириллице
+  quickFilterIds    String?                      // JSON массив ID быстрых фильтров
+  afishaCategory    AfishaCategory?              @relation(fields: [categoryId], references: [id])
+  popularCategories AfishaEventPopularCategory[]
+  ticketTypes       EventTicketType[]            // Связь с билетами
+  reviews           EventReview[]                // Связь с отзывами
+  pointsTransactions PointsTransaction[]         // Связь с транзакциями баллов
+  eventViews        EventView[]                  // Связь с уникальными просмотрами
+
+  // Индексы ускоряют фильтры:
+  @@index([status, citySlug])
+  @@index([ageFrom, ageTo])
+  @@index([minPrice])
+  @@index([startDate])
+  @@index([searchText])
+}
+
+model EventTicketType {
+  id        String      @id @default(cuid())
+  eventId   String?
+  listingId Int?
+  name      String
+  price     Int?        // цена в тех же единицах (int)
+  currency  String?     // "RUB" и т.п.
+
+  event     AfishaEvent? @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  listing   Listing?     @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  
+  // Обратные связи для существующих моделей
+  bookingItems BookingItem[]
+  orderItems   OrderItem[]
+  tickets      Ticket[]
+
+  @@index([eventId])
+  @@index([listingId])
+  @@index([price])
+}
+
+model AfishaCategory {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  slug        String        @unique
+  description String?
+  icon        String?
+  coverImage  String?
+  color       String?
+  isActive    Boolean       @default(true)
+  sortOrder   Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  events      AfishaEvent[]
+}
+
+model AIAssistant {
+  id          Int              @id @default(autoincrement())
+  vendorId    Int
+  type        AIAssistantType
+  prompt      String
+  response    String?
+  status      AIAssistantStatus @default(PENDING)
+  metadata    Json?
+  tokensUsed  Int?
+  cost        Float?
+  createdAt   DateTime         @default(now())
+  completedAt DateTime?
+  Vendor      Vendor           @relation(fields: [vendorId], references: [id])
+
+  @@index([status, createdAt])
+  @@index([vendorId, type])
+}
+
+model AIRecommendation {
+  id          Int       @id @default(autoincrement())
+  vendorId    Int
+  listingId   Int?
+  type        String
+  title       String
+  description String
+  priority    Int       @default(1)
+  isApplied   Boolean   @default(false)
+  appliedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  Vendor      Vendor    @relation(fields: [vendorId], references: [id])
+  Listing     Listing?  @relation(fields: [listingId], references: [id])
+
+  @@index([isApplied])
+  @@index([priority, createdAt])
+  @@index([vendorId, type])
+}
+
+model Account {
+  id                String  @id
+  userId            Int
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  User              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model AdEvent {
+  id            Int         @id @default(autoincrement())
+  adPlacementId Int
+  type          String      @default("IMPRESSION")
+  createdAt     DateTime    @default(now())
+  ip            String?
+  ua            String?
+  cityId        Int?
+  AdPlacement   AdPlacement @relation(fields: [adPlacementId], references: [id])
+  City          City?       @relation(fields: [cityId], references: [id])
+
+  @@index([adPlacementId, type, createdAt])
+}
+
+model AdPlacement {
+  id        Int       @id @default(autoincrement())
+  page      String
+  position  String
+  title     String
+  imageUrl  String?
+  hrefUrl   String?
+  startsAt  DateTime?
+  endsAt    DateTime?
+  order     Int       @default(0)
+  isActive  Boolean   @default(true)
+  cityId    Int?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  weight    Int       @default(1)
+  AdEvent   AdEvent[]
+  City      City?     @relation(fields: [cityId], references: [id])
+
+  @@index([page, position, isActive])
+}
+
+model AdminAudit {
+  id        Int      @id @default(autoincrement())
+  userId    Int?
+  action    String
+  entity    String?
+  entityId  Int?
+  details   Json?
+  createdAt DateTime @default(now())
+  User      User?    @relation(fields: [userId], references: [id])
+
+  @@index([userId, createdAt])
+}
+
+model AdminDashboard {
+  id        Int      @id @default(autoincrement())
+  name      String
+  config    Json
+  isDefault Boolean  @default(false)
+  createdBy Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  User      User     @relation(fields: [createdBy], references: [id])
+
+  @@index([isDefault])
+  @@index([createdBy])
+}
+
+model AdminInsight {
+  id              Int                 @id @default(autoincrement())
+  type            AdminInsightType
+  priority        AdminInsightPriority
+  title           String
+  description     String
+  data            Json
+  recommendations Json?
+  isResolved      Boolean             @default(false)
+  resolvedAt      DateTime?
+  resolvedBy      Int?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime
+  User            User?               @relation(fields: [resolvedBy], references: [id])
+
+  @@index([priority, createdAt])
+  @@index([isResolved, createdAt])
+  @@index([type, priority])
+}
+
+model Chat {
+  id            Int            @id @default(autoincrement())
+  vendorId      Int
+  customerId    Int
+  listingId     Int?
+  status        String         @default("ACTIVE")
+  lastMessageAt DateTime?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime
+  Vendor        Vendor         @relation(fields: [vendorId], references: [id])
+  User          User           @relation(fields: [customerId], references: [id])
+  Listing       Listing?       @relation(fields: [listingId], references: [id])
+  ChatTemplate  ChatTemplate[]
+  Message       Message[]
+
+  @@index([listingId])
+  @@index([customerId, status])
+  @@index([vendorId, status])
+}
+
+model ChatTemplate {
+  id         Int      @id @default(autoincrement())
+  vendorId   Int
+  chatId     Int?
+  name       String
+  content    String
+  category   String?
+  isActive   Boolean  @default(true)
+  usageCount Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime
+  Vendor     Vendor   @relation(fields: [vendorId], references: [id])
+  Chat       Chat?    @relation(fields: [chatId], references: [id])
+
+  @@index([isActive])
+  @@index([vendorId, category])
+}
+
+model Content {
+  id                            Int                   @id @default(autoincrement())
+  title                         String
+  slug                          String                @unique
+  type                          String
+  status                        String                @default("DRAFT")
+  priority                      String                @default("NORMAL")
+  excerpt                       String?
+  content                       String
+  featuredImage                 String?
+  seoTitle                      String?
+  seoDescription                String?
+  seoKeywords                   String?
+  categoryId                    Int?
+  cityId                        Int?
+  authorId                      Int
+  editorId                      Int?
+  reviewerId                    Int?
+  publishedAt                   DateTime?
+  scheduledAt                   DateTime?
+  viewCount                     Int                   @default(0)
+  likeCount                     Int                   @default(0)
+  shareCount                    Int                   @default(0)
+  commentCount                  Int                   @default(0)
+  createdAt                     DateTime              @default(now())
+  updatedAt                     DateTime
+  ContentCategory               ContentCategory?      @relation(fields: [categoryId], references: [id])
+  City                          City?                 @relation(fields: [cityId], references: [id])
+  User_Content_authorIdToUser   User                  @relation("Content_authorIdToUser", fields: [authorId], references: [id])
+  User_Content_editorIdToUser   User?                 @relation("Content_editorIdToUser", fields: [editorId], references: [id])
+  User_Content_reviewerIdToUser User?                 @relation("Content_reviewerIdToUser", fields: [reviewerId], references: [id])
+  ContentAnalytics              ContentAnalytics[]
+  ContentComment                ContentComment[]
+  ContentLike                   ContentLike[]
+  ContentListing                ContentListing[]
+  PublicationPlanItem           PublicationPlanItem[]
+
+  @@index([cityId])
+  @@index([categoryId])
+  @@index([scheduledAt])
+  @@index([publishedAt])
+  @@index([authorId])
+  @@index([status])
+  @@index([type])
+}
+
+model ContentAnalytics {
+  id          Int      @id @default(autoincrement())
+  contentId   Int
+  date        DateTime
+  views       Int      @default(0)
+  uniqueViews Int      @default(0)
+  likes       Int      @default(0)
+  shares      Int      @default(0)
+  comments    Int      @default(0)
+  timeOnPage  Float?
+  bounceRate  Float?
+  createdAt   DateTime @default(now())
+  Content     Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@unique([contentId, date])
+  @@index([contentId])
+  @@index([date])
+}
+
+model ContentCategory {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  color       String?
+  isActive    Boolean   @default(true)
+  sortOrder   Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime
+  Content     Content[]
+
+  @@index([sortOrder])
+  @@index([isActive])
+}
+
+model ContentComment {
+  id                   Int              @id @default(autoincrement())
+  contentId            Int
+  userId               Int
+  text                 String
+  parentId             Int?
+  isApproved           Boolean          @default(false)
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime
+  Content              Content          @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  User                 User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ContentComment       ContentComment?  @relation("ContentCommentToContentComment", fields: [parentId], references: [id])
+  other_ContentComment ContentComment[] @relation("ContentCommentToContentComment")
+
+  @@index([isApproved])
+  @@index([parentId])
+  @@index([userId])
+  @@index([contentId])
+}
+
+model ContentLike {
+  id        Int      @id @default(autoincrement())
+  contentId Int
+  userId    Int
+  createdAt DateTime @default(now())
+  Content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([contentId, userId])
+  @@index([userId])
+  @@index([contentId])
+}
+
+model ContentListing {
+  id        Int      @id @default(autoincrement())
+  contentId Int
+  listingId Int
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  Content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  Listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@unique([contentId, listingId])
+  @@index([listingId])
+  @@index([contentId])
+}
+
+model ContentTemplate {
+  id          Int      @id @default(autoincrement())
+  name        String
+  type        String
+  description String?
+  template    String
+  isActive    Boolean  @default(true)
+  createdById Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  User        User     @relation(fields: [createdById], references: [id])
+
+  @@index([createdById])
+  @@index([isActive])
+  @@index([type])
+}
+
+model EmailLog {
+  id            String        @id
+  templateId    String
+  toEmail       String
+  toName        String?
+  subject       String
+  status        String
+  errorMessage  String?
+  variables     Json?
+  sentAt        DateTime?
+  createdAt     DateTime      @default(now())
+  EmailTemplate EmailTemplate @relation(fields: [templateId], references: [id])
+
+  @@index([status, createdAt])
+  @@index([toEmail])
+}
+
+model EmailTemplate {
+  id          String     @id
+  name        String     @unique
+  subject     String
+  htmlContent String
+  textContent String?
+  variables   Json?
+  isActive    Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime
+  EmailLog    EmailLog[]
+
+  @@index([name])
+}
+
+model FilterConfig {
+  id            Int       @id @default(autoincrement())
+  scope         String
+  cityId        Int?
+  categoryId    Int?
+  subcategoryId String?
+  type          String
+  label         String
+  key           String
+  isRequired    Boolean   @default(false)
+  isVisible     Boolean   @default(true)
+  order         Int       @default(0)
+  config        Json
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime
+  City          City?     @relation(fields: [cityId], references: [id])
+  Category      Category? @relation(fields: [categoryId], references: [id])
+
+  @@index([order])
+  @@index([isVisible])
+  @@index([type])
+  @@index([scope, cityId, categoryId, subcategoryId])
+}
+
+model Interest {
+  id           Int            @id @default(autoincrement())
+  name         String         @unique
+  slug         String         @unique
+  description  String?
+  icon         String?
+  color        String?
+  category     String?
+  isActive     Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime
+  ListingTag   ListingTag[]
+  UserInterest UserInterest[]
+
+  @@index([isActive])
+  @@index([category])
+  @@index([slug])
+}
+
+model Lead {
+  id        Int       @id @default(autoincrement())
+  listingId Int
+  vendorId  Int?
+  cityId    Int?
+  name      String
+  phone     String?
+  email     String?
+  message   String?
+  desiredAt DateTime?
+  status    String    @default("NEW")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  Listing   Listing   @relation(fields: [listingId], references: [id])
+  Vendor    Vendor?   @relation(fields: [vendorId], references: [id])
+  City      City?     @relation(fields: [cityId], references: [id])
+
+  @@index([status])
+  @@index([vendorId])
+  @@index([listingId])
+}
+
+model ListingCommission {
+  id               Int      @id @default(autoincrement())
+  listingId        Int
+  percent          Int      @default(15)
+  effectiveFrom    DateTime @default(now())
+  approvedByUserId Int?
+  Listing          Listing  @relation(fields: [listingId], references: [id])
+  User             User?    @relation(fields: [approvedByUserId], references: [id])
+
+  @@index([effectiveFrom])
+  @@index([listingId])
+}
+
+model ListingModeration {
+  id          Int       @id @default(autoincrement())
+  listingId   Int       @unique
+  status      String    @default("DRAFT")
+  comment     String?
+  moderatorId Int?
+  reviewedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime
+  Listing     Listing   @relation(fields: [listingId], references: [id])
+  User        User?     @relation(fields: [moderatorId], references: [id])
+
+  @@index([moderatorId])
+  @@index([listingId, status])
+}
+
+model ListingTag {
+  id         Int      @id @default(autoincrement())
+  listingId  Int
+  interestId Int
+  createdAt  DateTime @default(now())
+  Listing    Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  Interest   Interest @relation(fields: [interestId], references: [id], onDelete: Cascade)
+
+  @@unique([listingId, interestId])
+  @@index([interestId])
+  @@index([listingId])
+}
+
+model LoyaltyPoint {
+  id          String       @id
+  userId      Int
+  action      LoyaltyAction
+  points      Int
+  orderId     String?
+  description String?
+  expiresAt   DateTime?
+  createdAt   DateTime     @default(now())
+  User        User         @relation(fields: [userId], references: [id])
+  Order       Order?       @relation(fields: [orderId], references: [id])
+
+  @@index([expiresAt])
+  @@index([action, createdAt])
+  @@index([userId])
+}
+
+model Message {
+  id         Int       @id @default(autoincrement())
+  chatId     Int
+  senderId   Int
+  senderType String
+  type       String    @default("TEXT")
+  content    String
+  metadata   Json?
+  status     String    @default("SENT")
+  readAt     DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime
+  Chat       Chat      @relation(fields: [chatId], references: [id])
+  User       User      @relation(fields: [senderId], references: [id])
+
+  @@index([senderId])
+  @@index([chatId, createdAt])
+}
+
+model Notification {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  type      String
+  channel   String
+  title     String
+  content   String
+  data      Json?
+  isRead    Boolean   @default(false)
+  sentAt    DateTime?
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+  User      User      @relation(fields: [userId], references: [id])
+
+  @@index([createdAt])
+  @@index([type, channel])
+  @@index([userId, isRead])
+}
+
+model Order {
+  id                String         @id
+  userId            Int
+  vendorId          Int
+  listingId         Int
+  status            OrderStatus    @default(PENDING)
+  totalAmount       Int
+  discountAmount    Int            @default(0)
+  finalAmount       Int
+  currency          String         @default("RUB")
+  promoCodeId       String?
+  loyaltyPointsUsed Int            @default(0)
+  notes             String?
+  expiresAt         DateTime?
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime
+  LoyaltyPoint      LoyaltyPoint[]
+  User              User           @relation(fields: [userId], references: [id])
+  Vendor            Vendor         @relation(fields: [vendorId], references: [id])
+  Listing           Listing        @relation(fields: [listingId], references: [id])
+  PromoCode         PromoCode?     @relation(fields: [promoCodeId], references: [id])
+  OrderItem         OrderItem[]
+  Payment           Payment[]
+  Refund            Refund[]
+  Ticket            Ticket[]
+  pointsTransactions PointsTransaction[]
+  userRewards        UserReward[]
+
+  @@index([expiresAt])
+  @@index([status, createdAt])
+  @@index([vendorId, status])
+  @@index([userId, status])
+}
+
+model OrderItem {
+  id              String          @id
+  orderId         String
+  ticketTypeId    String
+  quantity        Int
+  unitPrice       Int
+  totalPrice      Int
+  metadata        Json?
+  Order           Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  EventTicketType EventTicketType @relation(fields: [ticketTypeId], references: [id])
+  Ticket          Ticket[]
+
+  @@index([orderId])
+}
+
+model Payout {
+  id          Int       @id @default(autoincrement())
+  vendorId    Int
+  paymentId   Int
+  amount      Int
+  status      String    @default("PENDING")
+  method      String?
+  details     Json?
+  processedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime
+  Vendor      Vendor    @relation(fields: [vendorId], references: [id])
+  Payment     Payment   @relation(fields: [paymentId], references: [id])
+
+  @@index([vendorId, status])
+}
+
+model PopularEvent {
+  id             Int       @id @default(autoincrement())
+  eventId        String
+  title          String
+  slug           String
+  description    String?
+  imageUrl       String?
+  price          String?
+  date           DateTime?
+  location       String?
+  category       String?
+  isActive       Boolean   @default(true)
+  order          Int       @default(0)
+  startDate      DateTime?
+  endDate        DateTime?
+  clickCount     Int       @default(0)
+  viewCount      Int       @default(0)
+  cityId         Int?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime
+  tickets        String?
+  vendorName     String?
+  coordinatesLat Float?
+  coordinatesLng Float?
+  images         String?
+  City           City?     @relation(fields: [cityId], references: [id])
+
+  @@index([startDate, endDate])
+  @@index([cityId])
+  @@index([order])
+  @@index([isActive])
+}
+
+model PromoCode {
+  id             String        @id
+  code           String        @unique
+  type           PromoCodeType
+  value          Int
+  minOrderAmount Int?
+  maxDiscount    Int?
+  usageLimit     Int?
+  usedCount      Int           @default(0)
+  isActive       Boolean       @default(true)
+  validFrom      DateTime
+  validUntil     DateTime
+  applicableTo   Json?
+  description    String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime
+  Order          Order[]
+
+  @@index([isActive, validFrom, validUntil])
+  @@index([code])
+}
+
+model PublicationPlan {
+  id                  Int                   @id @default(autoincrement())
+  title               String
+  description         String?
+  startDate           DateTime
+  endDate             DateTime?
+  isActive            Boolean               @default(true)
+  createdById         Int
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime
+  User                User                  @relation(fields: [createdById], references: [id])
+  PublicationPlanItem PublicationPlanItem[]
+
+  @@index([createdById])
+  @@index([startDate])
+  @@index([isActive])
+}
+
+model PublicationPlanItem {
+  id              Int             @id @default(autoincrement())
+  planId          Int
+  contentId       Int?
+  title           String
+  description     String?
+  scheduledDate   DateTime
+  status          String          @default("PLANNED")
+  assignedTo      Int?
+  priority        String          @default("NORMAL")
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime
+  PublicationPlan PublicationPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  Content         Content?        @relation(fields: [contentId], references: [id])
+  User            User?           @relation(fields: [assignedTo], references: [id])
+
+  @@index([assignedTo])
+  @@index([status])
+  @@index([scheduledDate])
+  @@index([planId])
+}
+
+model Refund {
+  id          String    @id
+  orderId     String
+  paymentId   Int
+  amount      Int
+  reason      String?
+  status      String    @default("PENDING")
+  externalId  String?
+  processedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime
+  Order       Order     @relation(fields: [orderId], references: [id])
+  Payment     Payment   @relation(fields: [paymentId], references: [id])
+
+  @@index([status])
+  @@index([paymentId])
+  @@index([orderId])
+}
+
+model Review {
+  id                            Int       @id @default(autoincrement())
+  listingId                     Int
+  userId                        Int
+  vendorId                      Int
+  rating                        Int
+  title                         String?
+  content                       String
+  isPublic                      Boolean   @default(true)
+  isModerated                   Boolean   @default(false)
+  moderatorId                   Int?
+  moderatedAt                   DateTime?
+  vendorReply                   String?
+  replyAt                       DateTime?
+  createdAt                     DateTime  @default(now())
+  updatedAt                     DateTime
+  Listing                       Listing   @relation(fields: [listingId], references: [id])
+  User_Review_userIdToUser      User      @relation("Review_userIdToUser", fields: [userId], references: [id])
+  Vendor                        Vendor    @relation(fields: [vendorId], references: [id])
+  User_Review_moderatorIdToUser User?     @relation("Review_moderatorIdToUser", fields: [moderatorId], references: [id])
+
+  @@index([rating])
+  @@index([userId])
+  @@index([vendorId, isModerated])
+  @@index([listingId, isPublic])
+}
+
+model RoleAssignment {
+  id         Int       @id @default(autoincrement())
+  userId     Int
+  role       AppRole
+  scopeType  ScopeType @default(GLOBAL)
+  scopeId    Int?
+  cityId     Int?
+  categoryId Int?
+  vendorId   Int?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime
+  User       User      @relation(fields: [userId], references: [id])
+  City       City?     @relation(fields: [cityId], references: [id])
+  Category   Category? @relation(fields: [categoryId], references: [id])
+  Vendor     Vendor?   @relation(fields: [vendorId], references: [id])
+
+  @@index([vendorId])
+  @@index([categoryId])
+  @@index([cityId])
+  @@index([scopeType, scopeId])
+  @@index([role])
+  @@index([userId])
+}
+
+model SLARule {
+  id        Int      @id @default(autoincrement())
+  vendorId  Int
+  type      String
+  timeLimit Int
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  Vendor    Vendor   @relation(fields: [vendorId], references: [id])
+
+  @@index([isActive])
+  @@index([vendorId, type])
+}
+
+model SectionVisibility {
+  id                Int       @id @default(autoincrement())
+  scope             String
+  cityId            Int?
+  categoryId        Int?
+  subcategoryId     String?
+  isVisible         Boolean   @default(true)
+  hideIfEmpty       Boolean   @default(false)
+  customTitle       String?
+  customDescription String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime
+  City              City?     @relation(fields: [cityId], references: [id])
+  Category          Category? @relation(fields: [categoryId], references: [id])
+
+  @@unique([scope, cityId, categoryId, subcategoryId])
+  @@index([categoryId])
+  @@index([cityId])
+  @@index([isVisible])
+  @@index([scope])
+}
+
+model Session {
+  id           String   @id
+  sessionToken String   @unique
+  userId       Int
+  expires      DateTime
+  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model StockAvatar {
+  id        Int      @id @default(autoincrement())
+  name      String
+  url       String   @unique
+  category  String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@index([isActive])
+  @@index([category])
+}
+
+model Ticket {
+  id                       String          @id
+  orderId                  String
+  orderItemId              String
+  userId                   Int
+  vendorId                 Int
+  listingId                Int
+  ticketTypeId             String
+  qrCode                   String          @unique
+  status                   TicketStatus    @default(ACTIVE)
+  usedAt                   DateTime?
+  usedBy                   Int?
+  metadata                 Json?
+  createdAt                DateTime        @default(now())
+  updatedAt                DateTime
+  Order                    Order           @relation(fields: [orderId], references: [id])
+  OrderItem                OrderItem       @relation(fields: [orderItemId], references: [id])
+  User_Ticket_userIdToUser User            @relation("Ticket_userIdToUser", fields: [userId], references: [id])
+  Vendor                   Vendor          @relation(fields: [vendorId], references: [id])
+  Listing                  Listing         @relation(fields: [listingId], references: [id])
+  EventTicketType          EventTicketType @relation(fields: [ticketTypeId], references: [id])
+  User_Ticket_usedByToUser User?           @relation("Ticket_usedByToUser", fields: [usedBy], references: [id])
+
+  @@index([status])
+  @@index([qrCode])
+  @@index([vendorId])
+  @@index([userId])
+}
+
+model UserBehaviorEvent {
+  id        Int      @id @default(autoincrement())
+  userId    Int?
+  sessionId String
+  eventType String
+  page      String
+  element   String?
+  data      Json?
+  userAgent String?
+  ipAddress String?
+  createdAt DateTime @default(now())
+  User      User?    @relation(fields: [userId], references: [id])
+
+  @@index([eventType, createdAt])
+  @@index([createdAt])
+  @@index([sessionId])
+  @@index([userId, eventType])
+}
+
+model UserChild {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  name      String
+  birthDate DateTime
+  gender    String
+  interests Json?
+  avatar    String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([isActive])
+  @@index([userId])
+}
+
+model UserComment {
+  id                                 Int               @id @default(autoincrement())
+  userId                             Int
+  listingId                          Int
+  content                            String
+  parentId                           Int?
+  isModerated                        Boolean           @default(false)
+  moderatedAt                        DateTime?
+  moderatorId                        Int?
+  moderationNote                     String?
+  isActive                           Boolean           @default(true)
+  createdAt                          DateTime          @default(now())
+  updatedAt                          DateTime
+  User_UserComment_userIdToUser      User              @relation("UserComment_userIdToUser", fields: [userId], references: [id], onDelete: Cascade)
+  Listing                            Listing           @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  UserComment                        UserComment?      @relation("UserCommentToUserComment", fields: [parentId], references: [id])
+  other_UserComment                  UserComment[]     @relation("UserCommentToUserComment")
+  User_UserComment_moderatorIdToUser User?             @relation("UserComment_moderatorIdToUser", fields: [moderatorId], references: [id])
+  UserCommentVote                    UserCommentVote[]
+
+  @@index([isActive])
+  @@index([isModerated])
+  @@index([parentId])
+  @@index([listingId])
+  @@index([userId])
+}
+
+model UserCommentVote {
+  id          Int         @id @default(autoincrement())
+  userId      Int
+  commentId   Int
+  vote        Int
+  createdAt   DateTime    @default(now())
+  User        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  UserComment UserComment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, commentId])
+  @@index([commentId])
+  @@index([userId])
+}
+
+model UserFavorite {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  listingId Int
+  createdAt DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, listingId])
+  @@index([listingId])
+  @@index([userId])
+}
+
+model UserInterest {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  interestId Int
+  createdAt  DateTime @default(now())
+  User       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Interest   Interest @relation(fields: [interestId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, interestId])
+  @@index([interestId])
+  @@index([userId])
+}
+
+model UserLoyaltyPoint {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  points    Int
+  reason    String
+  source    String?
+  sourceId  Int?
+  expiresAt DateTime?
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  User      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([createdAt])
+  @@index([expiresAt])
+  @@index([source, sourceId])
+  @@index([userId])
+}
+
+model UserNotification {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  type      String
+  title     String
+  message   String
+  data      Json?
+  isRead    Boolean   @default(false)
+  readAt    DateTime?
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  User      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([createdAt])
+  @@index([type])
+  @@index([isRead])
+  @@index([userId])
+}
+
+model UserNotificationSettings {
+  id              Int      @id @default(autoincrement())
+  userId          Int      @unique
+  emailNewEvents  Boolean  @default(true)
+  emailPriceDrops Boolean  @default(true)
+  emailReminders  Boolean  @default(true)
+  emailReviews    Boolean  @default(true)
+  emailNewsletter Boolean  @default(true)
+  pushNewEvents   Boolean  @default(true)
+  pushPriceDrops  Boolean  @default(false)
+  pushReminders   Boolean  @default(true)
+  pushReviews     Boolean  @default(true)
+  frequency       String   @default("daily")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime
+  User            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model UserReview {
+  id                                Int              @id @default(autoincrement())
+  userId                            Int
+  listingId                         Int
+  rating                            Int
+  title                             String?
+  content                           String
+  photos                            Json?
+  isVerified                        Boolean          @default(false)
+  isModerated                       Boolean          @default(false)
+  moderatedAt                       DateTime?
+  moderatorId                       Int?
+  moderationNote                    String?
+  isActive                          Boolean          @default(true)
+  createdAt                         DateTime         @default(now())
+  updatedAt                         DateTime
+  User_UserReview_userIdToUser      User             @relation("UserReview_userIdToUser", fields: [userId], references: [id], onDelete: Cascade)
+  Listing                           Listing          @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  User_UserReview_moderatorIdToUser User?            @relation("UserReview_moderatorIdToUser", fields: [moderatorId], references: [id])
+  UserReviewVote                    UserReviewVote[]
+
+  @@index([isActive])
+  @@index([isModerated])
+  @@index([listingId])
+  @@index([userId])
+}
+
+model UserReviewVote {
+  id         Int        @id @default(autoincrement())
+  userId     Int
+  reviewId   Int
+  vote       Int
+  createdAt  DateTime   @default(now())
+  User       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  UserReview UserReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, reviewId])
+  @@index([reviewId])
+  @@index([userId])
+}
+
+model UserSubscription {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  type      String
+  targetId  Int
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, type, targetId])
+  @@index([type, targetId])
+  @@index([userId])
+}
+
+model UserWallet {
+  id            String   @id
+  userId        Int      @unique
+  balance       Int      @default(0)
+  totalEarned   Int      @default(0)
+  totalSpent    Int      @default(0)
+  lastUpdatedAt DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime
+  User          User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model VendorOnboarding {
+  id             Int       @id @default(autoincrement())
+  vendorId       Int       @unique
+  step           Int       @default(1)
+  completedSteps Json      @default("[]")
+  isCompleted    Boolean   @default(false)
+  completedAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime
+  Vendor         Vendor    @relation(fields: [vendorId], references: [id])
+
+  @@index([vendorId, isCompleted])
+}
+
+model VendorPerformanceMetric {
+  id         Int      @id @default(autoincrement())
+  vendorId   Int
+  metricType String
+  value      Float
+  period     String
+  date       DateTime
+  metadata   Json?
+  createdAt  DateTime @default(now())
+  Vendor     Vendor   @relation(fields: [vendorId], references: [id])
+
+  @@index([period, date])
+  @@index([vendorId, metricType, date])
+}
+
+model VendorSubscription {
+  id               Int              @id @default(autoincrement())
+  vendorId         Int
+  tariffPlanId     Int
+  status           String           @default("PENDING")
+  startsAt         DateTime
+  endsAt           DateTime?
+  autoRenew        Boolean          @default(true)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime
+  Payment          Payment[]
+  Vendor           Vendor           @relation(fields: [vendorId], references: [id])
+  VendorTariffPlan VendorTariffPlan @relation(fields: [tariffPlanId], references: [id])
+
+  @@index([vendorId, status])
+}
+
+model VendorTariffPlan {
+  id                 Int                  @id @default(autoincrement())
+  name               String
+  tariff             String
+  price              Int
+  features           Json
+  maxListings        Int?
+  isActive           Boolean              @default(true)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime
+  VendorSubscription VendorSubscription[]
+
+  @@index([tariff, isActive])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model PopularCategory {
+  id              Int                          @id @default(autoincrement())
+  name            String
+  description     String?
+  icon            String?
+  color           String?
+  isActive        Boolean                      @default(true)
+  sortOrder       Int                          @default(0)
+  cityId          Int
+  createdAt       DateTime                     @default(now())
+  updatedAt       DateTime                     @default(now()) @updatedAt
+  eventCategories AfishaEventPopularCategory[]
+  city            City                         @relation(fields: [cityId], references: [id], onDelete: Cascade)
+
+  @@unique([cityId, name])
+}
+
+model AfishaEventPopularCategory {
+  id                Int             @id @default(autoincrement())
+  afishaEventId     String
+  popularCategoryId Int
+  isPermanent       Boolean         @default(false)
+  daysToShow        Int?
+  startDate         DateTime?
+  endDate           DateTime?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @default(now()) @updatedAt
+  popularCategory   PopularCategory @relation(fields: [popularCategoryId], references: [id], onDelete: Cascade)
+  afishaEvent       AfishaEvent     @relation(fields: [afishaEventId], references: [id], onDelete: Cascade)
+
+  @@unique([afishaEventId, popularCategoryId])
+}
+
+/// ========= Enums =========
+
+enum ListingType {
+  EVENT
+  VENUE
+  SERVICE
+}
+
+enum BookingMode {
+  INSTANT
+  REQUEST
+}
+
+enum BookingStatus {
+  CART
+  HOLD
+  PAYMENT_PENDING
+  PAID
+  CONFIRMED
+  CANCELLED
+  REFUNDED
+  USED
+  REQUESTED
+  VENDOR_REVIEW
+  OFFERED
+  ACCEPTED
+}
+
+enum PaymentStatus {
+  NEW
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum VenueType {
+  PLACE
+  SERVICE
+}
+
+enum VenueParameterType {
+  TEXT
+  TEXTAREA
+  INPUT_MASK
+  SELECT
+  RADIO
+  CHECKBOX
+  NUMBER
+  PHOTO_UPLOADER
+  MAP_ADDRESS
+  EMAIL
+  LINK
+}
+
+enum VenueTariff {
+  FREE
+  OPTIMAL
+  MAXIMUM
+}
+
+enum VenuePartnerStatus {
+  ACTIVE
+  MODERATION
+  HIDDEN
+}
+
+enum VenueVendorType {
+  INDIVIDUAL_ENTREPRENEUR
+  LEGAL_ENTITY
+  SELF_EMPLOYED
+}
+
+enum VenueVendorStatus {
+  ACTIVE
+  PENDING
+  HIDDEN
+  DELETED
+}
+
+enum VenueDocumentStatus {
+  NONE
+  PENDING
+  CHECKED
+}
+
+// Модели для отзывов и комментариев
+model EventReview {
+  id          String   @id @default(cuid())
+  eventId     String
+  userId      Int
+  rating      Int      // 1-5 звезд
+  comment     String?  // Текстовый отзыв
+  status      ReviewStatus @default(MODERATION)
+  likesCount  Int      @default(0)
+  dislikesCount Int    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Связи
+  event       AfishaEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reactions   ReviewReaction[]
+  replies     ReviewReply[] // Ответы на отзыв
+  
+  @@index([eventId])
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model VenueReview {
+  id          String   @id @default(cuid())
+  venueId     Int
+  userId      Int
+  rating      Int      // 1-5 звезд
+  comment     String?  // Текстовый отзыв
+  photos      String?  // JSON array of photo URLs
+  status      ReviewStatus @default(MODERATION)
+  likesCount  Int      @default(0)
+  dislikesCount Int    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Связи
+  venue       VenuePartner @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  user        User @relation("VenueReview_userIdToUser", fields: [userId], references: [id], onDelete: Cascade)
+  reactions   VenueReviewReaction[]
+  replies     VenueReviewReply[] // Ответы на отзыв
+  
+  @@index([venueId])
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model ReviewReaction {
+  id        String   @id @default(cuid())
+  reviewId  String
+  userId    Int
+  type      ReactionType // LIKE или DISLIKE
+  createdAt DateTime @default(now())
+  
+  // Связи
+  review    EventReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Один пользователь может поставить только одну реакцию на отзыв
+  @@unique([reviewId, userId])
+  @@index([reviewId])
+  @@index([userId])
+}
+
+model VenueReviewReaction {
+  id        String   @id @default(cuid())
+  reviewId  String
+  userId    Int
+  type      ReactionType // LIKE или DISLIKE
+  createdAt DateTime @default(now())
+  
+  // Связи
+  review    VenueReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  user      User @relation("VenueReviewReaction_userIdToUser", fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Один пользователь может поставить только одну реакцию на отзыв
+  @@unique([reviewId, userId])
+  @@index([reviewId])
+  @@index([userId])
+}
+
+model ReviewReply {
+  id        String   @id @default(cuid())
+  reviewId  String
+  userId    Int
+  message   String
+  status    ReviewStatus @default(APPROVED)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Связи
+  review    EventReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([reviewId])
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model VenueReviewReply {
+  id        String   @id @default(cuid())
+  reviewId  String
+  userId    Int
+  message   String
+  status    ReviewStatus @default(APPROVED)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Связи
+  review    VenueReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  user      User @relation("VenueReviewReply_userIdToUser", fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([reviewId])
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum ReviewStatus {
+  MODERATION
+  APPROVED
+  REJECTED
+  HIDDEN
+}
+
+enum ReactionType {
+  LIKE
+  DISLIKE
+}
+
+// Система баллов лояльности
+model UserPoints {
+  id          Int      @id @default(autoincrement())
+  userId      Int      @unique
+  points      Int      @default(0)
+  totalEarned Int      @default(0)
+  totalSpent  Int      @default(0)
+  level       UserLevel @default(NOVICE)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Связи
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions PointsTransaction[]
+  rewards     UserReward[]
+  
+  @@index([userId])
+  @@index([level])
+}
+
+model PointsTransaction {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  points      Int
+  type        TransactionType
+  category    String
+  description String
+  orderId     String?
+  eventId     String?
+  venueId     Int?
+  createdAt   DateTime @default(now())
+  
+  // Связи
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  order       Order? @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  event       AfishaEvent? @relation(fields: [eventId], references: [id], onDelete: SetNull)
+  userPoints  UserPoints @relation(fields: [userId], references: [userId])
+  
+  @@index([userId])
+  @@index([type])
+  @@index([category])
+  @@index([createdAt])
+}
+
+model Reward {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  pointsCost  Int
+  type        RewardType
+  value       Int?     // значение скидки в рублях или процентах
+  isActive    Boolean  @default(true)
+  maxUses     Int?     // максимальное количество использований
+  expiresAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Связи
+  userRewards UserReward[]
+  
+  @@index([isActive])
+  @@index([type])
+}
+
+model UserReward {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  rewardId    Int
+  pointsSpent Int
+  usedAt      DateTime?
+  isUsed      Boolean  @default(false)
+  orderId     String?
+  createdAt   DateTime @default(now())
+  
+  // Связи
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reward      Reward @relation(fields: [rewardId], references: [id], onDelete: Cascade)
+  order       Order? @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  userPoints  UserPoints @relation(fields: [userId], references: [userId])
+  
+  @@index([userId])
+  @@index([rewardId])
+  @@index([isUsed])
+}
+
+model UserInvite {
+  id          Int      @id @default(autoincrement())
+  inviterId   Int      // кто пригласил
+  inviteeId   Int?     // кого пригласили (может быть null если еще не зарегистрировался)
+  inviteCode  String   @unique
+  email       String?  // email приглашенного
+  isUsed      Boolean  @default(false)
+  pointsAwarded Boolean @default(false)
+  createdAt   DateTime @default(now())
+  usedAt      DateTime?
+  
+  // Связи
+  inviter     User @relation("UserInvites", fields: [inviterId], references: [id], onDelete: Cascade)
+  invitee     User? @relation("UserInvited", fields: [inviteeId], references: [id], onDelete: SetNull)
+  
+  @@index([inviterId])
+  @@index([inviteeId])
+  @@index([inviteCode])
+  @@index([isUsed])
+}
+
+// Enums для системы баллов
+enum UserLevel {
+  NOVICE      // 0-999 баллов
+  ACTIVE      // 1000-4999 баллов
+  VIP         // 5000-19999 баллов
+  PLATINUM    // 20000+ баллов
+}
+
+enum TransactionType {
+  EARNED
+  SPENT
+  BONUS
+  REFUND
+}
+
+enum RewardType {
+  DISCOUNT      // скидка
+  FREE_TICKET   // бесплатный билет
+  GIFT          // подарок
+  VIP_STATUS    // VIP статус
+  BONUS_POINTS  // бонусные баллы
+}
+
+// Enums для системы вендоров
+enum VendorType {
+  START         // Минимальная регистрация
+  PRO           // Полная регистрация с KYC
+}
+
+enum KycStatus {
+  DRAFT         // Черновик
+  SUBMITTED     // Отправлено на модерацию
+  NEEDS_INFO    // Требует дополнительной информации
+  APPROVED      // Одобрено
+  REJECTED      // Отклонено
+}
+
+enum SubscriptionStatus {
+  INACTIVE      // Неактивна
+  ACTIVE        // Активна
+  EXPIRED       // Истекла
+  CANCELLED     // Отменена
+}
+
+enum VendorRoleType {
+  NPD           // Самозанятый (НПД)
+  IE            // Индивидуальный предприниматель
+  LEGAL         // Юридическое лицо
+}
+
+enum TaxRegime {
+  NPD           // Налог на профессиональный доход
+  USN           // Упрощенная система налогообложения
+  OSN           // Общая система налогообложения
+  PSN           // Патентная система налогообложения
+}
+
+enum ClaimStatus {
+  PENDING       // Ожидает рассмотрения
+  APPROVED      // Одобрено
+  REJECTED      // Отклонено
+  HOLD          // Приостановлено (много заявок)
+}
+
+enum ProofType {
+  DOMAIN_EMAIL  // Email на домене компании
+  DNS_RECORD    // DNS запись
+  LETTER        // Письмо-доверенность
+  PHOTO         // Фото из зала/офиса
+}
+
+// Enums для документов
+enum DocumentType {
+  PASSPORT           // Паспорт
+  EGRUL              // Выписка ЕГРЮЛ
+  EGRIP              // Выписка ЕГРИП
+  DIRECTOR_ORDER     // Приказ о назначении директора
+  NPD_PROOF          // Справка о постановке на учет НПД
+  BANK_STATEMENT     // Банковская выписка
+  TAX_CERTIFICATE    // Справка из налоговой
+  OTHER              // Прочие документы
+}
+
+enum DocumentStatus {
+  PENDING    // Ожидает рассмотрения
+  APPROVED   // Одобрен
+  REJECTED   // Отклонен
+  EXPIRED    // Истек срок действия
+}
+
+// Enums для НДС
+enum VatStatus {
+  NONE    // Не является плательщиком НДС
+  VAT_0   // 0% НДС
+  VAT_5   // 5% НДС
+  VAT_7   // 7% НДС
+  VAT_20  // 20% НДС
+}
+
+// Enums для фискализации
+enum FiscalMode {
+  PLATFORM  // Платформа выбивает чек как агент
+  VENDOR    // Вендор сам выбивает чек
+}
+
+// Дополнительные enum'ы для системы
+enum AdminInsightType {
+  PERFORMANCE
+  SECURITY
+  BUSINESS
+  TECHNICAL
+  USER_BEHAVIOR
+}
+
+enum AdminInsightPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum AIAssistantType {
+  CONTENT_GENERATION
+  SEO_OPTIMIZATION
+  PRICING_ANALYSIS
+  MARKETING_SUGGESTIONS
+  CUSTOMER_SUPPORT
+}
+
+enum AIAssistantStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum LoyaltyAction {
+  REGISTRATION
+  FIRST_PURCHASE
+  PURCHASE
+  REVIEW
+  REFERRAL
+  BIRTHDAY
+  ANNIVERSARY
+  BONUS
+  REFUND
+}
+
+enum PromoCodeType {
+  PERCENTAGE
+  FIXED_AMOUNT
+  FREE_SHIPPING
+  BOGO
+  CUSTOM
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+  FAILED
+}
+
+enum TicketStatus {
+  ACTIVE
+  USED
+  CANCELLED
+  EXPIRED
+  REFUNDED
+}
+
+enum AppRole {
+  SUPER_ADMIN
+  ADMIN
+  MANAGER
+  MODERATOR
+  VENDOR
+  USER
+  GUEST
+}
+
+enum ScopeType {
+  GLOBAL
+  CITY
+  CATEGORY
+  VENDOR
+  USER
+}
+
+// Модель для аудита действий модераторов
+model AuditLog {
+  id          Int      @id @default(autoincrement())
+  entityType  String   // Тип сущности (VENDOR, LISTING_CLAIM, etc.)
+  entityId    String   // ID сущности
+  action      String   // Действие (APPROVE, REJECT, etc.)
+  details     Json?    // Детали действия
+  userId      Int      // ID пользователя, выполнившего действие
+  ipAddress   String?  // IP адрес
+  createdAt   DateTime @default(now())
+  
+  // Связи
+  user        User     @relation(fields: [userId], references: [id])
+  
+  @@index([entityType, entityId])
+  @@index([userId])
+  @@index([createdAt])
+}
+
+// История модераций вендоров
+model VendorModerationHistory {
+  id                Int           @id @default(autoincrement())
+  vendorId          Int
+  action            String        // SUBMITTED, APPROVED, REJECTED, NEEDS_INFO, RESUBMITTED
+  previousStatus    KycStatus?
+  newStatus         KycStatus?
+  moderatorId       Int?
+  moderatorNotes    String?
+  rejectionReason   String?
+  documentsCount    Int?          // Количество документов при отправке
+  documentsList     Json?         // Список документов (массив объектов с fileName, fileUrl, docType)
+  ipAddress         String?
+  userAgent         String?
+  createdAt         DateTime      @default(now())
+  
+  vendor            Vendor        @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  moderator         User?         @relation("VendorModerationHistoryModerator", fields: [moderatorId], references: [id])
+  
+  @@index([vendorId])
+  @@index([action])
+  @@index([createdAt])
+  @@index([moderatorId])
+}
+
+// Модель для отслеживания уникальных просмотров событий по IP
+model EventView {
+  id        String   @id @default(cuid())
+  eventId   String
+  ipAddress String
+  userAgent String?
+  createdAt DateTime @default(now())
+  
+  // Связи
+  event     AfishaEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  
+  // Один IP может просмотреть событие только один раз
+  @@unique([eventId, ipAddress])
+  @@index([eventId])
+  @@index([ipAddress])
+  @@index([createdAt])
+}
+
+// Модель для рекламных слотов в херо-блоке
+model HeroSlot {
+  id                String    @id @default(cuid())
+  city              String    // Город
+  eventIds          String    // JSON array of event IDs
+  startDate         DateTime  // Начало показа
+  endDate           DateTime  // Конец показа
+  rotationFrequency Int       @default(1) // Частотность показа (1-10)
+  isActive          Boolean   @default(true)
+  clickCount        Int       @default(0)
+  viewCount         Int       @default(0)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  @@index([city])
+  @@index([isActive])
+  @@index([startDate, endDate])
+}
+
+model UserSession {
+  id           String   @id @default(cuid())
+  userId       Int
+  refreshToken String   @unique
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  userAgent    String?
+  ipAddress    String?
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([expiresAt])
+  @@index([refreshToken])
+}

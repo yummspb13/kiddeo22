@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест ссылок HomePageBlock</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-item { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px; }
+        .test-item h3 { margin-top: 0; color: #333; }
+        .test-item p { margin: 5px 0; color: #666; }
+        .link { color: #007bff; text-decoration: none; }
+        .link:hover { text-decoration: underline; }
+        .expected { background-color: #f8f9fa; padding: 10px; border-radius: 4px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Тест ссылок HomePageBlock</h1>
+    
+    <div class="test-item">
+        <h3>Тест 1: Событие с slug</h3>
+        <p><strong>Данные:</strong> { type: 'EVENT', id: '123', slug: 'test-event', title: 'Тестовое событие' }</p>
+        <p><strong>Ожидаемая ссылка:</strong> <span class="expected">/event/test-event</span></p>
+        <p><strong>Фактическая ссылка:</strong> <a href="/event/test-event" class="link">/event/test-event</a></p>
+    </div>
+    
+    <div class="test-item">
+        <h3>Тест 2: Событие без slug</h3>
+        <p><strong>Данные:</strong> { type: 'EVENT', id: '456', slug: null, title: 'Событие без slug' }</p>
+        <p><strong>Ожидаемая ссылка:</strong> <span class="expected">/event/456</span></p>
+        <p><strong>Фактическая ссылка:</strong> <a href="/event/456" class="link">/event/456</a></p>
+    </div>
+    
+    <div class="test-item">
+        <h3>Тест 3: Место с slug</h3>
+        <p><strong>Данные:</strong> { type: 'VENUE', id: '789', slug: 'test-venue', title: 'Тестовое место' }</p>
+        <p><strong>Ожидаемая ссылка:</strong> <span class="expected">/city/moskva/venue/test-venue</span></p>
+        <p><strong>Фактическая ссылка:</strong> <a href="/city/moskva/venue/test-venue" class="link">/city/moskva/venue/test-venue</a></p>
+    </div>
+    
+    <div class="test-item">
+        <h3>Тест 4: Место без slug</h3>
+        <p><strong>Данные:</strong> { type: 'VENUE', id: '101', slug: null, title: 'Место без slug' }</p>
+        <p><strong>Ожидаемая ссылка:</strong> <span class="expected">/city/moskva/venue/101</span></p>
+        <p><strong>Фактическая ссылка:</strong> <a href="/city/moskva/venue/101" class="link">/city/moskva/venue/101</a></p>
+    </div>
+    
+    <div class="test-item">
+        <h3>Тест 5: Сервис с slug</h3>
+        <p><strong>Данные:</strong> { type: 'SERVICE', id: '202', slug: 'test-service', title: 'Тестовый сервис' }</p>
+        <p><strong>Ожидаемая ссылка:</strong> <span class="expected">/city/moskva/service/test-service</span></p>
+        <p><strong>Фактическая ссылка:</strong> <a href="/city/moskva/service/test-service" class="link">/city/moskva/service/test-service</a></p>
+    </div>
+    
+    <div class="test-item">
+        <h3>Тест 6: Блог с slug</h3>
+        <p><strong>Данные:</strong> { type: 'BLOG_POST', id: '303', slug: 'test-blog', title: 'Тестовая статья' }</p>
+        <p><strong>Ожидаемая ссылка:</strong> <span class="expected">/blog/test-blog</span></p>
+        <p><strong>Фактическая ссылка:</strong> <a href="/blog/test-blog" class="link">/blog/test-blog</a></p>
+    </div>
+    
+    <script>
+        // Симуляция логики HomePageBlock
+        function generateLink(item, citySlug = 'moskva') {
+            return item.type === 'BLOG_POST' ? `/blog/${item.slug || item.id}` : 
+                   item.type === 'EVENT' ? `/event/${item.slug || item.id}` :
+                   item.type === 'VENUE' ? `/city/${citySlug}/venue/${item.slug || item.id}` :
+                   item.type === 'SERVICE' ? `/city/${citySlug}/service/${item.slug || item.id}` :
+                   `/city/${citySlug}/${item.type.toLowerCase()}/${item.slug || item.id}`;
+        }
+        
+        // Тестовые данные
+        const testData = [
+            { type: 'EVENT', id: '123', slug: 'test-event', title: 'Тестовое событие' },
+            { type: 'EVENT', id: '456', slug: null, title: 'Событие без slug' },
+            { type: 'VENUE', id: '789', slug: 'test-venue', title: 'Тестовое место' },
+            { type: 'VENUE', id: '101', slug: null, title: 'Место без slug' },
+            { type: 'SERVICE', id: '202', slug: 'test-service', title: 'Тестовый сервис' },
+            { type: 'BLOG_POST', id: '303', slug: 'test-blog', title: 'Тестовая статья' }
+        ];
+        
+        console.log('Тестирование ссылок HomePageBlock:');
+        testData.forEach((item, index) => {
+            const link = generateLink(item);
+            console.log(`Тест ${index + 1}:`, item, '->', link);
+        });
+    </script>
+</body>
+</html>

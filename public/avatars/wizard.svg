@@ -1,0 +1,23 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Фон -->
+  <circle cx="50" cy="50" r="50" fill="#8b5cf6"/>
+  
+  <!-- Шляпа -->
+  <path d="M30 25 Q50 10 70 25 Q75 35 70 45 Q65 50 60 45 Q55 40 50 45 Q45 40 40 45 Q35 50 30 45 Q25 35 30 25" fill="#5b21b6"/>
+  
+  <!-- Лицо -->
+  <circle cx="50" cy="50" r="25" fill="#fef3c7"/>
+  
+  <!-- Глаза -->
+  <circle cx="42" cy="45" r="3" fill="#1f2937"/>
+  <circle cx="58" cy="45" r="3" fill="#1f2937"/>
+  
+  <!-- Улыбка -->
+  <path d="M40 55 Q50 65 60 55" stroke="#1f2937" stroke-width="2" fill="none"/>
+  
+  <!-- Борода -->
+  <path d="M45 60 Q50 70 55 60" fill="#6b7280"/>
+  
+  <!-- Звезда на шляпе -->
+  <path d="M45 20 L47 25 L52 25 L48 28 L50 33 L45 30 L40 33 L42 28 L38 25 L43 25 Z" fill="#fbbf24"/>
+</svg>

@@ -1,0 +1,1830 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { Plus, Edit, Eye, EyeOff, Trash2, Wrench, ArrowLeft } from 'lucide-react'
+import AdminFileUploader from '@/components/AdminFileUploader'
+import { safeArray } from '@/lib/api-utils'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+
+interface VenuePartner {
+  id: number
+  name: string
+  slug: string
+  address: string
+  description?: string
+  heroImage?: string
+  coverImage?: string
+  additionalImages?: string
+  subcategoryId: number
+  vendorId: number
+  city: {
+    id: number
+    name: string
+  }
+  tariff: 'FREE' | 'OPTIMAL' | 'MAXIMUM'
+  status: 'ACTIVE' | 'MODERATION' | 'HIDDEN'
+  createdAt: string
+  subcategory: {
+    id: number
+    name: string
+    category: {
+      id: number
+      name: string
+    }
+  }
+  vendor: {
+    id: number
+    displayName: string
+  }
+}
+
+interface VenueSubcategory {
+  id: number
+  name: string
+  category: {
+    id: number
+    name: string
+  }
+}
+
+interface VenueVendor {
+  id: number
+  displayName: string
+}
+
+interface City {
+  id: number
+  name: string
+}
+
+interface VenueParameter {
+  id: number
+  name: string
+  type: string
+  config: string
+  isFree: boolean
+  isOptimal: boolean
+  isMaximum: boolean
+  isActive: boolean
+}
+
+interface VenueFilter {
+  id: number
+  name: string
+  key: string
+  config: string
+  isVisible: boolean
+  isActive: boolean
+}
+
+export default function VenuePartnersClient() {
+  const searchParams = useSearchParams()
+  const key = searchParams?.get('key')
+  
+  const [partners, setPartners] = useState<VenuePartner[]>([])
+  const [subcategories, setSubcategories] = useState<VenueSubcategory[]>([])
+  const [vendors, setVendors] = useState<VenueVendor[]>([])
+  const [cities, setCities] = useState<City[]>([])
+  const [parameters, setParameters] = useState<VenueParameter[]>([])
+  const [filters, setFilters] = useState<VenueFilter[]>([])
+  const [loading, setLoading] = useState(true)
+  const [showCreateModal, setShowCreateModal] = useState(false)
+  const [showEditModal, setShowEditModal] = useState(false)
+  const [editingPartner, setEditingPartner] = useState<VenuePartner | null>(null)
+  const [vendorSearch, setVendorSearch] = useState('')
+  const [isVendorDropdownOpen, setIsVendorDropdownOpen] = useState(false)
+  const [showModerationModal, setShowModerationModal] = useState(false)
+  const [moderationPartner, setModerationPartner] = useState<VenuePartner | null>(null)
+  const [moderationReason, setModerationReason] = useState('')
+  
+  // Состояния для сортировки и фильтрации
+  const [sortField, setSortField] = useState<keyof VenuePartner>('createdAt')
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc')
+  const [selectedCityIds, setSelectedCityIds] = useState<number[]>([])
+  const [showCityFilter, setShowCityFilter] = useState(false)
+
+  // Форма создания/редактирования
+  const [formData, setFormData] = useState({
+    name: '',
+    address: '',
+    heroImage: '',
+    coverImage: '',
+    subcategoryId: '',
+    vendorId: '',
+    tariff: 'FREE' as 'FREE' | 'OPTIMAL' | 'MAXIMUM',
+    cityId: ''
+  })
+
+  // Динамические поля параметров и фильтров
+  const [parameterValues, setParameterValues] = useState<Record<number, any>>({})
+  const [filterValues, setFilterValues] = useState<Record<number, any>>({})
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  // Отслеживание изменений подкатегории
+  useEffect(() => {
+    if (formData.subcategoryId) {
+      fetchSubcategoryData(formData.subcategoryId)
+    } else {
+      setParameters([])
+      setFilters([])
+    }
+  }, [formData.subcategoryId])
+
+  // Сброс значений параметров при изменении тарифа
+  useEffect(() => {
+    setParameterValues({})
+  }, [formData.tariff])
+
+  // Закрытие выпадающего списка при клике вне его
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element
+      if (!target.closest('.vendor-dropdown')) {
+        setIsVendorDropdownOpen(false)
+      }
+      if (!target.closest('.city-filter-dropdown')) {
+        setShowCityFilter(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
+  const fetchData = async () => {
+    try {
+      setLoading(true)
+      const [partnersRes, subcategoriesRes, citiesRes] = await Promise.all([
+        fetch('/api/admin/venues/partners'),
+        fetch('/api/admin/venues/subcategories'),
+        fetch('/api/cities')
+      ])
+
+      if (partnersRes.ok) {
+        const partnersData = await partnersRes.json()
+        setPartners(partnersData)
+      }
+
+      if (subcategoriesRes.ok) {
+        const subcategoriesData = await subcategoriesRes.json()
+        setSubcategories(subcategoriesData)
+      }
+
+      if (citiesRes.ok) {
+        const citiesData = await citiesRes.json()
+        setCities(safeArray(citiesData))
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const fetchSubcategoryData = async (subcategoryId: string) => {
+    if (!subcategoryId) {
+      setParameters([])
+      setFilters([])
+      return
+    }
+
+    try {
+      console.log('Fetching data for subcategory:', subcategoryId)
+      const [parametersRes, filtersRes] = await Promise.all([
+        fetch(`/api/admin/venues/parameters?subcategoryId=${subcategoryId}`),
+        fetch(`/api/admin/venues/filters?subcategoryId=${subcategoryId}`)
+      ])
+
+      if (parametersRes.ok) {
+        const parametersData = await parametersRes.json()
+        console.log('Loaded parameters:', parametersData)
+        setParameters(parametersData)
+      }
+
+      if (filtersRes.ok) {
+        const filtersData = await filtersRes.json()
+        console.log('Loaded filters:', filtersData)
+        setFilters(filtersData)
+      }
+    } catch (error) {
+      console.error('Error fetching subcategory data:', error)
+    }
+  }
+
+  const searchVendors = async (searchTerm: string) => {
+    if (searchTerm.length < 2) {
+      setVendors([])
+      return
+    }
+
+    try {
+      const response = await fetch(`/api/admin/venues/vendors?search=${encodeURIComponent(searchTerm)}`)
+      if (response.ok) {
+        const vendorsData = await response.json()
+        setVendors(vendorsData)
+      }
+    } catch (error) {
+      console.error('Error searching vendors:', error)
+    }
+  }
+
+  const handleVendorSearch = (searchTerm: string) => {
+    setVendorSearch(searchTerm)
+    if (searchTerm.length >= 2) {
+      searchVendors(searchTerm)
+      setIsVendorDropdownOpen(true)
+    } else {
+      setVendors([])
+      setIsVendorDropdownOpen(false)
+    }
+  }
+
+  const selectVendor = (vendor: VenueVendor) => {
+    setFormData({ ...formData, vendorId: vendor.id.toString() })
+    setVendorSearch(vendor.displayName)
+    setIsVendorDropdownOpen(false)
+  }
+
+  const handleModerationClick = (partner: VenuePartner) => {
+    setModerationPartner(partner)
+    setModerationReason('')
+    setShowModerationModal(true)
+  }
+
+  const handleModerationAction = async (action: 'approve' | 'reject' | 'correction') => {
+    if (!moderationPartner) return
+
+    try {
+      setLoading(true)
+      let newStatus = ''
+      
+      switch (action) {
+        case 'approve':
+          newStatus = 'ACTIVE'
+          break
+        case 'reject':
+          newStatus = 'HIDDEN'
+          break
+        case 'correction':
+          newStatus = 'MODERATION' // Остается на модерации для корректировки
+          break
+      }
+
+      const response = await fetch(`/api/admin/venues/partners/${moderationPartner.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          status: newStatus,
+          moderationReason: moderationReason || null
+        }),
+      })
+
+      if (response.ok) {
+        // Обновляем список партнеров
+        await fetchData()
+        setShowModerationModal(false)
+        setModerationPartner(null)
+        setModerationReason('')
+      } else {
+        const errorData = await response.json()
+        console.error('Ошибка при изменении статуса партнера:', errorData)
+        alert(`Ошибка при изменении статуса: ${errorData.message || 'Неизвестная ошибка'}`)
+      }
+    } catch (error) {
+      console.error('Ошибка при изменении статуса партнера:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Функция для сортировки
+  const handleSort = (field: keyof VenuePartner) => {
+    if (sortField === field) {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
+    } else {
+      setSortField(field)
+      setSortDirection('asc')
+    }
+  }
+
+  // Функция для фильтрации по городам
+  const handleCityFilter = (cityId: number) => {
+    setSelectedCityIds(prev => 
+      prev.includes(cityId) 
+        ? prev.filter(id => id !== cityId)
+        : [...prev, cityId]
+    )
+  }
+
+  // Функция для очистки фильтра городов
+  const clearCityFilter = () => {
+    setSelectedCityIds([])
+  }
+
+  // Функция для получения отфильтрованных и отсортированных партнеров
+  const getFilteredAndSortedPartners = () => {
+    let filtered = partners
+
+    // Фильтрация по городам
+    if (selectedCityIds.length > 0) {
+      filtered = partners.filter(partner => selectedCityIds.includes(partner.city.id))
+    }
+
+    // Сортировка
+    return filtered.sort((a, b) => {
+      let aValue = a[sortField]
+      let bValue = b[sortField]
+
+      // Обработка вложенных объектов
+      if (sortField === 'subcategory') {
+        aValue = a.subcategory.name
+        bValue = b.subcategory.name
+      } else if (sortField === 'vendor') {
+        aValue = a.vendor.displayName
+        bValue = b.vendor.displayName
+      } else if (sortField === 'city') {
+        aValue = a.city.name
+        bValue = b.city.name
+      }
+
+      if ((aValue ?? '') < (bValue ?? '')) return sortDirection === 'asc' ? -1 : 1
+      if ((aValue ?? '') > (bValue ?? '')) return sortDirection === 'asc' ? 1 : -1
+      return 0
+    })
+  }
+
+  // Функция для подсчета партнеров по статусам в городе
+  const getCityPartnerCounts = (cityId: number) => {
+    const cityPartners = partners.filter(partner => partner.city.id === cityId)
+    return {
+      active: cityPartners.filter(partner => partner.status === 'ACTIVE').length,
+      moderation: cityPartners.filter(partner => partner.status === 'MODERATION').length,
+      hidden: cityPartners.filter(partner => partner.status === 'HIDDEN').length
+    }
+  }
+
+  const handleCreate = () => {
+    setFormData({
+      name: '',
+      address: '',
+      heroImage: '',
+      coverImage: '',
+      subcategoryId: '',
+      vendorId: '',
+      tariff: 'FREE',
+      cityId: ''
+    })
+    setParameterValues({})
+    setFilterValues({})
+    setVendorSearch('')
+    setVendors([])
+    setIsVendorDropdownOpen(false)
+    setEditingPartner(null)
+    setShowCreateModal(true)
+  }
+
+  const handleSubcategoryChange = (subcategoryId: string) => {
+    setFormData({ ...formData, subcategoryId })
+    setParameterValues({})
+    setFilterValues({})
+    fetchSubcategoryData(subcategoryId)
+  }
+
+  const handleEdit = (partner: VenuePartner) => {
+    setFormData({
+      name: partner.name,
+      address: partner.address,
+      heroImage: partner.heroImage || '',
+      coverImage: partner.coverImage || '',
+      subcategoryId: partner.subcategoryId.toString(),
+      vendorId: partner.vendorId.toString(),
+      tariff: partner.tariff,
+      cityId: partner.city.id.toString()
+    })
+    
+    // Находим название вендора по ID
+    const vendor = vendors.find(v => v.id === partner.vendorId)
+    setVendorSearch(vendor?.displayName || '')
+    
+    setEditingPartner(partner)
+    setShowEditModal(true)
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+
+    try {
+      // Валидация фотографий
+      const visibleParameters = getVisibleParameters()
+      for (const parameter of visibleParameters) {
+        if (parameter.type === 'PHOTO_UPLOADER') {
+          const config = typeof parameter.config === 'string' ? JSON.parse(parameter.config) : parameter.config
+          const maxPhotos = config.maxPhotos || 1
+          const currentPhotos = parameterValues[parameter.id] || []
+          
+          if (currentPhotos.length > maxPhotos) {
+            alert(`Параметр "${parameter.name}": можно загрузить максимум ${maxPhotos} фото, у вас ${currentPhotos.length}`)
+            setLoading(false)
+            return
+          }
+        }
+      }
+
+      const url = editingPartner 
+        ? `/api/admin/venues/partners/${editingPartner.id}`
+        : '/api/admin/venues/partners'
+      
+      const method = editingPartner ? 'PATCH' : 'POST'
+
+      const response = await fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          subcategoryId: parseInt(formData.subcategoryId),
+          vendorId: parseInt(formData.vendorId),
+          cityId: parseInt(formData.cityId),
+          parameterValues,
+          filterValues
+        }),
+      })
+
+      if (response.ok) {
+        await fetchData()
+        setShowCreateModal(false)
+        setShowEditModal(false)
+        setEditingPartner(null)
+        setParameterValues({})
+        setFilterValues({})
+      } else {
+        const errorData = await response.json()
+        alert(`Ошибка при сохранении партнера: ${errorData.error || 'Неизвестная ошибка'}`)
+      }
+    } catch (error) {
+      console.error('Error saving partner:', error)
+      alert('Ошибка при сохранении партнера')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleDelete = async (id: number) => {
+    if (!confirm('Вы уверены, что хотите удалить этого партнера?')) return
+
+    try {
+      const response = await fetch(`/api/admin/venues/partners/${id}`, {
+        method: 'DELETE',
+      })
+
+      if (response.ok) {
+        await fetchData()
+      } else {
+        alert('Ошибка при удалении партнера')
+      }
+    } catch (error) {
+      console.error('Error deleting partner:', error)
+      alert('Ошибка при удалении партнера')
+    }
+  }
+
+  const handleToggleStatus = async (id: number, currentStatus: string) => {
+    try {
+      const newStatus = currentStatus === 'ACTIVE' ? 'HIDDEN' : 'ACTIVE'
+      const response = await fetch(`/api/admin/venues/partners/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: newStatus }),
+      })
+
+      if (response.ok) {
+        await fetchData()
+      } else {
+        alert('Ошибка при изменении статуса партнера')
+      }
+    } catch (error) {
+      console.error('Error toggling status:', error)
+      alert('Ошибка при изменении статуса партнера')
+    }
+  }
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'ACTIVE':
+        return 'text-green-600 bg-green-50'
+      case 'MODERATION':
+        return 'text-yellow-600 bg-yellow-50'
+      case 'HIDDEN':
+        return 'text-gray-600 bg-gray-50'
+      default:
+        return 'text-gray-600 bg-gray-50'
+    }
+  }
+
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case 'ACTIVE':
+        return 'Активен'
+      case 'MODERATION':
+        return 'На модерации'
+      case 'HIDDEN':
+        return 'Скрыт'
+      default:
+        return status
+    }
+  }
+
+  const getTariffText = (tariff: string) => {
+    switch (tariff) {
+      case 'FREE':
+        return 'Бесплатный'
+      case 'OPTIMAL':
+        return 'Оптимальный'
+      case 'MAXIMUM':
+        return 'Максимальный'
+      default:
+        return tariff
+    }
+  }
+
+  const getVisibleParameters = () => {
+    if (!formData.subcategoryId) return []
+    
+    const visible = parameters.filter(param => {
+      if (!param.isActive) return false
+      if (param.subcategory?.id !== parseInt(formData.subcategoryId)) return false
+      
+      switch (formData.tariff) {
+        case 'FREE':
+          return param.isFree
+        case 'OPTIMAL':
+          return param.isOptimal
+        case 'MAXIMUM':
+          return param.isMaximum
+        default:
+          return false
+      }
+    })
+    
+    console.log('Visible parameters for tariff', formData.tariff, ':', visible)
+    return visible
+  }
+
+  const getVisibleFilters = () => {
+    if (!formData.subcategoryId) return []
+    
+    const visible = filters.filter(filter => {
+      if (!filter.isVisible || !filter.isActive) return false
+      return filter.subcategory?.id === parseInt(formData.subcategoryId)
+    })
+    
+    console.log('Visible filters:', visible)
+    return visible
+  }
+
+  const renderParameterField = (parameter: VenueParameter) => {
+    const value = parameterValues[parameter.id] || ''
+    const config = typeof parameter.config === 'string' ? JSON.parse(parameter.config) : parameter.config
+
+    switch (parameter.type) {
+      case 'TEXT':
+        return (
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => setParameterValues({ ...parameterValues, [parameter.id]: e.target.value })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder={config.placeholder || ''}
+          />
+        )
+      case 'INPUT_MASK':
+        return (
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => setParameterValues({ ...parameterValues, [parameter.id]: e.target.value })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder={config.placeholder || config.mask || ''}
+            pattern={config.pattern || undefined}
+          />
+        )
+      case 'MULTILINE_TEXT':
+      case 'TEXTAREA':
+        return (
+          <textarea
+            value={value}
+            onChange={(e) => setParameterValues({ ...parameterValues, [parameter.id]: e.target.value })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            rows={3}
+            placeholder={config.placeholder || ''}
+          />
+        )
+      case 'NUMBER':
+        return (
+          <input
+            type="number"
+            value={value}
+            onChange={(e) => setParameterValues({ ...parameterValues, [parameter.id]: e.target.value })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            min={config.min || undefined}
+            max={config.max || undefined}
+          />
+        )
+      case 'EMAIL':
+        return (
+          <input
+            type="email"
+            value={value}
+            onChange={(e) => setParameterValues({ ...parameterValues, [parameter.id]: e.target.value })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        )
+      case 'LINK':
+        return (
+          <input
+            type="url"
+            value={value}
+            onChange={(e) => setParameterValues({ ...parameterValues, [parameter.id]: e.target.value })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="https://example.com"
+          />
+        )
+      case 'MAP_ADDRESS':
+        return (
+          <div className="space-y-2">
+            <input
+              type="text"
+              value={value}
+              onChange={(e) => setParameterValues({ ...parameterValues, [parameter.id]: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Введите адрес или координаты"
+            />
+            <div className="text-sm text-gray-500">
+              Формат: "ул. Примерная, 1, Москва" или "55.7558, 37.6176"
+            </div>
+          </div>
+        )
+      case 'DROPDOWN':
+      case 'SELECT':
+        return (
+          <select
+            value={value}
+            onChange={(e) => setParameterValues({ ...parameterValues, [parameter.id]: e.target.value })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Выберите вариант</option>); }
+            {config.options?.map((option: unknown, index: number) => { const optionObj = option as { value: string; label: string } | null; return (
+              <option key={index} value={optionObj?.value || String(option)}>
+                >{optionObj?.label || String(option)}</option>); }
+              </option>); }
+            ))}
+          </select>
+        )
+      case 'RADIO':
+        return (
+          <div className="space-y-2">
+            {config.options?.map((option: unknown, index: number) => {
+              const optionValue = typeof option === 'object' ? option.value : option;
+              const optionLabel = typeof option === 'object' ? option.label : option;
+              return (
+                <label key={index} className="flex items-center">
+                  <input
+                    type="radio"
+                    name={`param_${parameter.id}`}
+                    value={optionValue}
+                    checked={value === optionValue}
+                    onChange={(e) => setParameterValues({ ...parameterValues, [parameter.id]: e.target.value })}
+                    className="mr-2"
+                  />
+                  {optionLabel}
+                </label>
+              )
+            })}
+          </div>
+        )
+      case 'CHECKBOX':
+        const checkboxValues = value || []
+        return (
+          <div className="space-y-2">
+            {config.options?.map((option: unknown, index: number) => {
+              const optionValue = typeof option === 'object' ? option.value : option;
+              const optionLabel = typeof option === 'object' ? option.label : option;
+              return (
+                <label key={index} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={checkboxValues.includes(optionValue)}
+                    onChange={(e) => {
+                      const newValues = e.target.checked
+                        ? [...checkboxValues, optionValue]
+                        : checkboxValues.filter((v: string) => v !== optionValue)
+                      setParameterValues({ ...parameterValues, [parameter.id]: newValues })
+                    }}
+                    className="mr-2"
+                  />
+                  {optionLabel}
+                </label>
+              )
+            })}
+          </div>
+        )
+      case 'PHOTO_UPLOADER':
+        const photoValues = value || []
+        const maxPhotos = config.maxPhotos || 1
+        
+        const handlePhotoUpload = async (files: FileList) => {
+          const filesArray = Array.from(files)
+          const totalPhotos = photoValues.length + filesArray.length
+          
+          // Проверяем лимит перед загрузкой
+          if (totalPhotos > maxPhotos) {
+            alert(`Можно загрузить максимум ${maxPhotos} фото. У вас уже ${photoValues.length}, пытаетесь добавить ${filesArray.length}`)
+            return
+          }
+          
+          // Загружаем все файлы параллельно
+          const uploadPromises = filesArray.map(async (file) => {
+            const formData = new FormData()
+            formData.append('file', file)
+            
+            try {
+              const response = await fetch('/api/admin/upload', {
+                method: 'POST',
+                body: formData
+              })
+              
+              if (response.ok) {
+                const data = await response.json()
+                return data.url
+              } else {
+                console.error('Ошибка загрузки фото:', file.name)
+                return null
+              }
+            } catch (error) {
+              console.error('Ошибка загрузки фото:', file.name, error)
+              return null
+            }
+          })
+          
+          try {
+            const uploadedUrls = await Promise.all(uploadPromises)
+            const successfulUrls = uploadedUrls.filter(url => url !== null)
+            
+            if (successfulUrls.length > 0) {
+              const newPhotos = [...photoValues, ...successfulUrls]
+              setParameterValues({ ...parameterValues, [parameter.id]: newPhotos })
+            }
+            
+            if (successfulUrls.length < filesArray.length) {
+              alert(`Загружено ${successfulUrls.length} из ${filesArray.length} фото`)
+            }
+          } catch (error) {
+            console.error('Ошибка при загрузке фото:', error)
+          }
+        }
+        
+        const removePhoto = (index: number) => {
+          const newPhotos = photoValues.filter((_: string, i: number) => i !== index)
+          setParameterValues({ ...parameterValues, [parameter.id]: newPhotos })
+        }
+        
+        return (
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {photoValues.map((photoUrl: string, index: number) => (
+                <div key={index} className="relative group">
+                  <img
+                    src={photoUrl}
+                    alt={`Фото ${index + 1}`}
+                    className="w-full h-24 object-cover rounded-lg border border-gray-300"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removePhoto(index)}
+                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+            
+            {photoValues.length < maxPhotos && (
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={(e) => {
+                    const files = e.target.files
+                    if (files && files.length > 0) {
+                      handlePhotoUpload(files)
+                      e.target.value = '' // Сброс input
+                    }
+                  }}
+                  className="hidden"
+                  id={`photo-upload-${parameter.id}`}
+                />
+                <label
+                  htmlFor={`photo-upload-${parameter.id}`}
+                  className="cursor-pointer text-gray-600 hover:text-gray-800"
+                >
+                  <div className="text-2xl mb-2">📷</div>
+                  <div>Загрузить фото</div>
+                  <div className="text-sm text-gray-500">
+                    {photoValues.length} из {maxPhotos} фото
+                  </div>
+                  <div className="text-xs text-gray-400 mt-1">
+                    Можно выбрать несколько файлов сразу
+                  </div>
+                </label>
+              </div>
+            )}
+            
+            {photoValues.length >= maxPhotos && (
+              <div className="text-sm text-gray-500 text-center">
+                Максимум {maxPhotos} фото
+              </div>
+            )}
+          </div>
+        )
+      default:
+        return (
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => setParameterValues({ ...parameterValues, [parameter.id]: e.target.value })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        )
+    }
+  }
+
+  const renderFilterField = (filter: VenueFilter) => {
+    const value = filterValues[filter.id] || ''
+    const config = typeof filter.config === 'string' ? JSON.parse(filter.config) : filter.config
+
+    switch (config.type) {
+      case 'select':
+        return (
+          <select
+            value={value}
+            onChange={(e) => setFilterValues({ ...filterValues, [filter.id]: e.target.value })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Выберите вариант</option>); }
+            {config.options?.map((option: unknown, index: number) => { const optionObj = option as { value: string; label: string } | null; return (
+              <option key={index} value={optionObj?.value || String(option)}>
+                >{optionObj?.label || String(option)}</option>); }
+              </option>); }
+            ))}
+          </select>
+        )
+      case 'radio':
+        return (
+          <div className="space-y-2">
+            {config.options?.map((option: unknown, index: number) => {
+              const optionValue = typeof option === 'object' ? option.value : option;
+              const optionLabel = typeof option === 'object' ? option.label : option;
+              return (
+                <label key={index} className="flex items-center">
+                  <input
+                    type="radio"
+                    name={`filter_${filter.id}`}
+                    value={optionValue}
+                    checked={value === optionValue}
+                    onChange={(e) => setFilterValues({ ...filterValues, [filter.id]: e.target.value })}
+                    className="mr-2"
+                  />
+                  {optionLabel}
+                </label>
+              )
+            })}
+          </div>
+        )
+      case 'checkbox':
+        const checkboxValues = value || []
+        return (
+          <div className="space-y-2">
+            {config.options?.map((option: unknown, index: number) => {
+              const optionValue = typeof option === 'object' ? option.value : option;
+              const optionLabel = typeof option === 'object' ? option.label : option;
+              return (
+                <label key={index} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={checkboxValues.includes(optionValue)}
+                    onChange={(e) => {
+                      const newValues = e.target.checked
+                        ? [...checkboxValues, optionValue]
+                        : checkboxValues.filter((v: string) => v !== optionValue)
+                      setFilterValues({ ...filterValues, [filter.id]: newValues })
+                    }}
+                    className="mr-2"
+                  />
+                  {optionLabel}
+                </label>
+              )
+            })}
+          </div>
+        )
+      case 'range':
+        return (
+          <div className="space-y-2">
+            <input
+              type="range"
+              min={config.min || 0}
+              max={config.max || 100}
+              value={value || config.min || 0}
+              onChange={(e) => setFilterValues({ ...filterValues, [filter.id]: parseInt(e.target.value) })}
+              className="w-full"
+            />
+            <div className="text-sm text-gray-600">
+              Значение: {value || config.min || 0}
+            </div>
+          </div>
+        )
+      case 'boolean':
+        return (
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              checked={value === true}
+              onChange={(e) => setFilterValues({ ...filterValues, [filter.id]: e.target.checked })}
+              className="mr-2"
+            />
+            {config.label || 'Да'}
+          </label>
+        )
+      case 'text':
+        return (
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => setFilterValues({ ...filterValues, [filter.id]: e.target.value })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder={config.placeholder || ''}
+          />
+        )
+      default:
+        return (
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => setFilterValues({ ...filterValues, [filter.id]: e.target.value })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        )
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-lg">Загрузка...</div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Заголовок */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Партнеры</h1>
+          <p className="text-gray-600">Управление партнерами и их местами</p>
+        </div>
+        <div className="flex items-center space-x-4">
+          <Link 
+            href={`/admin/venues?key=${key}`}
+            className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Назад в Места
+          </Link>
+          {/* Фильтр по городам */}
+          <div className="relative city-filter-dropdown">
+            <button
+              onClick={() => setShowCityFilter(!showCityFilter)}
+              className="flex items-center space-x-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
+            >
+              <span>🏙️ Города</span>
+              {selectedCityIds.length > 0 && (
+                <span className="bg-blue-500 text-white text-xs rounded-full px-2 py-1">
+                  {selectedCityIds.length}
+                </span>
+              )}
+              {/* Общая статистика */}
+              <div className="flex items-center space-x-1">
+                <span className="inline-flex items-center justify-center w-4 h-4 text-xs font-medium text-white bg-green-500 rounded-full">
+                  {partners.filter(p => p.status === 'ACTIVE').length}
+                </span>
+                <span className="inline-flex items-center justify-center w-4 h-4 text-xs font-medium text-white bg-yellow-500 rounded-full">
+                  {partners.filter(p => p.status === 'MODERATION').length}
+                </span>
+              </div>
+              <span className="text-gray-400">▼</span>
+            </button>
+            
+            {showCityFilter && (
+              <div className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-10 max-h-64 overflow-y-auto">
+                <div className="p-3 border-b border-gray-200">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="font-medium text-gray-700">Фильтр по городам</span>
+                    {selectedCityIds.length > 0 && (
+                      <button
+                        onClick={clearCityFilter}
+                        className="text-xs text-blue-600 hover:text-blue-800"
+                      >
+                        Очистить
+                      </button>
+                    )}
+                  </div>
+                  {/* Легенда */}
+                  <div className="flex items-center space-x-3 text-xs text-gray-500">
+                    <div className="flex items-center space-x-1">
+                      <span className="inline-flex items-center justify-center w-4 h-4 text-xs font-medium text-white bg-green-500 rounded-full">0</span>
+                      <span>Активные</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <span className="inline-flex items-center justify-center w-4 h-4 text-xs font-medium text-white bg-yellow-500 rounded-full">0</span>
+                      <span>Модерация</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <span className="inline-flex items-center justify-center w-4 h-4 text-xs font-medium text-white bg-gray-500 rounded-full">0</span>
+                      <span>Скрытые</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-2">
+                  {Array.isArray(cities) ? cities.map(city => {
+                    const counts = getCityPartnerCounts(city.id)
+                    return (
+                      <label key={city.id} className="flex items-center justify-between p-2 hover:bg-gray-50 rounded">
+                        <div className="flex items-center space-x-2">
+                          <input
+                            type="checkbox"
+                            checked={selectedCityIds.includes(city.id)}
+                            onChange={() => handleCityFilter(city.id)}
+                            className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                          />
+                          <span className="text-sm text-gray-700">{city.name}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          {/* Зеленый кружок - активные */}
+                          {counts.active > 0 && (
+                            <span className="inline-flex items-center justify-center w-5 h-5 text-xs font-medium text-white bg-green-500 rounded-full">
+                              {counts.active}
+                            </span>
+                          )}
+                          {/* Желтый кружок - на модерации */}
+                          {counts.moderation > 0 && (
+                            <span className="inline-flex items-center justify-center w-5 h-5 text-xs font-medium text-white bg-yellow-500 rounded-full">
+                              {counts.moderation}
+                            </span>
+                          )}
+                          {/* Серый кружок - скрытые (опционально) */}
+                          {counts.hidden > 0 && (
+                            <span className="inline-flex items-center justify-center w-5 h-5 text-xs font-medium text-white bg-gray-500 rounded-full">
+                              {counts.hidden}
+                            </span>
+                          )}
+                        </div>
+                      </label>
+                    )
+                  }) : (
+                    <div className="text-sm text-gray-500 p-2">Загрузка городов...</div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+          
+          <button
+            onClick={handleCreate}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Создать место</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Информация о фильтрации */}
+      {selectedCityIds.length > 0 && (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-blue-700">
+                  Показано {getFilteredAndSortedPartners().length} из {partners.length} партнеров
+                </span>
+                {selectedCityIds.length > 0 && (
+                  <span className="text-xs text-blue-600">
+                    (отфильтровано по {selectedCityIds.length} городу/ам)
+                  </span>
+                )}
+              </div>
+              {/* Статистика по статусам для отфильтрованных данных */}
+              <div className="flex items-center space-x-2 text-xs">
+                <span className="text-gray-600">Статусы:</span>
+                <div className="flex items-center space-x-1">
+                  <span className="inline-flex items-center justify-center w-4 h-4 text-xs font-medium text-white bg-green-500 rounded-full">
+                    {getFilteredAndSortedPartners().filter(p => p.status === 'ACTIVE').length}
+                  </span>
+                  <span className="text-gray-600">активных</span>
+                </div>
+                <div className="flex items-center space-x-1">
+                  <span className="inline-flex items-center justify-center w-4 h-4 text-xs font-medium text-white bg-yellow-500 rounded-full">
+                    {getFilteredAndSortedPartners().filter(p => p.status === 'MODERATION').length}
+                  </span>
+                  <span className="text-gray-600">на модерации</span>
+                </div>
+                <div className="flex items-center space-x-1">
+                  <span className="inline-flex items-center justify-center w-4 h-4 text-xs font-medium text-white bg-gray-500 rounded-full">
+                    {getFilteredAndSortedPartners().filter(p => p.status === 'HIDDEN').length}
+                  </span>
+                  <span className="text-gray-600">скрытых</span>
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={clearCityFilter}
+              className="text-xs text-blue-600 hover:text-blue-800 underline"
+            >
+              Очистить фильтр
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Таблица партнеров */}
+      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th 
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none"
+                  onClick={() => handleSort('name')}
+                >
+                  <div className="flex items-center space-x-1">
+                    <span>Название места</span>
+                    {sortField === 'name' && (
+                      <span className="text-blue-600">
+                        {sortDirection === 'asc' ? '↑' : '↓'}
+                      </span>
+                    )}
+                  </div>
+                </th>
+                <th 
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none"
+                  onClick={() => handleSort('city')}
+                >
+                  <div className="flex items-center space-x-1">
+                    <span>Город</span>
+                    {sortField === 'city' && (
+                      <span className="text-blue-600">
+                        {sortDirection === 'asc' ? '↑' : '↓'}
+                      </span>
+                    )}
+                  </div>
+                </th>
+                <th 
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none"
+                  onClick={() => handleSort('subcategory')}
+                >
+                  <div className="flex items-center space-x-1">
+                    <span>Подкатегория</span>
+                    {sortField === 'subcategory' && (
+                      <span className="text-blue-600">
+                        {sortDirection === 'asc' ? '↑' : '↓'}
+                      </span>
+                    )}
+                  </div>
+                </th>
+                <th 
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none"
+                  onClick={() => handleSort('vendor')}
+                >
+                  <div className="flex items-center space-x-1">
+                    <span>Вендор</span>
+                    {sortField === 'vendor' && (
+                      <span className="text-blue-600">
+                        {sortDirection === 'asc' ? '↑' : '↓'}
+                      </span>
+                    )}
+                  </div>
+                </th>
+                <th 
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none"
+                  onClick={() => handleSort('tariff')}
+                >
+                  <div className="flex items-center space-x-1">
+                    <span>Тариф</span>
+                    {sortField === 'tariff' && (
+                      <span className="text-blue-600">
+                        {sortDirection === 'asc' ? '↑' : '↓'}
+                      </span>
+                    )}
+                  </div>
+                </th>
+                <th 
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none"
+                  onClick={() => handleSort('createdAt')}
+                >
+                  <div className="flex items-center space-x-1">
+                    <span>Дата создания</span>
+                    {sortField === 'createdAt' && (
+                      <span className="text-blue-600">
+                        {sortDirection === 'asc' ? '↑' : '↓'}
+                      </span>
+                    )}
+                  </div>
+                </th>
+                <th 
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none"
+                  onClick={() => handleSort('status')}
+                >
+                  <div className="flex items-center space-x-1">
+                    <span>Статус</span>
+                    {sortField === 'status' && (
+                      <span className="text-blue-600">
+                        {sortDirection === 'asc' ? '↑' : '↓'}
+                      </span>
+                    )}
+                  </div>
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Действия
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {getFilteredAndSortedPartners().map((partner) => (
+                <tr key={partner.id} className="hover:bg-gray-50">
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0 h-10 w-10">
+                        {partner.coverImage ? (
+                          <img
+                            className="h-10 w-10 rounded-lg object-cover"
+                            src={partner.coverImage}
+                            alt={partner.name}
+                          />
+                        ) : (
+                          <div className="h-10 w-10 rounded-lg bg-gray-200 flex items-center justify-center">
+                            <span className="text-gray-400 text-sm">📷</span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="ml-4">
+                        <div className={`text-sm font-medium ${
+                          partner.status === 'ACTIVE' ? 'text-green-600' :
+                          partner.status === 'MODERATION' ? 'text-yellow-600' :
+                          'text-gray-600'
+                        }`}>
+                          {partner.name}
+                          {partner.status === 'MODERATION' && (
+                            <Wrench className="inline w-4 h-4 ml-1" />
+                          )}
+                        </div>
+                        <div className="text-sm text-gray-500">{partner.address}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {partner.city.name}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <div>
+                      <div className="font-medium">{partner.subcategory.name}</div>
+                      <div className="text-gray-500">{partner.subcategory.category.name}</div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {partner.vendor.displayName}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {getTariffText(partner.tariff)}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {new Date(partner.createdAt).toLocaleDateString('ru-RU')}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center space-x-2">
+                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(partner.status)}`}>
+                        {getStatusText(partner.status)}
+                      </span>
+                      {partner.status === 'MODERATION' && (
+                        <button
+                          onClick={() => handleModerationClick(partner)}
+                          className="text-yellow-500 hover:text-yellow-600 cursor-pointer transition-colors"
+                          title="На модерации - нажмите для просмотра"
+                        >
+                          🛠️
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                    <button
+                      onClick={() => handleEdit(partner)}
+                      className="text-blue-600 hover:text-blue-900"
+                    >
+                      <Edit className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => handleToggleStatus(partner.id, partner.status)}
+                      className={partner.status === 'ACTIVE' ? 'text-gray-600 hover:text-gray-900' : 'text-green-600 hover:text-green-900'}
+                    >
+                      {partner.status === 'ACTIVE' ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                    {partner.status === 'ACTIVE' && (
+                      <button
+                        onClick={() => handleModerationClick(partner)}
+                        className="text-yellow-500 hover:text-yellow-600 transition-colors"
+                        title="Отправить на модерацию"
+                      >
+                        🛠️
+                      </button>
+                    )}
+                    <button
+                      onClick={() => handleDelete(partner.id)}
+                      className="text-red-600 hover:text-red-900"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Модальное окно создания/редактирования */}
+      {(showCreateModal || showEditModal) && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100000]">
+          <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <h2 className="text-xl font-bold mb-4">
+              {editingPartner ? 'Редактировать место' : 'Создать место'}
+            </h2>
+            
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Название места *
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Город *
+                  </label>
+                  <select
+                    value={formData.cityId}
+                    onChange={(e) => setFormData({ ...formData, cityId: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                  >
+                    <option value="">Выберите город</option>); }
+                    {Array.isArray(cities) ? cities.map((city) => (
+                      <option key={city.id} value={city.id}>
+                        {city.name}
+                      </option>); }
+                    )) : null}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Подкатегория *
+                  </label>
+                  <select
+                    value={formData.subcategoryId}
+                    onChange={(e) => handleSubcategoryChange(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                  >
+                    <option value="">Выберите подкатегорию</option>); }
+                    {subcategories.map((subcategory) => (
+                      <option key={subcategory.id} value={subcategory.id}>
+                        {subcategory.name} ({subcategory.category.name})
+                      </option>); }
+                    ))}
+                  </select>
+                </div>
+
+                <div className="relative vendor-dropdown">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Вендор *
+                  </label>
+                  <input
+                    type="text"
+                    value={vendorSearch}
+                    onChange={(e) => handleVendorSearch(e.target.value)}
+                    onFocus={() => setIsVendorDropdownOpen(true)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Начните вводить название вендора..."
+                    required
+                  />
+                  
+                  {/* Выпадающий список вендоров */}
+                  {isVendorDropdownOpen && vendors.length > 0 && (
+                    <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                      {vendors.map((vendor) => (
+                        <div
+                          key={vendor.id}
+                          onClick={() => selectVendor(vendor)}
+                          className="px-3 py-2 hover:bg-gray-100 cursor-pointer border-b border-gray-100 last:border-b-0"
+                        >
+                          <div className="font-medium">{vendor.displayName}</div>
+                          <div className="text-sm text-gray-500">ID: {vendor.id}</div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  
+                  {/* Сообщение о поиске */}
+                  {vendorSearch.length > 0 && vendorSearch.length < 2 && (
+                    <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg p-3 text-sm text-gray-500">
+                      Введите минимум 2 символа для поиска
+                    </div>
+                  )}
+                  
+                  {/* Сообщение о том, что ничего не найдено */}
+                  {vendorSearch.length >= 2 && vendors.length === 0 && (
+                    <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg p-3 text-sm text-gray-500">
+                      Вендоры не найдены
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Тариф *
+                  </label>
+                  <select
+                    value={formData.tariff}
+                    onChange={(e) => setFormData({ ...formData, tariff: e.target.value as 'FREE' | 'OPTIMAL' | 'MAXIMUM' })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                  >
+                    <option value="FREE">Бесплатный</option>); }
+                    <option value="OPTIMAL">Оптимальный</option>); }
+                    <option value="MAXIMUM">Максимальный</option>); }
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Адрес *
+                </label>
+                <input
+                  type="text"
+                  value={formData.address}
+                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Херо изображение
+                </label>
+                <AdminFileUploader
+                  value={formData.heroImage}
+                  onChange={(url) => setFormData({ ...formData, heroImage: url })}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Обложка
+                </label>
+                <AdminFileUploader
+                  value={formData.coverImage}
+                  onChange={(url) => setFormData({ ...formData, coverImage: url })}
+                />
+              </div>
+              </div>
+
+              {/* Динамические поля параметров */}
+              {getVisibleParameters().length > 0 && (
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-gray-900">Параметры места</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {getVisibleParameters().map((parameter) => (
+                      <div key={parameter.id}>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          {parameter.name}
+                        </label>
+                        {renderParameterField(parameter)}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Динамические поля фильтров */}
+              {getVisibleFilters().length > 0 && (
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-gray-900">Фильтры для поиска</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {getVisibleFilters().map((filter) => (
+                      <div key={filter.id}>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          {filter.name}
+                        </label>
+                        {renderFilterField(filter)}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="flex justify-end space-x-3 pt-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowCreateModal(false)
+                    setShowEditModal(false)
+                    setEditingPartner(null)
+                  }}
+                  className="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300"
+                >
+                  Отмена
+                </button>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                >
+                  {loading ? 'Сохранение...' : (editingPartner ? 'Сохранить' : 'Создать')}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Поп-ап модерации */}
+      {showModerationModal && moderationPartner && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100000]">
+          <div className="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-900">
+                {moderationPartner.status === 'MODERATION' ? 'Модерация места' : 'Отправить на модерацию'}: {moderationPartner.name}
+              </h3>
+              <button
+                onClick={() => setShowModerationModal(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              {/* Основная информация */}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Название</label>
+                  <p className="mt-1 text-sm text-gray-900">{moderationPartner.name}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Адрес</label>
+                  <p className="mt-1 text-sm text-gray-900">{moderationPartner.address}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Город</label>
+                  <p className="mt-1 text-sm text-gray-900">{moderationPartner.city.name}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Подкатегория</label>
+                  <p className="mt-1 text-sm text-gray-900">
+                    {moderationPartner.subcategory.name} ({moderationPartner.subcategory.category.name})
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Вендор</label>
+                  <p className="mt-1 text-sm text-gray-900">{moderationPartner.vendor.displayName}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Тариф</label>
+                  <p className="mt-1 text-sm text-gray-900">{getTariffText(moderationPartner.tariff)}</p>
+                </div>
+              </div>
+
+              {/* Описание */}
+              {moderationPartner.description && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Описание</label>
+                  <p className="text-sm text-gray-900 bg-gray-50 p-3 rounded-lg">
+                    {moderationPartner.description}
+                  </p>
+                </div>
+              )}
+
+              {/* Изображения */}
+              {(moderationPartner.heroImage || moderationPartner.coverImage) && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Изображения</label>
+                  <div className="grid grid-cols-2 gap-4">
+                    {moderationPartner.heroImage && (
+                      <div>
+                        <p className="text-sm text-gray-600 mb-1">Херо полоса:</p>
+                        <img
+                          src={moderationPartner.heroImage}
+                          alt="Херо полоса"
+                          className="w-full h-32 object-cover rounded-lg"
+                        />
+                      </div>
+                    )}
+                    {moderationPartner.coverImage && (
+                      <div>
+                        <p className="text-sm text-gray-600 mb-1">Обложка:</p>
+                        <img
+                          src={moderationPartner.coverImage}
+                          alt="Обложка"
+                          className="w-full h-32 object-cover rounded-lg"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+    {/* Дополнительные фото */}
+    {moderationPartner.additionalImages && (
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Дополнительные фото ({moderationPartner.tariff === 'FREE' ? 'до 4 штук' : 'доступно'})
+        </label>
+        {moderationPartner.tariff === 'FREE' ? (
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+            <p className="text-sm text-blue-800">
+              Дополнительные фото доступны до 4 штук на Бесплатном тарифе
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-3">
+              {JSON.parse(moderationPartner.additionalImages).map((image: string, index: number) => (
+                <div key={index}>
+                  <img
+                    src={image}
+                    alt={`Дополнительное фото ${index + 1}`}
+                    className="w-full h-24 object-cover rounded-lg"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {JSON.parse(moderationPartner.additionalImages).map((image: string, index: number) => (
+              <div key={index}>
+                <img
+                  src={image}
+                  alt={`Дополнительное фото ${index + 1}`}
+                  className="w-full h-24 object-cover rounded-lg"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    )}
+
+              {/* Информация о тарифе */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Возможности тарифа</label>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                  <div className="text-sm text-blue-800">
+                    <div className="font-medium mb-2">Тариф: {getTariffText(moderationPartner.tariff)}</div>
+          <ul className="space-y-1">
+            <li>✅ Основная информация (название, адрес, описание)</li>
+            <li>✅ Обложка места</li>
+            {moderationPartner.tariff === 'FREE' ? (
+              <>
+                <li>✅ Дополнительные фото (до 4 штук)</li>
+                <li>❌ Расширенные параметры (только для Optimal/Maximum)</li>
+              </>
+            ) : (
+              <>
+                <li>✅ Дополнительные фото (до 4 штук)</li>
+                <li>✅ Расширенные параметры места</li>
+                {moderationPartner.tariff === 'MAXIMUM' && (
+                  <li>✅ Максимальные возможности</li>
+                )}
+              </>
+            )}
+          </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Параметры и фильтры */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Заполненные параметры</label>
+                <div className="bg-gray-50 p-3 rounded-lg">
+                  <p className="text-sm text-gray-600">
+                    {moderationPartner.tariff === 'FREE' 
+                      ? 'Параметры доступны только для тарифов Optimal и Maximum'
+                      : 'Здесь будут отображаться заполненные параметры и фильтры места'
+                    }
+                  </p>
+                </div>
+              </div>
+
+              {/* Причина модерации */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Причина модерации <span className="text-gray-500">(необязательно)</span>
+                </label>
+                <textarea
+                  value={moderationReason}
+                  onChange={(e) => setModerationReason(e.target.value)}
+                  rows={3}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Укажите причину модерации или обнаруженные неточности..."
+                />
+              </div>
+            </div>
+
+            {/* Кнопки действий */}
+            <div className="flex justify-end space-x-3 mt-6 pt-4 border-t border-gray-200">
+              <button
+                onClick={() => setShowModerationModal(false)}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              >
+                Отмена
+              </button>
+              
+              {moderationPartner.status === 'MODERATION' ? (
+                <>
+                  <button
+                    onClick={() => handleModerationAction('reject')}
+                    className="px-4 py-2 text-sm font-medium text-red-700 bg-red-100 border border-red-300 rounded-md hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500"
+                  >
+                    Отказать (Скрыть)
+                  </button>
+                  <button
+                    onClick={() => handleModerationAction('correction')}
+                    className="px-4 py-2 text-sm font-medium text-yellow-700 bg-yellow-100 border border-yellow-300 rounded-md hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  >
+                    Отправить на корректировку
+                  </button>
+                  <button
+                    onClick={() => handleModerationAction('approve')}
+                    className="px-4 py-2 text-sm font-medium text-green-700 bg-green-100 border border-green-300 rounded-md hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  >
+                    Принять
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={() => handleModerationAction('correction')}
+                    className="px-4 py-2 text-sm font-medium text-yellow-700 bg-yellow-100 border border-yellow-300 rounded-md hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  >
+                    Отправить на модерацию
+                  </button>
+                  {moderationPartner.status === 'ACTIVE' && (
+                    <button
+                      onClick={() => handleModerationAction('reject')}
+                      className="px-4 py-2 text-sm font-medium text-red-700 bg-red-100 border border-red-300 rounded-md hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    >
+                      Скрыть
+                    </button>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}

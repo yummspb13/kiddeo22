@@ -1,0 +1,4089 @@
+{
+  "AIAssistant": [],
+  "QuickFilter": [],
+  "AIRecommendation": [],
+  "Refund": [],
+  "Account": [],
+  "Review": [],
+  "AdEvent": [
+    {
+      "id": 1,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760465472432,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 2,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760466235054,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 3,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760466236357,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 4,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760466350086,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 5,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760466579428,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 6,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760466606155,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 7,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760466635843,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 8,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760466861793,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 9,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760467144468,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 10,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760467144660,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 11,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760467194883,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 12,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760467194942,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 13,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760467245775,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 14,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760467245775,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 15,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760467245822,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 16,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760475759131,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 17,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760475759132,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 18,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760475759132,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 19,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760475759300,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 20,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760475759301,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 21,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760475759300,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 22,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760475932459,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 23,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760475932459,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 24,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760475932551,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 25,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760475975427,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 26,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760475975428,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 27,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760475975428,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 28,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760475975795,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 29,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760475975795,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 30,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760475975795,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 31,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760476604380,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 32,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760476604380,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 33,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760476604380,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 34,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760476604586,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 35,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760476604586,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 36,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760476604587,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 37,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760476829840,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 38,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760476829841,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 39,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760476829842,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 40,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760476830516,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 41,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760476830727,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 42,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760476831305,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 43,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760477857387,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 44,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760477857387,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 45,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760477857387,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 46,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760477857630,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 47,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760477857631,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 48,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760477857630,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 49,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760478023288,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 50,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760478023287,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 51,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760478023287,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 52,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760478023467,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 53,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760478023467,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 54,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760478023467,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 55,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760478189196,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 56,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760478189197,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 57,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760478189197,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 58,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760478189361,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 59,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760478189362,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 60,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760478189362,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 61,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760478689708,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 62,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760478689707,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 63,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760478689709,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 64,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760478690063,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 65,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760478690064,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 66,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760478690065,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 67,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760478845973,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 68,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760478845973,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 69,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760478845973,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 70,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760478846244,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 71,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760478846244,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 72,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760478846278,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 73,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760478982007,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 74,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760478982007,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 75,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760478982007,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 76,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760478982147,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 77,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760478982149,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 78,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760478982147,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 79,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760479018963,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 80,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760479018963,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 81,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760479019045,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 82,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760479306501,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 83,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760479306500,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 84,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760479306500,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 85,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760479307087,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 86,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760479307089,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 87,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760479307186,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 88,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760479309727,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 89,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760479309727,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 90,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760479309791,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 91,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760479903029,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 92,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760479903030,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 93,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760479903673,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 94,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760479905706,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 95,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760479905708,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 96,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760479905707,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 97,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760479906406,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 98,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760479906512,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 99,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760479906591,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 100,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760479918646,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 101,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760479918828,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 102,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760479918829,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 103,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760479919668,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 104,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760479919668,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 105,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760479919737,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 106,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760479929318,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 107,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760479929493,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 108,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760479929493,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 109,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760479929786,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 110,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760479929787,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 111,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760479929786,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 112,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760479961669,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 113,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760479961669,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 114,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760479961669,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 115,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760479961833,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 116,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760479961833,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 117,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760479961833,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 118,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760482499687,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 119,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760482499688,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 120,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760482499688,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 121,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760482499822,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 122,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760482499823,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 123,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760482499822,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 124,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760484021114,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 125,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760484021114,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 126,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760484022298,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 127,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760484255594,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 128,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760484255595,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 129,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760484255595,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 130,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760484256227,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 131,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760484256227,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 132,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760484256228,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 133,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760484555184,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 134,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760484555184,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 135,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760484555184,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 136,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760484556422,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 137,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760484556423,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 138,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760484556423,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 139,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760507442256,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 140,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760507442256,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 141,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760507442256,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 142,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760507442949,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 143,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760507442949,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 144,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760507442950,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 145,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760508540333,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 146,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760508540332,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 147,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760508540332,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 148,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760508540604,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 149,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760508540604,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 150,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760508540660,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 151,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760508639169,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 152,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760508639169,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 153,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760508639169,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 154,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760508639612,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 155,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760508639613,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 156,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760508639613,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 157,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760508744991,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 158,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760508745098,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 159,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760508747204,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 160,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760508783423,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 161,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760508783574,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 162,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760508783660,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 163,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760508813307,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 164,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760508813372,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 165,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760508813703,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 166,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760508918739,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 167,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760508918799,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 168,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760508918923,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 169,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760509636324,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 170,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760509636451,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 171,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760509639381,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 172,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760509745636,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 173,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760509748144,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 174,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760509748144,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 175,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760509898414,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 176,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760509898415,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 177,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760509898414,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 178,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760509898686,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 179,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760509898686,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 180,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760509898687,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 181,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760510092091,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 182,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760510092279,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 183,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760510097334,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 184,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760510443452,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 185,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760510443455,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 186,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760510443453,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 187,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760510452623,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 188,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760510452623,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 189,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760510452624,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 190,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760510621173,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 191,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760510621174,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 192,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760510621173,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 193,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760510626903,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 194,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760510626903,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 195,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760510626913,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 196,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760510850210,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 197,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760510850211,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 198,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760510850211,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 199,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760510850923,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 200,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760510850923,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 201,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760510850924,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 202,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760517814410,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 203,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760517814410,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 204,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760517814410,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 205,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760517815337,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 206,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760517815520,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 207,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760517815520,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 208,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760527919423,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 209,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760527919423,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 210,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760527919423,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 211,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760527919702,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 212,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760527919702,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 213,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760527919756,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 214,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760547198482,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 215,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760547198482,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 216,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760547198482,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 217,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760547199831,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 218,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760547199832,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 219,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760547199832,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 220,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760596519291,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 221,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760596519291,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 222,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760596519633,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 223,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760604144506,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 224,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760604144507,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 225,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760604144720,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 226,
+      "adPlacementId": 2,
+      "type": "IMPRESSION",
+      "createdAt": 1760606409456,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 227,
+      "adPlacementId": 1,
+      "type": "IMPRESSION",
+      "createdAt": 1760606409455,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    },
+    {
+      "id": 228,
+      "adPlacementId": 3,
+      "type": "IMPRESSION",
+      "createdAt": 1760606409825,
+      "ip": null,
+      "ua": null,
+      "cityId": 1
+    }
+  ],
+  "ReviewReaction": [
+    {
+      "id": "cmgr4bwjb0005kvuh7na5h1n8",
+      "reviewId": "cmgr4bpzw0003kvuhkhxbx17f",
+      "userId": 2,
+      "type": "LIKE",
+      "createdAt": 1760479988087
+    }
+  ],
+  "AdPlacement": [
+    {
+      "id": 1,
+      "page": "afisha",
+      "position": "HEADER_BANNER",
+      "title": "По",
+      "imageUrl": "/uploads/news/news_1760465446441.jpg",
+      "hrefUrl": null,
+      "startsAt": 1760465400000,
+      "endsAt": 1761675000000,
+      "order": 0,
+      "isActive": 1,
+      "cityId": 1,
+      "createdAt": 1760465460445,
+      "updatedAt": 1760465460445,
+      "weight": 1
+    },
+    {
+      "id": 2,
+      "page": "afisha",
+      "position": "SIDEBAR_TOP",
+      "title": "ку",
+      "imageUrl": "/uploads/news/news_1760467166775.jpg",
+      "hrefUrl": null,
+      "startsAt": 1760467140000,
+      "endsAt": 1761676740000,
+      "order": 0,
+      "isActive": 1,
+      "cityId": 1,
+      "createdAt": 1760467175967,
+      "updatedAt": 1760467175967,
+      "weight": 1
+    },
+    {
+      "id": 3,
+      "page": "afisha",
+      "position": "SIDEBAR",
+      "title": "уцй",
+      "imageUrl": "/uploads/news/news_1760467222991.jpg",
+      "hrefUrl": null,
+      "startsAt": 1760467200000,
+      "endsAt": 1761676800000,
+      "order": 0,
+      "isActive": 1,
+      "cityId": 1,
+      "createdAt": 1760467235305,
+      "updatedAt": 1760467235305,
+      "weight": 1
+    }
+  ],
+  "ReviewReply": [
+    {
+      "id": "cmgr4c7av0007kvuhv094lg9o",
+      "reviewId": "cmgr4bpzw0003kvuhkhxbx17f",
+      "userId": 2,
+      "message": "Ну да",
+      "status": "APPROVED",
+      "createdAt": 1760480002039,
+      "updatedAt": 1760480002039
+    }
+  ],
+  "AdminAudit": [],
+  "Reward": [],
+  "AdminDashboard": [],
+  "RoleAssignment": [],
+  "AdminInsight": [],
+  "SLARule": [],
+  "AfishaCategory": [
+    {
+      "id": 2,
+      "name": "Театры",
+      "slug": "teatry",
+      "description": "Театральные представления для детей",
+      "icon": "/uploads/icon/icon_1760465343041.png",
+      "coverImage": "/uploads/background/background_1760465346487.jpg",
+      "color": "#FF6B6B",
+      "isActive": 1,
+      "sortOrder": 1,
+      "createdAt": 1760462517645,
+      "updatedAt": 1760465348278
+    },
+    {
+      "id": 9,
+      "name": "Цирки",
+      "slug": "cirk",
+      "description": "Цирковые представления",
+      "icon": "🎪",
+      "coverImage": null,
+      "color": "#4ECDC4",
+      "isActive": 1,
+      "sortOrder": 2,
+      "createdAt": 1760463935246,
+      "updatedAt": 1760463935246
+    },
+    {
+      "id": 10,
+      "name": "Музеи",
+      "slug": "muzei",
+      "description": "Музейные экспозиции и выставки",
+      "icon": "🏛️",
+      "coverImage": null,
+      "color": "#45B7D1",
+      "isActive": 1,
+      "sortOrder": 3,
+      "createdAt": 1760463935247,
+      "updatedAt": 1760463935247
+    },
+    {
+      "id": 11,
+      "name": "Концерты",
+      "slug": "koncerty",
+      "description": "Музыкальные концерты",
+      "icon": "🎵",
+      "coverImage": null,
+      "color": "#96CEB4",
+      "isActive": 1,
+      "sortOrder": 4,
+      "createdAt": 1760463935248,
+      "updatedAt": 1760463935248
+    },
+    {
+      "id": 13,
+      "name": "Мастер-классы",
+      "slug": "master-klassy",
+      "description": "Обучающие мастер-классы",
+      "icon": "🎨",
+      "coverImage": null,
+      "color": "#DDA0DD",
+      "isActive": 1,
+      "sortOrder": 6,
+      "createdAt": 1760463935249,
+      "updatedAt": 1760463935249
+    },
+    {
+      "id": 14,
+      "name": "Спектакли",
+      "slug": "spektakli",
+      "description": "Детские спектакли для детей и их родителей",
+      "icon": "/uploads/icon/icon_1760465313202.png",
+      "coverImage": "",
+      "color": "#3B82F6",
+      "isActive": 1,
+      "sortOrder": 0,
+      "createdAt": 1760463935250,
+      "updatedAt": 1760465330282
+    }
+  ],
+  "SectionVisibility": [],
+  "AfishaEvent": [
+    {
+      "id": "cmgqtr3m90000kvv6q5qvlmz3",
+      "title": "Arte Musicum. Гарри Поттер. Космическое фэнтези",
+      "slug": "arte-musicum-garri-potter-kosmicheskoe-fentezi",
+      "description": null,
+      "venue": "Планетарий Садовая-Кудринская, 5, стр. 1",
+      "organizer": "Kiddeo Events",
+      "startDate": 1761384600000,
+      "endDate": 1761390000000,
+      "coordinates": "55.761532, 37.583469",
+      "order": 0,
+      "status": "active",
+      "coverImage": "/uploads/background/background_1760462254651.png",
+      "gallery": null,
+      "tickets": "[{\"name\":\"Билет\",\"description\":\"\",\"price\":6000,\"quantity\":0,\"isActive\":true},{\"name\":\"Билет\",\"description\":\"\",\"price\":9000,\"quantity\":0,\"isActive\":true}]",
+      "city": "Москва",
+      "citySlug": null,
+      "categoryName": null,
+      "categoryId": null,
+      "createdAt": 1760462221329,
+      "updatedAt": 1760463209466,
+      "ageFrom": 8,
+      "ageTo": null,
+      "minPrice": null,
+      "ageGroups": "[\"8-12\",\"13-16\",\"16-plus\"]",
+      "viewCount": 1,
+      "isPopular": 0,
+      "isPaid": 0,
+      "isPromoted": 0,
+      "priority": 5,
+      "searchText": "",
+      "quickFilterIds": null,
+      "richDescription": "{\"type\":\"doc\",\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":null},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"textStyle\",\"attrs\":{\"color\":\"rgb(0, 0, 0)\"}}],\"text\":\"Билет на концерт дает право бесплатного самостоятельного посещения музея Урании с 14:30. \"},{\"type\":\"hardBreak\"},{\"type\":\"text\",\"marks\":[{\"type\":\"textStyle\",\"attrs\":{\"color\":\"rgb(0, 0, 0)\"}},{\"type\":\"bold\"},{\"type\":\"italic\"}],\"text\":\"Билет на концерт дает скидку 10% при посещении кафетерия Планетария.  \"},{\"type\":\"hardBreak\"},{\"type\":\"hardBreak\"},{\"type\":\"text\",\"marks\":[{\"type\":\"textStyle\",\"attrs\":{\"color\":\"rgb(0, 0, 0)\"}}],\"text\":\"Концертно-продюсерский центр ARTEMUSICUM совместно с Московским Планетарием представляют премьеру нового космического симфонического шоу для всей семьи и всех любителей мира фэнтези! Событие, которое навсегда останется в памяти поклонников «Гарри Поттера». Величественный Большой звёздный зал Московского планетария станет свидетелем удивительного симфонического шоу, посвященного музыке из этого знаменитого во всем мире фильма. «Космическое фэнтези» станет для вас невероятным музыкальным опытом, в котором магия живой музыки и волшебства вселенной «Гарри Поттера» сплетутся с космической красотой, создавая захватывающее путешествие для всех поклонников франшизы. Мелодии, созданные Джоном Уильямсом для киноэпопеи «Гарри Поттер», оживут в исполнении самого необычного оркестра страны – Imperialis orchestra, который перенесет вас в мир волшебства и фантазии через музыку, насыщенную волшебством Хогвартса и наполнит зал потрясающими звуками сказки и чудес. Гениальная музыка гармонично переплетётся с звёздными видеовизуальными эффектами, создавая иллюзию пребывания в самом сердце волшебного мира. Программа шоу удивительным образом подходит для погружения вас и ваших детей в глубокий и волшебный мир классической музыки. Погружение в атмосферу магии и волшебства начнется с самых известных композиций фильма, переосмысленных через призму масштабов Вселенной.  Космическое фэнтези «Гарри Поттер» - шоу, которое невозможно будет забыть. Яркий и насыщенный концерт, который унесёт каждого зрителя в параллельную сказочную реальность. Симфоническое шоу «Гарри Поттер» в Большом звездном зале Московского планетария- это воплощение магии и эстетики. \"}]},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":null},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"textStyle\",\"attrs\":{\"color\":\"rgb(0, 0, 0)\"}},{\"type\":\"bold\"}],\"text\":\"Программа \"},{\"type\":\"text\",\"marks\":[{\"type\":\"textStyle\",\"attrs\":{\"color\":\"rgb(0, 0, 0)\"}}],\"text\":\" \"},{\"type\":\"hardBreak\"},{\"type\":\"text\",\"marks\":[{\"type\":\"textStyle\",\"attrs\":{\"color\":\"rgb(0, 0, 0)\"}}],\"text\":\"Сюиты из кинофильмов о Гарри Поттере  *возможны дополнения и изменения в программе  Исполнители   IMPERIALIS ORCHESTRA  Площадка   Московский планетарий— один из самых больших в мире и самый старый планетарий в России. Расположен в Москве возле новой территории Московского зоопарка, недалеко от Садового кольца. Построен в 1927—1929 годах по проекту архитекторов М. О. Барща, М. И. Синявского и инженера Г. А. Зунблата.  На момент открытия Московский планетарий был единственным в стране, тринадцатым в мире и Европе.  Основным направлением деятельности Московского планетария является популяризация естественнонаучных знаний.  В Московском планетарии расположена обсерватория, из которой можно наблюдать различные космические объекты.\"}]}]}"
+    },
+    {
+      "id": "cmgquj5h80002kvfoeescp1vk",
+      "title": "Sense. Почувствуй стихии",
+      "slug": "sense-pochuvstvuy-stihii",
+      "description": null,
+      "venue": " Центр «Марс» Пушкарев пер., 5",
+      "organizer": "Kiddeo Events",
+      "startDate": 1763204400000,
+      "endDate": 1763229600000,
+      "coordinates": "55.768967, 37.626771",
+      "order": 0,
+      "status": "active",
+      "coverImage": "/uploads/background/background_1760463522460.jpg",
+      "gallery": null,
+      "tickets": "[{\"name\":\"Билет\",\"description\":\"\",\"price\":1300,\"quantity\":0,\"isActive\":true}]",
+      "city": "Москва",
+      "citySlug": null,
+      "categoryName": null,
+      "categoryId": null,
+      "createdAt": 1760463530107,
+      "updatedAt": 1760479069009,
+      "ageFrom": 13,
+      "ageTo": null,
+      "minPrice": null,
+      "ageGroups": "[\"13-16\",\"16-plus\"]",
+      "viewCount": 1,
+      "isPopular": 0,
+      "isPaid": 0,
+      "isPromoted": 0,
+      "priority": 5,
+      "searchText": "",
+      "quickFilterIds": null,
+      "richDescription": "{\"type\":\"doc\",\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":null},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"textStyle\",\"attrs\":{\"color\":\"rgb(0, 0, 0)\"}}],\"text\":\"ЦСИ М'АРС, продолжая осваивать сферу психотрансформационного зрелищного искусства представляет главную премьеру года – новый масштабный выставочный проект, который даёт зрителю возможность не только созерцать, а ещё – испытывать мощный терапевтический эффект, укреплять духовные опоры и получать глубокие осознания.  SENSE – впечатляющая выставка, синтезирующая знания учёных, философов, алхимиков разных времён и культур о природных феноменах, затрагивающая все органы чувств, обогащая и восполняя внутренние ресурсы человека.  SENSE – это 5 эффектных красочных локаций, 5 природных элементов и 5 способов восприятия мира, важные для современного человека, теряющего связь с природой – необходимой средой для гармоничной жизни. Каждый зал выставки – репрезентация базовых элементов стихий, каждая инсталляция – переосмысление феноменов природы через призму искусства, позволяющие зрителю составить свою уникальную картину мира.  SENSE – это Огонь, Вода, Земля, Воздух и загадочный, метафизический элемент – Эфир – символ связи личности с тонкой материей, являющийся квинтэссенцией путешествия на пути обретения гармонии с собой, со своим Высшим Я, Абсолютом.  SENSE с одной стороны соединяет сложные художественные решения, новейшие цифровые технологии, с другой стороны возвращает человека к истокам, природе и её базовым элементам – стихиям. В проекте используются захватывающие аудиовизуальные инсталляции, интерактивные, кинетические, световые и лазерные арт–объекты, спецэффекты виртуальной реальности, технология прослушивания электромагнитных волн, а также – климатические и ароматические настройки.  Цель арт-проекта, созданного с помощью новейших технологий, – мотивировать зрителя к полной перезагрузке, дать энергию для восстановления сил и утраченного вдохновения.  Кроме того, гостей выставки ждёт инновационная VR-медитация. Это медитативное пространство разработано для глубокого расслабления, восстановления и усиления ощущения связи с собой и окружающим миром.  Автор выставки: Анастасия Картузова – художница арт-инсталляций, дизайнер и создатель мультимедийных пространств. Соавтор выставки «Экспансия Реальности» (шорт-лист лучшего проекта Премии Курехина, Russian Creative Awards), участница Творческого Союза Художников России. Арт-продюсер и дизайнер выставок «Реальный космос», «Deep Inside/ght», «RESET». Арт-продюсер ивент-проектов для Комитета Развития Туризма Подмосковья, НИУ ВШЕ, фестивалей SIGNAL, SunSpirit, ISALONI (Милан). Лектор Института STRELKA, Vladivostok Design Week 2019, Seasons of Life, Indecor Самара 2019, Москва Фест 2023.  Художники-участники: • Анастасия Картузова – автор и художник. • Юлия Кузьмина (RA:METRIKA) – куратор искусства новых медиа, мультимедиа продюсер, VJ, участник ТХСР. Продюсер выставки Universum в Севкабель Порт. Участница фестивалей Signal, Odyssey, Gamma, Сказка, Chill Out Planet, Anatman, Science Fest. Мультимедиа куратор танцевального спектакля НеПокой от Ксении Михеевой. Работала с Портал 2030, ПМЭФ, Яндекс, Yota, Сбер, Cosmoscow и т.д. • Владимир Ефимов – мультимедиа художник, участник проектов: SunSpirit festival, LESINTERES festival, выставка Экспансия Реальности (ЦСИ М'АРС), SIGNAL festival 2024 • Екатерина Калашникова – медиахудожник, организатор медиафестиваля BYOB, образовательных встреч Touchdesigner Meetups, VJ battle, участник ТХСР. * Среди работ – стенд AUDI, Cosmoscow 2020; купольная инсталляция в Союзмультпарке; участие в концертах Центра электроакустической академической музыки Московской Консерватории в театре Практика, фестивале Fields в Garage museum, гала-концертах в Концертном Зале «Зарядье» и Доме Музыки в Москве. • Игорь Косый - мультимедиа-художник, участник проектов: Cosmoscow 2020, Просвет Пермь 2020, Expo Dubai 2020, Cop 27 Egypt 2022, ЦЕХ Нижний Новгород 2023, «Свет и музыка» Казань 2023, Пикник афиша 2023, Signal 2023, Lumion Санкт-Петербург 2023 • Дмитрий Папиж - мультимедиа-художник, участник проектов: Expo Dubai 2020, Universum 2021, HI HUMAN, центр M`ARS 2020-21, INTERVALS 2021, GEEK PICNIC 2021, PROSVET FESTIVAL, All-Russian action Biblionoch-2021 , Z8 Summit Festival 2020, International Münchner Science and Fiction Festival 2020 • Василиса Капсалис - художник по свету. Участвовала в проектах Outline, Signal и пр. • Александр Курбатов (Kasper) - художник по свету. Участвовал в проектах Outline, Signal и пр. • Артём Гарифуллин –  саунд-дизайнер и медиа-художник. Участник выставок технологического искусства  «Код света» (ЦСИ М'АРС), «Элемент» (\"},{\"type\":\"text\",\"marks\":[{\"type\":\"link\",\"attrs\":{\"href\":\"http://Cube.Moscow\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer nofollow\",\"class\":\"text-blue-600 underline\"}},{\"type\":\"textStyle\",\"attrs\":{\"color\":\"rgb(0, 0, 0)\"}}],\"text\":\"Cube.Moscow\"},{\"type\":\"text\",\"marks\":[{\"type\":\"textStyle\",\"attrs\":{\"color\":\"rgb(0, 0, 0)\"}}],\"text\":\", галерея Луч), «Границы сред» (Культурный центр ЗИЛ), «Континуум» (Краснохолмская галерея). Студент магистратуры ArtTECH университета МИСИС. • Дмитрий Никулин — дизайнер и медиа-художник. Участник выставок технологического искусства  «Код света» (ЦСИ М'АРС), «Элемент» (\"},{\"type\":\"text\",\"marks\":[{\"type\":\"link\",\"attrs\":{\"href\":\"http://Cube.Moscow\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer nofollow\",\"class\":\"text-blue-600 underline\"}},{\"type\":\"textStyle\",\"attrs\":{\"color\":\"rgb(0, 0, 0)\"}}],\"text\":\"Cube.Moscow\"},{\"type\":\"text\",\"marks\":[{\"type\":\"textStyle\",\"attrs\":{\"color\":\"rgb(0, 0, 0)\"}}],\"text\":\", галерея Луч), «Границы сред» (Культурный центр ЗИЛ), «Континуум» (Краснохолмская галерея). Студент магистратуры ArtTECH университета МИСИС.\"}]}]}"
+    }
+  ],
+  "Session": [],
+  "AfishaEventPopularCategory": [],
+  "Slot": [],
+  "AuditLog": [
+    {
+      "id": 1,
+      "entityType": "DOCUMENT",
+      "entityId": "1",
+      "action": "DOCUMENT_MODERATED",
+      "details": "{\"documentId\":1,\"status\":\"REJECTED\",\"moderatorNotes\":\"Зачем ты мне скинул закупку?)\",\"rejectionReason\":\"закупку?)\",\"vendorId\":2}",
+      "userId": 1,
+      "ipAddress": "::1",
+      "createdAt": 1760611406825
+    },
+    {
+      "id": 2,
+      "entityType": "DOCUMENT",
+      "entityId": "2",
+      "action": "DOCUMENT_MODERATED",
+      "details": "{\"documentId\":2,\"status\":\"APPROVED\",\"moderatorNotes\":\"ор\",\"rejectionReason\":\"\",\"vendorId\":2}",
+      "userId": 1,
+      "ipAddress": "::1",
+      "createdAt": 1760611528226
+    }
+  ],
+  "StockAvatar": [],
+  "BankAccount": [
+    {
+      "id": 1,
+      "vendorId": 2,
+      "holderName": "ИП Козлов Иван Петрович",
+      "inn": "123456789012",
+      "bankName": "Сбербанк России",
+      "bik": "044525225",
+      "account": "40817810123456789012",
+      "corrAccount": "30101810400000000225",
+      "iban": null,
+      "swift": null,
+      "verified": 0,
+      "verifiedAt": null,
+      "moderatorNotes": null,
+      "moderatorId": null,
+      "moderatedAt": null,
+      "createdAt": 1760605603761,
+      "updatedAt": 1760605603761
+    }
+  ],
+  "TaxProfile": [
+    {
+      "id": 1,
+      "vendorId": 2,
+      "taxRegime": "OSN",
+      "vatStatus": "VAT_20",
+      "vatRate": null,
+      "isVatPayer": 0,
+      "npdToken": null,
+      "npdRegion": null,
+      "fiscalMode": "PLATFORM",
+      "agencyAgreement": 0,
+      "moderatorNotes": null,
+      "moderatorId": null,
+      "moderatedAt": null,
+      "createdAt": 1760605778666,
+      "updatedAt": 1760608830107
+    }
+  ],
+  "Booking": [],
+  "Ticket": [],
+  "BookingItem": [],
+  "User": [
+    {
+      "id": 1,
+      "email": "test@test.com",
+      "name": "Кирилл",
+      "password": null,
+      "role": "USER",
+      "createdAt": 1760447815668,
+      "updatedAt": 1760475350565,
+      "emailVerified": null,
+      "image": "/uploads/avatars/088811d7-0917-4017-b2ea-db34aa476d17.png"
+    },
+    {
+      "id": 2,
+      "email": "admin@kiddeo.ru",
+      "name": "yummspb",
+      "password": "$2b$10$NA5QF7gTu0vTGR351Courugt/EhzIuuAaxMygCU4rCFB0vGAvHVxC",
+      "role": "ADMIN",
+      "createdAt": 1760477022207,
+      "updatedAt": 1760527048056,
+      "emailVerified": 1760477022205,
+      "image": "/uploads/avatars/bb4b2aa5-3e45-4052-a0ca-cb0c4c96a52d.png"
+    },
+    {
+      "id": 3,
+      "email": "test@example.com",
+      "name": "Test User",
+      "password": "$2b$10$NSDxC0aR8/wffPLTuEvkc.l8B1bzax1xX4VyVEUGhly5adPSUCOuu",
+      "role": "VENDOR",
+      "createdAt": 1760478813597,
+      "updatedAt": 1760514473400,
+      "emailVerified": 1760514468698,
+      "image": null
+    },
+    {
+      "id": 4,
+      "email": "yummspb@gmail.com",
+      "name": "Кирилл",
+      "password": "$2b$10$7S3Eu7qveFVnmwlW2vNquOmEA8DGkzMLolN4KZ3z00Z/xJVRT0xt.",
+      "role": "VENDOR",
+      "createdAt": 1760482469652,
+      "updatedAt": 1760482469652,
+      "emailVerified": 1760482469651,
+      "image": null
+    },
+    {
+      "id": 5,
+      "email": "test-referral@example.com",
+      "name": "Test Referral User",
+      "password": "$2b$10$JTOyslSX1QOneh8gJugab.RIaTUAMfIEuKqmEctbYyA7BOaWmOFUy",
+      "role": "USER",
+      "createdAt": 1760482872543,
+      "updatedAt": 1760482872543,
+      "emailVerified": 1760482872539,
+      "image": null
+    },
+    {
+      "id": 6,
+      "email": "test-referral2@example.com",
+      "name": "Test Referral User 2",
+      "password": "$2b$10$SWqi7tx.540O4P1apYsw2uH5o918G.cD7bP07cv7WSu6A3Z.pi93q",
+      "role": "USER",
+      "createdAt": 1760482884651,
+      "updatedAt": 1760482884651,
+      "emailVerified": 1760482884646,
+      "image": null
+    }
+  ],
+  "Cart": [
+    {
+      "id": "cmgrlbvom000fkvhmt7kgcmyb",
+      "userId": 2,
+      "city": "moskva",
+      "items": "[]",
+      "total": 0,
+      "itemCount": 0,
+      "createdAt": 1760508540454,
+      "updatedAt": 1760622971904
+    },
+    {
+      "id": "cmgthlfu8000ekv0hooxaa51z",
+      "userId": 4,
+      "city": "moskva",
+      "items": "[]",
+      "total": 0,
+      "itemCount": 0,
+      "createdAt": 1760623200367,
+      "updatedAt": 1760624677283
+    }
+  ],
+  "UserBehaviorEvent": [
+    {
+      "id": 1,
+      "userId": 1,
+      "sessionId": "profile-action",
+      "eventType": "child_added",
+      "page": "/profile",
+      "element": "children-manager",
+      "data": "{\"childId\":1,\"childName\":\"Платон\",\"childGender\":\"male\"}",
+      "userAgent": "Kiddeo App",
+      "ipAddress": "127.0.0.1",
+      "createdAt": 1760475389207
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "sessionId": "profile-action",
+      "eventType": "child_added",
+      "page": "/profile",
+      "element": "children-manager",
+      "data": "{\"childId\":2,\"childName\":\"Матвей\",\"childGender\":\"male\"}",
+      "userAgent": "Kiddeo App",
+      "ipAddress": "127.0.0.1",
+      "createdAt": 1760475404094
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "sessionId": "review-creation",
+      "eventType": "review_created",
+      "page": "/event/cmgqtr3m90000kvv6q5qvlmz3",
+      "element": "review-form",
+      "data": "{\"reviewId\":\"cmgr4bpzw0003kvuhkhxbx17f\",\"eventId\":\"cmgqtr3m90000kvv6q5qvlmz3\",\"rating\":5,\"hasComment\":true}",
+      "userAgent": "Kiddeo App",
+      "ipAddress": "127.0.0.1",
+      "createdAt": 1760479979623
+    },
+    {
+      "id": 4,
+      "userId": 2,
+      "sessionId": "review-reply",
+      "eventType": "review_reply_received",
+      "page": "/event/cmgqtr3m90000kvv6q5qvlmz3",
+      "element": "review-reply",
+      "data": "{\"replyId\":\"cmgr4c7av0007kvuhv094lg9o\",\"reviewId\":\"cmgr4bpzw0003kvuhkhxbx17f\",\"eventId\":\"cmgqtr3m90000kvv6q5qvlmz3\",\"eventTitle\":\"Arte Musicum. Гарри Поттер. Космическое фэнтези\",\"replyAuthorId\":2,\"replyAuthorName\":\"Admin User\"}",
+      "userAgent": "Kiddeo App",
+      "ipAddress": "127.0.0.1",
+      "createdAt": 1760480002051
+    },
+    {
+      "id": 5,
+      "userId": 2,
+      "sessionId": "review-creation",
+      "eventType": "review_created",
+      "page": "/event/cmgqtr3m90000kvv6q5qvlmz3",
+      "element": "review-form",
+      "data": "{\"reviewId\":\"cmgr4nfld0005kvwunic6wwwt\",\"eventId\":\"cmgqtr3m90000kvv6q5qvlmz3\",\"rating\":5,\"hasComment\":true}",
+      "userAgent": "Kiddeo App",
+      "ipAddress": "127.0.0.1",
+      "createdAt": 1760480526007
+    }
+  ],
+  "Category": [
+    {
+      "id": 1,
+      "slug": "razvlecheniya",
+      "name": "Развлечения",
+      "defaultBookingMode": "REQUEST",
+      "icon": "🎪",
+      "color": "#FF6B6B",
+      "isActive": 1,
+      "createdAt": 1760448373048,
+      "updatedAt": 1760448373048
+    },
+    {
+      "id": 2,
+      "slug": "obrazovanie",
+      "name": "Образование",
+      "defaultBookingMode": "REQUEST",
+      "icon": "📚",
+      "color": "#4ECDC4",
+      "isActive": 1,
+      "createdAt": 1760448373054,
+      "updatedAt": 1760448373054
+    },
+    {
+      "id": 3,
+      "slug": "sport",
+      "name": "Спорт",
+      "defaultBookingMode": "REQUEST",
+      "icon": "⚽",
+      "color": "#45B7D1",
+      "isActive": 1,
+      "createdAt": 1760448373055,
+      "updatedAt": 1760448373055
+    },
+    {
+      "id": 4,
+      "slug": "tvorchestvo",
+      "name": "Творчество",
+      "defaultBookingMode": "REQUEST",
+      "icon": "🎨",
+      "color": "#96CEB4",
+      "isActive": 1,
+      "createdAt": 1760448373056,
+      "updatedAt": 1760448373056
+    },
+    {
+      "id": 5,
+      "slug": "nauka",
+      "name": "Наука",
+      "defaultBookingMode": "REQUEST",
+      "icon": "🔬",
+      "color": "#FFEAA7",
+      "isActive": 1,
+      "createdAt": 1760448373056,
+      "updatedAt": 1760448373056
+    },
+    {
+      "id": 6,
+      "slug": "priroda",
+      "name": "Природа",
+      "defaultBookingMode": "REQUEST",
+      "icon": "🌿",
+      "color": "#DDA0DD",
+      "isActive": 1,
+      "createdAt": 1760448373057,
+      "updatedAt": 1760448373057
+    }
+  ],
+  "UserChild": [
+    {
+      "id": 1,
+      "userId": 1,
+      "name": "Платон",
+      "birthDate": 1551916800000,
+      "gender": "male",
+      "interests": null,
+      "avatar": null,
+      "isActive": 1,
+      "createdAt": 1760475389201,
+      "updatedAt": 1760475389200
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "name": "Матвей",
+      "birthDate": 1620172800000,
+      "gender": "male",
+      "interests": null,
+      "avatar": null,
+      "isActive": 1,
+      "createdAt": 1760475404092,
+      "updatedAt": 1760475404091
+    }
+  ],
+  "Chat": [],
+  "UserComment": [],
+  "ChatTemplate": [],
+  "UserCommentVote": [],
+  "City": [
+    {
+      "id": 1,
+      "slug": "moskva",
+      "name": "Москва",
+      "isPublic": 1
+    },
+    {
+      "id": 2,
+      "slug": "sankt-peterburg",
+      "name": "Санкт-Петербург",
+      "isPublic": 1
+    },
+    {
+      "id": 3,
+      "slug": "novosibirsk",
+      "name": "Новосибирск",
+      "isPublic": 1
+    },
+    {
+      "id": 4,
+      "slug": "ekaterinburg",
+      "name": "Екатеринбург",
+      "isPublic": 1
+    },
+    {
+      "id": 5,
+      "slug": "kazan",
+      "name": "Казань",
+      "isPublic": 1
+    },
+    {
+      "id": 6,
+      "slug": "nizhniy-novgorod",
+      "name": "Нижний Новгород",
+      "isPublic": 1
+    },
+    {
+      "id": 7,
+      "slug": "chelyabinsk",
+      "name": "Челябинск",
+      "isPublic": 1
+    },
+    {
+      "id": 8,
+      "slug": "samara",
+      "name": "Самара",
+      "isPublic": 1
+    },
+    {
+      "id": 9,
+      "slug": "omsk",
+      "name": "Омск",
+      "isPublic": 1
+    },
+    {
+      "id": 10,
+      "slug": "rostov-na-donu",
+      "name": "Ростов-на-Дону",
+      "isPublic": 1
+    },
+    {
+      "id": 11,
+      "slug": "ufa",
+      "name": "Уфа",
+      "isPublic": 1
+    },
+    {
+      "id": 12,
+      "slug": "krasnoyarsk",
+      "name": "Красноярск",
+      "isPublic": 1
+    },
+    {
+      "id": 13,
+      "slug": "voronezh",
+      "name": "Воронеж",
+      "isPublic": 1
+    },
+    {
+      "id": 14,
+      "slug": "perm",
+      "name": "Пермь",
+      "isPublic": 1
+    },
+    {
+      "id": 15,
+      "slug": "volgograd",
+      "name": "Волгоград",
+      "isPublic": 1
+    },
+    {
+      "id": 16,
+      "slug": "krasnodar",
+      "name": "Краснодар",
+      "isPublic": 1
+    },
+    {
+      "id": 17,
+      "slug": "saratov",
+      "name": "Саратов",
+      "isPublic": 1
+    },
+    {
+      "id": 18,
+      "slug": "tyumen",
+      "name": "Тюмень",
+      "isPublic": 1
+    },
+    {
+      "id": 19,
+      "slug": "tolyatti",
+      "name": "Тольятти",
+      "isPublic": 1
+    },
+    {
+      "id": 20,
+      "slug": "izhevsk",
+      "name": "Ижевск",
+      "isPublic": 1
+    },
+    {
+      "id": 21,
+      "slug": "barnaul",
+      "name": "Барнаул",
+      "isPublic": 1
+    },
+    {
+      "id": 22,
+      "slug": "ulyanovsk",
+      "name": "Ульяновск",
+      "isPublic": 1
+    }
+  ],
+  "UserFavorite": [],
+  "Collection": [],
+  "UserInterest": [],
+  "CollectionEvent": [
+    {
+      "id": "cmgrm8tv9000rkvhmgpzb9b99",
+      "collectionId": "cmgrm8pqp000qkvhmrus1tu2f",
+      "eventId": "cmgquj5h80002kvfoeescp1vk",
+      "createdAt": 1760510077750,
+      "updatedAt": 1760510077750
+    },
+    {
+      "id": "cmgrm8tv9000skvhm2w0lzbc6",
+      "collectionId": "cmgrm8pqp000qkvhmrus1tu2f",
+      "eventId": "cmgqtr3m90000kvv6q5qvlmz3",
+      "createdAt": 1760510077750,
+      "updatedAt": 1760510077750
+    }
+  ],
+  "UserInvite": [
+    {
+      "id": 1,
+      "inviterId": 3,
+      "inviteeId": null,
+      "inviteCode": "REF-1760481043251-CU848O",
+      "email": null,
+      "isUsed": 0,
+      "pointsAwarded": 0,
+      "createdAt": 1760481043254,
+      "usedAt": null
+    },
+    {
+      "id": 2,
+      "inviterId": 2,
+      "inviteeId": 5,
+      "inviteCode": "REF-1760482122496-DAP8ON",
+      "email": null,
+      "isUsed": 1,
+      "pointsAwarded": 0,
+      "createdAt": 1760482122497,
+      "usedAt": 1760482872552
+    },
+    {
+      "id": 3,
+      "inviterId": 2,
+      "inviteeId": null,
+      "inviteCode": "REF-1760482890053-8WO369",
+      "email": null,
+      "isUsed": 1,
+      "pointsAwarded": 0,
+      "createdAt": 1760482890065,
+      "usedAt": 1760482900872
+    },
+    {
+      "id": 4,
+      "inviterId": 2,
+      "inviteeId": null,
+      "inviteCode": "REF-1760518492694-XCW58B",
+      "email": null,
+      "isUsed": 0,
+      "pointsAwarded": 0,
+      "createdAt": 1760518492699,
+      "usedAt": null
+    },
+    {
+      "id": 5,
+      "inviterId": 4,
+      "inviteeId": null,
+      "inviteCode": "REF-1760646246312-XFDIEG",
+      "email": null,
+      "isUsed": 0,
+      "pointsAwarded": 0,
+      "createdAt": 1760646246313,
+      "usedAt": null
+    }
+  ],
+  "CollectionVenue": [],
+  "UserLoyaltyPoint": [],
+  "Content": [],
+  "UserNotification": [],
+  "ContentAnalytics": [],
+  "UserNotificationSettings": [
+    {
+      "id": 1,
+      "userId": 2,
+      "emailNewEvents": 1,
+      "emailPriceDrops": 1,
+      "emailReminders": 1,
+      "emailReviews": 1,
+      "emailNewsletter": 1,
+      "pushNewEvents": 1,
+      "pushPriceDrops": 0,
+      "pushReminders": 1,
+      "pushReviews": 1,
+      "frequency": "daily",
+      "createdAt": 1760519679074,
+      "updatedAt": 1760519679072
+    }
+  ],
+  "ContentCategory": [],
+  "UserPoints": [
+    {
+      "id": 1,
+      "userId": 1,
+      "points": 0,
+      "totalEarned": 0,
+      "totalSpent": 0,
+      "level": "NOVICE",
+      "createdAt": 1760456621129,
+      "updatedAt": 1760456621129
+    },
+    {
+      "id": 2,
+      "userId": 3,
+      "points": 0,
+      "totalEarned": 0,
+      "totalSpent": 0,
+      "level": "NOVICE",
+      "createdAt": 1760478813640,
+      "updatedAt": 1760478813640
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "points": 210,
+      "totalEarned": 10,
+      "totalSpent": 0,
+      "level": "NOVICE",
+      "createdAt": 1760478856554,
+      "updatedAt": 1760482900874
+    },
+    {
+      "id": 4,
+      "userId": 4,
+      "points": 100,
+      "totalEarned": 100,
+      "totalSpent": 0,
+      "level": "NOVICE",
+      "createdAt": 1760482469655,
+      "updatedAt": 1760482469656
+    }
+  ],
+  "ContentComment": [],
+  "UserReview": [],
+  "ContentLike": [],
+  "UserReviewVote": [],
+  "ContentListing": [],
+  "UserReward": [],
+  "ContentTemplate": [],
+  "UserSession": [],
+  "Document": [
+    {
+      "id": 1,
+      "vendorId": 2,
+      "docType": "OTHER",
+      "fileUrl": "vendor_2_1760609456648.docx",
+      "fileName": "1._Описание_объекта_закупки._Подставка_для_ног.docx",
+      "fileSize": 45116,
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "status": "REJECTED",
+      "issuedAt": null,
+      "expiresAt": null,
+      "moderatorNotes": "Зачем ты мне скинул закупку?)",
+      "rejectionReason": "закупку?)",
+      "moderatorId": 1,
+      "moderatedAt": 1760611406818,
+      "createdAt": 1760609456650,
+      "updatedAt": 1760611406821
+    },
+    {
+      "id": 2,
+      "vendorId": 2,
+      "docType": "OTHER",
+      "fileUrl": "vendor_2_1760611509114.docx",
+      "fileName": "Эскиз-2.docx",
+      "fileSize": 79163,
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "status": "APPROVED",
+      "issuedAt": null,
+      "expiresAt": null,
+      "moderatorNotes": "ор",
+      "rejectionReason": "",
+      "moderatorId": 1,
+      "moderatedAt": 1760611528221,
+      "createdAt": 1760611509117,
+      "updatedAt": 1760611528223
+    }
+  ],
+  "UserSettings": [
+    {
+      "id": "cmgrpl51n0009kvsgov0s0gxi",
+      "userId": 2,
+      "theme": "light",
+      "language": "ru",
+      "notifications": 1,
+      "emailNotifications": 1,
+      "pushNotifications": 1,
+      "marketingEmails": 0,
+      "createdAt": 1760515690955,
+      "updatedAt": 1760516318814
+    }
+  ],
+  "EmailLog": [],
+  "UserSubscription": [],
+  "EmailTemplate": [],
+  "UserWallet": [],
+  "EventReview": [
+    {
+      "id": "cmgr4bpzw0003kvuhkhxbx17f",
+      "eventId": "cmgqtr3m90000kvv6q5qvlmz3",
+      "userId": 2,
+      "rating": 5,
+      "comment": "Классное место",
+      "status": "APPROVED",
+      "likesCount": 1,
+      "dislikesCount": 0,
+      "createdAt": 1760479979608,
+      "updatedAt": 1760479988095
+    },
+    {
+      "id": "cmgr4nfld0005kvwunic6wwwt",
+      "eventId": "cmgqtr3m90000kvv6q5qvlmz3",
+      "userId": 2,
+      "rating": 5,
+      "comment": "Отличное событие!",
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760480526001,
+      "updatedAt": 1760480526001
+    }
+  ],
+  "Vendor": [
+    {
+      "id": 1,
+      "userId": 1,
+      "displayName": "ООО \"Попугайня\"",
+      "cityId": 1,
+      "canPostEvents": 0,
+      "canPostCatalog": 0,
+      "description": "Лучший контактный зоопарк с попугаями",
+      "createdAt": 1760447815671,
+      "updatedAt": 1760447815671,
+      "address": null,
+      "email": null,
+      "logo": "/popugai-logo.jpg",
+      "phone": null,
+      "website": null,
+      "type": "PRO",
+      "kycStatus": "APPROVED",
+      "payoutEnabled": 0,
+      "officialPartner": 0,
+      "brandSlug": null,
+      "supportEmail": null,
+      "supportPhone": null,
+      "subscriptionStatus": "INACTIVE",
+      "proofType": null,
+      "proofData": null,
+      "additionalProofData": null,
+      "agreements": null
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "displayName": "ИП Козлов",
+      "cityId": 1,
+      "canPostEvents": 1,
+      "canPostCatalog": 1,
+      "description": "Делаем пирожки с маком",
+      "createdAt": 1760532243492,
+      "updatedAt": 1760547169073,
+      "address": "",
+      "email": "yummspb@gmail.com",
+      "logo": null,
+      "phone": "+79213888868",
+      "website": "yumm.spb.ru",
+      "type": "PRO",
+      "kycStatus": "APPROVED",
+      "payoutEnabled": 0,
+      "officialPartner": 0,
+      "brandSlug": null,
+      "supportEmail": null,
+      "supportPhone": null,
+      "subscriptionStatus": "INACTIVE",
+      "proofType": null,
+      "proofData": null,
+      "additionalProofData": null,
+      "agreements": "{\"privacyPolicy\":true,\"termsOfService\":true,\"marketing\":true}"
+    },
+    {
+      "id": 3,
+      "userId": 4,
+      "displayName": "ИП Кених",
+      "cityId": 1,
+      "canPostEvents": 1,
+      "canPostCatalog": 1,
+      "description": "Привет Андрей",
+      "createdAt": 1760623589127,
+      "updatedAt": 1760646221510,
+      "address": "",
+      "email": "yummspb@gmail.com",
+      "logo": null,
+      "phone": "+79211231212",
+      "website": "yummspb.ru",
+      "type": "START",
+      "kycStatus": "APPROVED",
+      "payoutEnabled": 0,
+      "officialPartner": 0,
+      "brandSlug": "catery.ae",
+      "supportEmail": "yummspb@gmail.com",
+      "supportPhone": "+79211231212",
+      "subscriptionStatus": "INACTIVE",
+      "proofType": "PHOTO",
+      "proofData": "Фотография",
+      "additionalProofData": null,
+      "agreements": "{\"privacyPolicy\":true,\"termsOfService\":true,\"marketing\":true}"
+    }
+  ],
+  "EventTicketType": [],
+  "VendorModerationHistory": [],
+  "EventView": [
+    {
+      "id": "cmgquca1s0001kvfou5ottlgf",
+      "eventId": "cmgqtr3m90000kvv6q5qvlmz3",
+      "ipAddress": "::1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+      "createdAt": 1760463209440
+    },
+    {
+      "id": "cmgr1w8bp0001kv80frst2q8n",
+      "eventId": "cmgquj5h80002kvfoeescp1vk",
+      "ipAddress": "::1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+      "createdAt": 1760475897637
+    }
+  ],
+  "VendorOnboarding": [
+    {
+      "id": 1,
+      "vendorId": 1,
+      "step": 1,
+      "completedSteps": "[]",
+      "isCompleted": 0,
+      "completedAt": null,
+      "createdAt": 1760531615557,
+      "updatedAt": 1760531615501
+    },
+    {
+      "id": 2,
+      "vendorId": 2,
+      "step": 4,
+      "completedSteps": "[1,2,3,4]",
+      "isCompleted": 1,
+      "completedAt": 1760547169078,
+      "createdAt": 1760547169079,
+      "updatedAt": 1760547169078
+    },
+    {
+      "id": 3,
+      "vendorId": 3,
+      "step": 4,
+      "completedSteps": "[1,2,3,4]",
+      "isCompleted": 1,
+      "completedAt": 1760623999231,
+      "createdAt": 1760623999233,
+      "updatedAt": 1760623999231
+    }
+  ],
+  "Favorite": [
+    {
+      "id": "cmgr3xcs50001kvuhh322g8zx",
+      "userId": 2,
+      "itemId": "arte-musicum-garri-potter-kosmicheskoe-fentezi",
+      "itemType": "event",
+      "title": "Arte Musicum. Гарри Поттер. Космическое фэнтези",
+      "description": null,
+      "image": "/uploads/background/background_1760462254651.png",
+      "price": 600000,
+      "currency": "RUB",
+      "location": "Планетарий Садовая-Кудринская, 5, стр. 1",
+      "date": "2025-10-25T09:30:00.000Z",
+      "createdAt": 1760479309301,
+      "endDate": "2025-10-25T11:00:00.000Z"
+    }
+  ],
+  "VendorPerformanceMetric": [],
+  "FilterConfig": [],
+  "VendorRole": [
+    {
+      "id": 1,
+      "vendorId": 1,
+      "role": "LEGAL",
+      "fullName": null,
+      "inn": "7701234567",
+      "orgnip": null,
+      "orgn": "1234567890123",
+      "kpp": null,
+      "bankAccount": null,
+      "bik": null,
+      "bankName": null,
+      "corrAccount": null,
+      "iban": null,
+      "swift": null,
+      "address": null,
+      "legalAddress": "г. Москва, ул. Попугайная, д. 1",
+      "actualAddress": null,
+      "isVatPayer": 0,
+      "vatRate": null,
+      "representativeName": null,
+      "representativePosition": null,
+      "isRepresentative": 0,
+      "companyName": "ООО \"Попугайня\"",
+      "directorName": null,
+      "directorPosition": null,
+      "selfEmployedInn": null,
+      "taxRegime": null,
+      "npdToken": null,
+      "npdRegion": null,
+      "moderatorNotes": null,
+      "moderatedBy": null,
+      "moderatedAt": null,
+      "moderatorIp": null,
+      "createdAt": 1760447815673,
+      "updatedAt": 1760447815673
+    },
+    {
+      "id": 2,
+      "vendorId": 2,
+      "role": "LEGAL",
+      "fullName": "Биша Муда Беньков",
+      "inn": "123456789012",
+      "orgnip": "123456789012345",
+      "orgn": "123456789012",
+      "kpp": null,
+      "bankAccount": null,
+      "bik": null,
+      "bankName": null,
+      "corrAccount": null,
+      "iban": null,
+      "swift": null,
+      "address": null,
+      "legalAddress": null,
+      "actualAddress": null,
+      "isVatPayer": 0,
+      "vatRate": null,
+      "representativeName": null,
+      "representativePosition": null,
+      "isRepresentative": 0,
+      "companyName": "ООО \"Шайн Брайт лайк даймонд\"",
+      "directorName": "Биша Муда Беньков",
+      "directorPosition": null,
+      "selfEmployedInn": null,
+      "taxRegime": null,
+      "npdToken": null,
+      "npdRegion": null,
+      "moderatorNotes": null,
+      "moderatedBy": null,
+      "moderatedAt": null,
+      "moderatorIp": null,
+      "createdAt": 1760605507016,
+      "updatedAt": 1760607988268
+    }
+  ],
+  "HeroSlot": [],
+  "VendorSubscription": [],
+  "Interest": [],
+  "VendorTariffPlan": [],
+  "Lead": [],
+  "VenueCategory": [
+    {
+      "id": 1,
+      "name": "Развлечения",
+      "slug": "razvlecheniya",
+      "icon": "🎭",
+      "color": "#3B82F6",
+      "isActive": 1,
+      "createdAt": 1760447815662,
+      "updatedAt": 1760550119449
+    }
+  ],
+  "Listing": [],
+  "VenueCategoryCity": [
+    {
+      "id": 1,
+      "categoryId": 1,
+      "cityId": 1,
+      "createdAt": 1760550119457
+    }
+  ],
+  "ListingClaim": [],
+  "VenueClaim": [],
+  "ListingCommission": [],
+  "VenueFilter": [],
+  "ListingModeration": [],
+  "VenueParameter": [],
+  "ListingTag": [],
+  "VenuePartner": [
+    {
+      "id": 1,
+      "name": "Попугайня",
+      "slug": "popugaynya",
+      "address": "г. Москва, ул. Попугайная, д. 1",
+      "description": "Контактный зоопарк с попугаями для всей семьи! У нас вы сможете покормить и погладить более 20 видов попугаев.",
+      "coverImage": "/popugai-cover.jpg",
+      "additionalImages": "[\"/popugai-1.jpg\",\"/popugai-2.jpg\",\"/popugai-3.jpg\"]",
+      "subcategoryId": 1,
+      "vendorId": 1,
+      "cityId": 1,
+      "tariff": "FREE",
+      "status": "ACTIVE",
+      "moderationReason": null,
+      "district": "Центральный",
+      "metro": "Маяковская",
+      "lat": 55.769717,
+      "lng": 37.597626,
+      "priceFrom": null,
+      "priceTo": null,
+      "ageFrom": null,
+      "ageTo": null,
+      "timezone": null,
+      "fiasId": null,
+      "kladrId": null,
+      "createdAt": 1760447815675,
+      "updatedAt": 1760447815675,
+      "workingHours": null,
+      "richDescription": null
+    },
+    {
+      "id": 2,
+      "name": "Райвола",
+      "slug": "rayvola",
+      "address": "г Москва, Ленинградский пр-кт, д 10",
+      "description": "\"Райвола\" - загородный отель в посёлке Рощино, в трёх километрах от заповедника \"Линдуловская лиственничная роща\". В отеле есть всё необходимое для активного отдыха (пейнтбол, бильярд, тир, спортивные площадки). На территории отеля располагается верёвочный парк, крытый роллердром, прокат спорт инвентаря, уличный подогреваемый бассейн, мини-зоопарк.\r\n\r\nЖелающим улучшить своё самочувствие отель предлагает такие услуги как массаж, фитнес, тренажёрный зал и сауна.\r\n\r\nОтель подходит для размещения с детьми любого возраста (дети до 5 лет проживают бесплатно; есть возможность поставить в номере дополнительную детскую кроватку). На территории отеля есть детский игровой комплекс с батутом, а также игровой корпус, где можно почитать, посмотреть телевизор и даже поупражняться на шведской стенке.",
+      "coverImage": "/venues/cover/3a72dd0d-c060-4d86-bfeb-5a44598d53ca.jpg",
+      "additionalImages": "[\"/venues/additional/venue_2_1760616080834_0.webp\",\"/venues/additional/venue_2_1760616080836_1.webp\",\"/venues/additional/venue_2_1760616080836_2.webp\"]",
+      "subcategoryId": 1,
+      "vendorId": 2,
+      "cityId": 1,
+      "tariff": "FREE",
+      "status": "ACTIVE",
+      "moderationReason": null,
+      "district": "Беговой р-н",
+      "metro": "Беговая",
+      "lat": 55.768967,
+      "lng": 37.626771,
+      "priceFrom": null,
+      "priceTo": null,
+      "ageFrom": null,
+      "ageTo": null,
+      "timezone": "Europe/Moscow",
+      "fiasId": "b577b9c0-8680-4627-8f5e-25d3160fad98",
+      "kladrId": "7700000000016850203",
+      "createdAt": 1760565490218,
+      "updatedAt": 1760616080836,
+      "workingHours": null,
+      "richDescription": null
+    }
+  ],
+  "LoyaltyPoint": [],
+  "VenuePartnerParameter": [],
+  "Message": [],
+  "VenueReview": [
+    {
+      "id": "cmgql6c580001kvz0k09k8zlm",
+      "venueId": 1,
+      "userId": 1,
+      "rating": 5,
+      "comment": "Отличное место! Дети в восторге, попугаи очень дружелюбные!",
+      "photos": "[\"/review-1.jpg\",\"/review-2.jpg\",\"/review-3.jpg\"]",
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760447815677,
+      "updatedAt": 1760447815677
+    },
+    {
+      "id": "cmgqlhcgx0001kvzt1hl3ubfp",
+      "venueId": 1,
+      "userId": 1,
+      "rating": 5,
+      "comment": "Отличное место! Дети в восторге, попугаи очень дружелюбные!",
+      "photos": "[\"/review-1.jpg\",\"/review-2.jpg\",\"/review-3.jpg\"]",
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760448329313,
+      "updatedAt": 1760448329313
+    },
+    {
+      "id": "cmgqtx0rl0001kv1r3lqu1fyo",
+      "venueId": 1,
+      "userId": 1,
+      "rating": 5,
+      "comment": "Отличное место! Дети в восторге, попугаи очень дружелюбные!",
+      "photos": "[\"/review-1.jpg\",\"/review-2.jpg\",\"/review-3.jpg\"]",
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760462497569,
+      "updatedAt": 1760462497569
+    },
+    {
+      "id": "d805ffbf-ad0d-4b8f-8310-9c925f222ada",
+      "venueId": 1,
+      "userId": 1,
+      "rating": 4,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249695,
+      "updatedAt": 1760613249695
+    },
+    {
+      "id": "1d1b4434-1dbc-431a-97dc-318965c91999",
+      "venueId": 1,
+      "userId": 3,
+      "rating": 3,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249698,
+      "updatedAt": 1760613249698
+    },
+    {
+      "id": "6a2a97a1-35b6-4576-8941-25774b19a4af",
+      "venueId": 1,
+      "userId": 3,
+      "rating": 3,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249698,
+      "updatedAt": 1760613249698
+    },
+    {
+      "id": "314cf41c-0938-46c4-863a-ad938d1b55c6",
+      "venueId": 1,
+      "userId": 4,
+      "rating": 4,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249699,
+      "updatedAt": 1760613249699
+    },
+    {
+      "id": "ba76f948-901c-4240-a514-32b3703a9a4f",
+      "venueId": 1,
+      "userId": 4,
+      "rating": 5,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249699,
+      "updatedAt": 1760613249699
+    },
+    {
+      "id": "6979d54d-cc2c-4bd8-a282-a23cd9ce0877",
+      "venueId": 1,
+      "userId": 5,
+      "rating": 5,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249700,
+      "updatedAt": 1760613249700
+    },
+    {
+      "id": "4b599ddb-2fc0-4b2a-9c5a-23de0f9c4afa",
+      "venueId": 1,
+      "userId": 4,
+      "rating": 4,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249700,
+      "updatedAt": 1760613249700
+    },
+    {
+      "id": "5432319a-aa10-4804-a1d7-966110218395",
+      "venueId": 1,
+      "userId": 2,
+      "rating": 3,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249701,
+      "updatedAt": 1760613249701
+    },
+    {
+      "id": "4d777be3-e0ca-4d89-887e-e32d35794cb3",
+      "venueId": 1,
+      "userId": 2,
+      "rating": 4,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249702,
+      "updatedAt": 1760613249702
+    },
+    {
+      "id": "47fef11c-06aa-4a0e-a304-255a29115a6d",
+      "venueId": 1,
+      "userId": 1,
+      "rating": 4,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249702,
+      "updatedAt": 1760613249702
+    },
+    {
+      "id": "cae02d09-cf0c-4e8b-aa68-c0282403d346",
+      "venueId": 1,
+      "userId": 3,
+      "rating": 5,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249703,
+      "updatedAt": 1760613249703
+    },
+    {
+      "id": "8aad7624-08cd-4968-9c24-8931a3406442",
+      "venueId": 1,
+      "userId": 3,
+      "rating": 3,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249703,
+      "updatedAt": 1760613249703
+    },
+    {
+      "id": "30d69055-2a50-4adc-99f1-cf2ac6f469e4",
+      "venueId": 1,
+      "userId": 4,
+      "rating": 4,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249704,
+      "updatedAt": 1760613249704
+    },
+    {
+      "id": "8ce45c5d-d050-4162-b80d-3e910143f558",
+      "venueId": 1,
+      "userId": 2,
+      "rating": 4,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249706,
+      "updatedAt": 1760613249706
+    },
+    {
+      "id": "aef33695-4ac3-49b8-bb18-a37f40cf8961",
+      "venueId": 2,
+      "userId": 2,
+      "rating": 3,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249707,
+      "updatedAt": 1760613249707
+    },
+    {
+      "id": "57677e55-9e93-4d4d-b389-7b373b22ee88",
+      "venueId": 2,
+      "userId": 4,
+      "rating": 4,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249708,
+      "updatedAt": 1760613249708
+    },
+    {
+      "id": "e55fcd4c-e143-4103-a822-1831ebba490a",
+      "venueId": 2,
+      "userId": 2,
+      "rating": 3,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249708,
+      "updatedAt": 1760613249708
+    },
+    {
+      "id": "d79cc142-9eb7-4513-b4d0-aa8233d0f096",
+      "venueId": 2,
+      "userId": 2,
+      "rating": 3,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249709,
+      "updatedAt": 1760613249709
+    },
+    {
+      "id": "90a763cb-d063-4a93-8209-7eac66e348e1",
+      "venueId": 2,
+      "userId": 4,
+      "rating": 3,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249709,
+      "updatedAt": 1760613249709
+    },
+    {
+      "id": "db6b08a6-7bb2-4af9-bf11-ef13105f34d6",
+      "venueId": 2,
+      "userId": 4,
+      "rating": 4,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249710,
+      "updatedAt": 1760613249710
+    },
+    {
+      "id": "8cbffb9d-e6d0-4fbb-aa54-36a061067c3f",
+      "venueId": 2,
+      "userId": 5,
+      "rating": 5,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249710,
+      "updatedAt": 1760613249710
+    },
+    {
+      "id": "756091d6-e971-426c-9dfe-46d6c270b87e",
+      "venueId": 2,
+      "userId": 5,
+      "rating": 3,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249710,
+      "updatedAt": 1760613249710
+    },
+    {
+      "id": "67c1636f-bb1d-4129-b172-1d41acf60d78",
+      "venueId": 2,
+      "userId": 3,
+      "rating": 3,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249711,
+      "updatedAt": 1760613249711
+    },
+    {
+      "id": "16717c35-815a-4fd3-abcf-daffc1be62f3",
+      "venueId": 2,
+      "userId": 2,
+      "rating": 3,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249712,
+      "updatedAt": 1760613249712
+    },
+    {
+      "id": "0b11a893-5c90-458e-a5ef-23bd2ea491b7",
+      "venueId": 2,
+      "userId": 3,
+      "rating": 4,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249712,
+      "updatedAt": 1760613249712
+    },
+    {
+      "id": "3077e777-89fd-43c5-989e-6997f6b90385",
+      "venueId": 2,
+      "userId": 2,
+      "rating": 5,
+      "comment": "Отличное место! Очень рекомендую.",
+      "photos": null,
+      "status": "APPROVED",
+      "likesCount": 0,
+      "dislikesCount": 0,
+      "createdAt": 1760613249713,
+      "updatedAt": 1760613249713
+    }
+  ],
+  "Notification": [],
+  "VenueReviewReaction": [],
+  "Order": [],
+  "VenueReviewReply": [],
+  "OrderItem": [],
+  "VenueSubcategory": [
+    {
+      "id": 1,
+      "name": "Зоопарки",
+      "slug": "zoo",
+      "type": "PLACE",
+      "categoryId": 1,
+      "icon": "/uploads/icon/icon_1760557976471.png",
+      "color": "#3B82F6",
+      "backgroundImage": "/uploads/background/background_1760557944969.png",
+      "isActive": 1,
+      "createdAt": 1760447815664,
+      "updatedAt": 1760557978082
+    }
+  ],
+  "Payment": [],
+  "VenueSubcategoryCity": [
+    {
+      "id": 2,
+      "subcategoryId": 1,
+      "cityId": 1,
+      "createdAt": 1760557978082
+    }
+  ],
+  "Payout": [],
+  "VenueVendor": [],
+  "PointsTransaction": [
+    {
+      "id": 1,
+      "userId": 2,
+      "points": 10,
+      "type": "EARNED",
+      "category": "write_review",
+      "description": "Отзыв на событие",
+      "orderId": null,
+      "eventId": "cmgqtr3m90000kvv6q5qvlmz3",
+      "venueId": null,
+      "createdAt": 1760480526006
+    },
+    {
+      "id": 2,
+      "userId": 4,
+      "points": 100,
+      "type": "EARNED",
+      "category": "registration",
+      "description": "Бонус за регистрацию",
+      "orderId": null,
+      "eventId": null,
+      "venueId": null,
+      "createdAt": 1760482469658
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "points": 200,
+      "type": "EARNED",
+      "category": "invite_friend",
+      "description": "Приглашение друга по реферальной ссылке",
+      "orderId": null,
+      "eventId": null,
+      "venueId": null,
+      "createdAt": 1760482906493
+    }
+  ],
+  "VenueVendorUser": [],
+  "PopularCategory": [],
+  "VenueView": [
+    {
+      "id": "9b0cc6b1-4a45-4fcb-b05a-ae0778cfae7b",
+      "venueId": 1,
+      "ipAddress": "192.168.1.212",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758661054766
+    },
+    {
+      "id": "19a971af-5468-4487-89b5-afa8588336ee",
+      "venueId": 1,
+      "ipAddress": "192.168.1.145",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1760388750291
+    },
+    {
+      "id": "4c46ed5f-5766-4398-a94e-4c6573b1c504",
+      "venueId": 1,
+      "ipAddress": "192.168.1.19",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758449400739
+    },
+    {
+      "id": "4888161e-38c8-4384-88da-1f6d0a63fee8",
+      "venueId": 1,
+      "ipAddress": "192.168.1.216",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759577733977
+    },
+    {
+      "id": "5a18ecbe-5da9-40cf-bb71-415b69f02b4e",
+      "venueId": 1,
+      "ipAddress": "192.168.1.128",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759184790784
+    },
+    {
+      "id": "1d527de2-587d-4fcb-8e5f-2dfc27f28dea",
+      "venueId": 1,
+      "ipAddress": "192.168.1.103",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1760286795949
+    },
+    {
+      "id": "d5a20157-b503-481c-9837-0f033a726843",
+      "venueId": 1,
+      "ipAddress": "192.168.1.33",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759176100698
+    },
+    {
+      "id": "4ec324a1-fa76-4dde-adfe-01b04475be40",
+      "venueId": 1,
+      "ipAddress": "192.168.1.248",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1760384116947
+    },
+    {
+      "id": "05fec111-9187-48af-b268-2f684b42340e",
+      "venueId": 1,
+      "ipAddress": "192.168.1.234",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758242081023
+    },
+    {
+      "id": "ea47ef69-1719-4bcf-9201-2535952145e2",
+      "venueId": 1,
+      "ipAddress": "192.168.1.84",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758175200896
+    },
+    {
+      "id": "d0bf4de7-2f69-46d5-b2b3-dd978a750ff3",
+      "venueId": 1,
+      "ipAddress": "192.168.1.61",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759231123957
+    },
+    {
+      "id": "634d5b5e-2427-4cc1-87bb-b55ebfab31ea",
+      "venueId": 1,
+      "ipAddress": "192.168.1.114",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758878617718
+    },
+    {
+      "id": "8eef11bc-b70e-42d9-9418-a49c1ef9f502",
+      "venueId": 1,
+      "ipAddress": "192.168.1.93",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1760071379227
+    },
+    {
+      "id": "f7ca436b-b1a4-4f56-b3b4-f69b4bd68663",
+      "venueId": 1,
+      "ipAddress": "192.168.1.100",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758487379170
+    },
+    {
+      "id": "7c9174e8-99d5-43bb-9024-21b211fe3211",
+      "venueId": 1,
+      "ipAddress": "192.168.1.209",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758524767235
+    },
+    {
+      "id": "27686d3d-eb36-4ec8-afdc-a6959f6f50ba",
+      "venueId": 1,
+      "ipAddress": "192.168.1.104",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758911613039
+    },
+    {
+      "id": "b0fee229-8ecd-45e1-a5fd-6df73bdd5844",
+      "venueId": 1,
+      "ipAddress": "192.168.1.11",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758105962615
+    },
+    {
+      "id": "00744cb7-ed9b-4b6f-a689-465b5534ece8",
+      "venueId": 1,
+      "ipAddress": "192.168.1.182",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1760432120808
+    },
+    {
+      "id": "74872d1f-f4d9-4f75-84ab-1e65faf836bc",
+      "venueId": 1,
+      "ipAddress": "192.168.1.24",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758292073886
+    },
+    {
+      "id": "a66aab98-c340-448d-b798-d7eb36a6eefe",
+      "venueId": 1,
+      "ipAddress": "192.168.1.192",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759322951271
+    },
+    {
+      "id": "125d338c-138c-4d16-9738-4b7e3fdd6e08",
+      "venueId": 1,
+      "ipAddress": "192.168.1.9",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759616379529
+    },
+    {
+      "id": "0d2ecaba-8c58-4bc0-b993-1cacc8b15b7c",
+      "venueId": 2,
+      "ipAddress": "192.168.1.15",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759983873944
+    },
+    {
+      "id": "4d05825a-b1e8-4459-9aa2-701ae0137b53",
+      "venueId": 2,
+      "ipAddress": "192.168.1.126",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758510778697
+    },
+    {
+      "id": "2e4f2e8f-5977-4bae-a4ce-30b2877949d4",
+      "venueId": 2,
+      "ipAddress": "192.168.1.70",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758809223124
+    },
+    {
+      "id": "6d6e8465-e09e-483a-b485-150b673d309c",
+      "venueId": 2,
+      "ipAddress": "192.168.1.206",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758025410908
+    },
+    {
+      "id": "c719ea42-ce2d-4bdf-9899-f6acc73d8e41",
+      "venueId": 2,
+      "ipAddress": "192.168.1.233",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759298505422
+    },
+    {
+      "id": "23b67a88-2237-4662-a8a1-b7edede7ed4d",
+      "venueId": 2,
+      "ipAddress": "192.168.1.168",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759312138676
+    },
+    {
+      "id": "1210078c-108a-4c68-a852-7d41e54464ae",
+      "venueId": 2,
+      "ipAddress": "192.168.1.220",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759392215570
+    },
+    {
+      "id": "1e645d2f-3ea7-481b-844d-89f26a0f5faa",
+      "venueId": 2,
+      "ipAddress": "192.168.1.46",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759910609229
+    },
+    {
+      "id": "361aa2ee-47af-4eda-936c-93b8bc0a5288",
+      "venueId": 2,
+      "ipAddress": "192.168.1.9",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1760036154723
+    },
+    {
+      "id": "2461635e-9092-41a8-a3e1-18bb48737971",
+      "venueId": 2,
+      "ipAddress": "192.168.1.78",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759705817104
+    },
+    {
+      "id": "047aa753-8b32-4c1d-bbd7-7af70a5efb5c",
+      "venueId": 2,
+      "ipAddress": "192.168.1.238",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759598051605
+    },
+    {
+      "id": "ed3c591e-5a91-44e3-8485-5e1c35515761",
+      "venueId": 2,
+      "ipAddress": "192.168.1.84",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1760418589248
+    },
+    {
+      "id": "32e4de5e-e8e8-4e25-82a0-768c65dd0e87",
+      "venueId": 2,
+      "ipAddress": "192.168.1.196",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1760296132414
+    },
+    {
+      "id": "df6b93af-a0d3-470f-846c-64ecfda58f2b",
+      "venueId": 2,
+      "ipAddress": "192.168.1.10",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758523437949
+    },
+    {
+      "id": "380c8591-898f-450c-aa4c-f26fd2a6b82a",
+      "venueId": 2,
+      "ipAddress": "192.168.1.210",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1760091980120
+    },
+    {
+      "id": "0697f9cb-3eab-4d95-b266-40f0ee6ccce1",
+      "venueId": 2,
+      "ipAddress": "192.168.1.108",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759406413373
+    },
+    {
+      "id": "107359a3-e20c-4a94-9ef3-8eff8f453f8b",
+      "venueId": 2,
+      "ipAddress": "192.168.1.204",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758267881038
+    },
+    {
+      "id": "64c8a79c-e437-4525-a895-5a450499714b",
+      "venueId": 2,
+      "ipAddress": "192.168.1.112",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1760416552268
+    },
+    {
+      "id": "874c3206-32ec-4a1b-9324-71998f0bc30b",
+      "venueId": 2,
+      "ipAddress": "192.168.1.51",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758469534533
+    },
+    {
+      "id": "da345161-348a-4a51-8cb7-804e9cb7e279",
+      "venueId": 2,
+      "ipAddress": "192.168.1.28",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759628751947
+    },
+    {
+      "id": "69faa37d-f969-4d9f-96a9-271559a202cc",
+      "venueId": 2,
+      "ipAddress": "192.168.1.99",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1758966360734
+    },
+    {
+      "id": "09419232-f2a4-40e1-bed2-6db2e8e02f66",
+      "venueId": 2,
+      "ipAddress": "192.168.1.114",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759998726876
+    },
+    {
+      "id": "dfad576e-2969-401e-bc87-3f3216f79568",
+      "venueId": 2,
+      "ipAddress": "192.168.1.252",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1760522378027
+    },
+    {
+      "id": "ff66dcc6-e40f-40a1-bd02-fc61954eae5b",
+      "venueId": 2,
+      "ipAddress": "192.168.1.62",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759763369919
+    },
+    {
+      "id": "ce328a35-e912-47ed-8010-55102332310d",
+      "venueId": 2,
+      "ipAddress": "192.168.1.118",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1760232109216
+    },
+    {
+      "id": "a6449d8e-0d3b-4ba6-a210-0dd07df417e4",
+      "venueId": 2,
+      "ipAddress": "192.168.1.235",
+      "userAgent": "Mozilla/5.0 (Test Browser)",
+      "createdAt": 1759626216992
+    }
+  ],
+  "PopularEvent": [],
+  "VerificationToken": [],
+  "PromoCode": [],
+  "PublicationPlan": [],
+  "PublicationPlanItem": []
+}

@@ -1,0 +1,58 @@
+// src/app/api/db/debug/route.ts
+import { NextResponse } from 'next/server'
+import path from 'node:path'
+import { prisma } from '@/lib/prisma'
+
+function resolveSqlitePath(dbUrl: string | undefined) {
+  if (!dbUrl) return { raw: null, resolved: null }
+  // ожидаем file:./prisma/dev.db или file:./dev.db, либо file:/abs/path/dev.db
+  const raw = dbUrl
+  let p = dbUrl.replace(/^file:/, '')
+  // если путь относительный — резолвим от CWD
+  if (!p.startsWith('/')) p = path.resolve(process.cwd(), p)
+  return { raw, resolved: p }
+}
+
+export async function GET() {
+  try {
+    const { raw, resolved } = resolveSqlitePath(process.env.DATABASE_URL)
+
+    // Спросим у SQLite фактический открытый файл
+    // @ts-ignore
+    const dbList = await prisma.$queryRawUnsafe<{ seq: number; name: string; file: string }[]>(
+      'PRAGMA database_list;'
+    )
+
+    // Проверим, какие таблицы реально существуют
+    // @ts-ignore
+    const tables = await prisma.$queryRawUnsafe<{ name: string }[]>(
+      "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name"
+    )
+
+    // Быстрые счётчики по ключевым таблицам
+    const [afishaCount, listingCount] = await Promise.all([
+      prisma.afishaEvent.count().catch(() => -1),
+      prisma.listing.count().catch(() => -1),
+    ])
+
+    // Попробуем достать первый AfishaEvent
+    const firstAfisha = await prisma.afishaEvent.findFirst().catch(() => null)
+
+    return NextResponse.json({
+      cwd: process.cwd(),
+      nodeEnv: process.env.NODE_ENV,
+      databaseUrl: raw,
+      resolvedPath: resolved,
+      dbList: dbList.map(db => ({
+        seq: Number(db.seq),
+        name: db.name,
+        file: db.file
+      })),
+      tables: tables.map((t) => t.name).slice(0, 50),
+      counts: { afishaEvent: afishaCount, listing: listingCount },
+      firstAfishaEvent: firstAfisha ? { id: Number(firstAfisha.id), title: firstAfisha.title } : null,
+    })
+  } catch (e: any) {
+    return NextResponse.json({ error: e?.message || String(e) }, { status: 500 })
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "timestamp": "2025-10-14T08:54:17.983Z",
+  "totalTests": 78,
+  "successfulTests": 14,
+  "successRate": 17.9,
+  "avgLoadTime": 2158,
+  "slowApis": [
+    {
+      "status": 200,
+      "loadTime": 3092,
+      "contentLength": 186,
+      "headers": {
+        "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+        "content-type": "application/json",
+        "date": "Tue, 14 Oct 2025 08:53:40 GMT",
+        "connection": "keep-alive",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "success": true,
+      "method": "GET",
+      "endpoint": "/api/health",
+      "authenticated": false
+    },
+    {
+      "status": 200,
+      "loadTime": 2361,
+      "contentLength": 1026,
+      "headers": {
+        "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+        "content-type": "application/json",
+        "date": "Tue, 14 Oct 2025 08:53:44 GMT",
+        "connection": "keep-alive",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "success": true,
+      "method": "GET",
+      "endpoint": "/api/cities",
+      "authenticated": false
+    },
+    {
+      "status": 200,
+      "loadTime": 1836,
+      "contentLength": 877,
+      "headers": {
+        "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+        "content-type": "application/json",
+        "date": "Tue, 14 Oct 2025 08:54:08 GMT",
+        "connection": "keep-alive",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "success": true,
+      "method": "GET",
+      "endpoint": "/api/admin/users",
+      "authenticated": true
+    },
+    {
+      "status": 200,
+      "loadTime": 1336,
+      "contentLength": 1389,
+      "headers": {
+        "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+        "content-type": "application/json",
+        "date": "Tue, 14 Oct 2025 08:53:48 GMT",
+        "connection": "keep-alive",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "success": true,
+      "method": "GET",
+      "endpoint": "/api/public/cities",
+      "authenticated": false
+    },
+    {
+      "status": 200,
+      "loadTime": 682,
+      "contentLength": 3042,
+      "headers": {
+        "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+        "content-type": "application/json",
+        "date": "Tue, 14 Oct 2025 08:54:16 GMT",
+        "connection": "keep-alive",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "success": true,
+      "method": "GET",
+      "endpoint": "/api/admin/roles",
+      "authenticated": true
+    }
+  ],
+  "methodStats": {
+    "GET": {
+      "total": 39,
+      "success": 14,
+      "avgTime": 12996
+    },
+    "POST": {
+      "total": 39,
+      "success": 0,
+      "avgTime": 0
+    }
+  },
+  "authenticated": true
+}
